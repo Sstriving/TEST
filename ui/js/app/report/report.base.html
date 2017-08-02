@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>报告</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="../../../css/system.css" charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../../../css/controls.css" charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../../../css/app/app.css" charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../../../css/app/report.css" charset="utf-8" />
+    <script type="text/javascript" charset="utf-8" src="../../common/commonjsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../core/corejsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../base.loader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../attach.conv.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../app.js"></script>
+    <script type="text/javascript" charset="utf-8" src='report.conv.js'></script>
+    <script type="text/javascript" charset="utf-8" src='report.base.js'></script>
+    <style media="print" type="text/css">
+        .noprint {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+        function up() {
+            var reportTab = document.getElementById("reportTab");
+            reportTab.scrollTop = reportTab.scrollTop - 28;
+        }
+
+        function down() {
+            var reportTab = document.getElementById("reportTab");
+            reportTab.scrollTop = reportTab.scrollTop + 28;
+        }
+    </script>
+    <style type="text/css">
+        .btn {
+            width: 25px;
+            height: 14px;
+            border: 0;
+            background-image: -moz-linear-gradient( 90deg, rgb(217, 217, 217) 1%, rgb(237, 237, 237) 100%);
+            background-image: -webkit-linear-gradient( 90deg, rgb(217, 217, 217) 1%, rgb(237, 237, 237) 100%);
+            background-image: -ms-linear-gradient( 90deg, rgb(217, 217, 217) 1%, rgb(237, 237, 237) 100%);
+            box-shadow: 0px 1px 0px 0px rgba(191, 191, 191, 0.004), inset 0px 1px 0px 0px rgba(255, 255, 255, 0.51);
+        }
+    </style>
+</head>
+
+<body onload="init();" style="background-color: #fff;">
+    <div style="display: none">
+        <div field="cmd_NavigateModule" command="-" conv="StaticValueConv('NavigateModule')">
+        </div>
+        <div field="cmd_ExitApplication" command="-" conv="StaticValueConv('ExitApplication')">
+        </div>
+        <div field="f_NotifyDataType" command="-" conv="StaticValueConv('object')">
+        </div>
+        <div field="f_AddExamRequest" command="-" conv="StaticValueConv('AddExamRequest')">
+        </div>
+        <div field="cmd_OpenHelpFile" command="-" conv="StaticValueConv('OpenHelpFile')">
+        </div>
+        <div field="cmd_MinWindow" command="-" conv="StaticValueConv('MinWindow')">
+        </div>
+    </div>
+    <div class="noprint">
+        <div class="Header">
+            <div class="logos">
+                <img src="../../../img/logo.png" alt="logo" />
+                <span>翼展影像存档与通讯系统</span>
+                <span style='color:red;'>&nbsp;&nbsp;&nbsp;&nbsp;当前用户：<span field="LoginUserCode" style='color:red'></span></span>
+            </div>
+            <div class="HeaderMain">
+                <div class="functions" style="display: inline-block; cursor: pointer" field="arg_NavigateModule_RegisterModule" conv="StaticValueConv('RegisterModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_NavigateModule_RegisterModule"
+                    onclick="commit(document.getElementById('divReportModule'));commit(this)" title="新建患者">
+                    <a>登记</a>
+                </div>
+                <div class="functions" style="display: inline-block; cursor: pointer" field="arg_NavigateModule_SearchModule" conv="StaticValueConv('SearchModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_NavigateModule_SearchModule"
+                    onclick="commit(document.getElementById('divReportModule'));commit(this)" title="查询患者">
+                    <a>查询</a>
+                </div>
+
+                <div class="selectterm" id="divReportModule" style="display: inline-block; cursor: pointer" field="arg_NavigateModule_ReportModule" conv="StaticValueConv('ReportModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_NavigateModule_ReportModule"
+                    onclick="commit(this)" title="报告">
+                    <a>报告</a>
+                </div>
+                <div class="functions" style="display: inline-block; cursor: pointer" field="arg_NavigateModule_ImageViewModule" conv="StaticValueConv('ImageViewModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_NavigateModule_ImageViewModule"
+                    onclick="commit(this)" title="阅片">
+                    <a>阅片</a>
+                </div>
+                <div class="functions" style="display: inline-block; cursor: pointer" field="arg_NavigateModule_ReportAssignModule" conv="StaticValueConv('ReportAssignModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_NavigateModule_ReportAssignModule"
+                    onclick="commit(this)" title="报告分配">
+                    <a>报告分配</a>
+                </div>
+                <div class="functions" style="display: inline-block; cursor: pointer" field="arg_Navigate_StudyMatchModule" conv="StaticValueConv('StudyMatchModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_Navigate_StudyMatchModule"
+                    onclick="commit(this)" title="图像匹配">
+                    <a>图像匹配</a>
+                </div>
+                <div class="functions" style="display: inline-block; cursor: pointer" field="arg_Navigate_StatisticsModule" conv="StaticValueConv('StatisticsModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_Navigate_StatisticsModule"
+                    onclick="commit(this)" title="数据统计">
+                    <a>统计</a>
+                </div>
+                <div class="functions" style="display: inline-block; cursor: pointer" field="arg_Navigate_ConfigsModule" conv="StaticValueConv('ConfigsModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_Navigate_ConfigsModule" onclick="commit(this)"
+                    title="配置">
+                    <a>配置</a>
+                </div>
+                <div class="functions" style="display: inline-block; cursor: pointer" command="NotifyTitle" condfields="cmd_OpenHelpFile" onclick="commit(this)" title="帮助">
+                    <a>帮助</a>
+                </div>
+                <div class="functions" style="display: inline-block; cursor: pointer" field="arg_Navigate_VersionModule" conv="StaticValueConv('VersionModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_Navigate_VersionModule" onclick="commit(this)"
+                    title="版本">
+                    <a>关于</a>
+                </div>
+                <div class="functions" style="display: inline-block; cursor: pointer" command="NotifyTitle" condfields="cmd_ExitApplication" onclick="commit(this)" title="退出">
+                    <a>退出</a>
+                </div>
+                <div class="functions" style="display: inline-block; cursor: pointer;float:right" command="NotifyTitle" condfields="cmd_MinWindow" onclick="minWindow()" title="最小化">
+                    <a>最小化</a>
+                </div>
+            </div>
+        </div>
+        <div>
+            <!--报告界面顶部患者列表控件-->
+            <div class="noprint">
+                <div id="reportTab" class="reportTab" field='ExamRequestReportList' conv="ClosableTabPageListConv({'item':'Tab', 'selected': 'selectedTab', 'unselected': 'unselectedTab' })" itemfield='CurrReportExamRequestID' itemcommand='CloseReport' valuechanged="valueChanged"
+                    itemvaluechanged="valueChanged" valuemember="ExamRequestID" displaymember="ReportDesc" itemdisplaymember="ReportDesc" itemvaluemember="ExamRequestID">
+                </div>
+                <div style="position: absolute;top: 104px; right: 0px;">
+                    <input class="btn" type="button" value="▲" onclick="up();" />
+                </div>
+                <div style="position: absolute;top: 118px; right: 0px;">
+                    <input class="btn" type="button" value="▼" onclick="down();" />
+                </div>
+            </div>
+            <!--Btn报告、Btn对比、Btn痕迹、Btn随访-->
+            <div class="noprint">
+                <div class="reportBtn" field="TopFrontGroupList" command="-" itemfield="TopFrontGroup" itemcommand="-" valuemember="GroupCode" displaymember="GroupName" conv="FrontGroupListConv({
+                'itemBorder': 'groupItemBorder3', 
+                'itemBounds_L': 'groupItemBounds_Left3', 
+                'itemBounds_M': 'groupItemBounds_Middle3', 
+                'itemBounds_R': 'groupItemBounds_Right3', 
+                'selected': 'selectedFrontGroup', 
+                'unselected': 'unselectedFrontGroup'})">
+                </div>
+            </div>
+            <!--中间信息录入区域整体框架布局，在其中切换4个iframe-->
+            <div class="reportMain" id="TopFrontGroup">
+                <div style="display: none;" class="reportMainHeight" field="TopFrontGroup" command="-" conv="ReportFrontGroupConv('GroupReport')">
+                    <iframe frameborder="0" src="report.html" style="width: 100%; height: 100%;"></iframe>
+                </div>
+                <div style="display: none;" class="reportMainHeight" field="TopFrontGroup" command="-" conv="ReportFrontGroupConv('GroupReportCompare')">
+                    <iframe class="reportCompareHeight" frameborder="0" src="report.compare.html" style="width: 100%;
+                    overflow: auto"></iframe>
+                </div>
+                <div style="display: none;" class="reportMainHeight" field="TopFrontGroup" command="-" conv="ReportFrontGroupConv('GroupReportTrace')">
+                    <iframe frameborder="0" src="report.trace.html" class="reportMainHeight" style="width: 100%;">
+                </iframe>
+                </div>
+                <div style="display: none;" class="reportMainHeight" field="TopFrontGroup" command="-" conv="ReportFrontGroupConv('GroupReportFollowUp')">
+                    <iframe frameborder="0" src="report.followup.html" class="reportMainHeight" style="width: 100%;">
+                </iframe>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

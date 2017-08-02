@@ -1,0 +1,148 @@
+
+ .dropItem
+{
+    
+    font-size: 15px;
+    font-family: "microsoft yahei";
+    cursor:pointer;
+   
+    position:relative;
+}
+ .dropText {
+ 	font-size: 14px;
+ 	width:197px;
+ 	font-family: "microsoft yahei";
+ 	text-overflow: ellipsis;
+ 	white-space: nowrap;
+ 	height: 24px;
+ 	line-height: 24px;
+ 	overflow: hidden;
+ 	
+ 	padding-left: 5px;
+ 	border: none;
+ 	background-color: rgb(255, 255, 255);
+ 	box-shadow: inset 0px 0px 0px 0px rgba(0, 0, 0, 0);
+ }
+ 
+ .bgImage .text input {
+ 	width: 200px;
+ 	height:30px;
+ 	line-height:30px;
+ 	margin-top: 16px;
+ 	border: none;
+ 	font-size: 16px;
+ 	color: #666;
+ 	background-color: transparent;
+ }
+ 
+ .dropImage {
+ 	width: 0px;
+ 	height: 0px;
+ 	border-left:8px solid transparent;
+ 	border-right:8px solid transparent;
+ 	border-top:10px solid #535353;
+ 	border-bottom: 0px;
+ 	position: absolute;
+ 	right:20px;
+ 	top: 13px;
+ }
+ .firstDropItem {
+	font-size: 15px;
+	font-family: "microsoft yahei";
+	width:188px;
+	height: 22px;
+	line-height: 22px;
+	border: 1px solid #b3b3b3;
+	margin-left: 17px;
+	background-color: white;
+	cursor: pointer;
+}
+.firstDropItem:hover
+{
+    background-color: #e1e1e1;
+    color: #4D4D4D;
+}
+.middleDropItem {
+	font-size: 15px;
+	font-family: "microsoft yahei";
+	width:188px;
+	height: 22px;
+	line-height: 22px;
+	margin-left: 17px;
+	border: 1px solid #b3b3b3;
+	
+	border-top: none;
+	background-color: white;
+	cursor: pointer;
+}
+.middleDropItem:hover
+{
+    background-color: #e1e1e1;
+    color: #4D4D4D;
+}
+.singleDropItem {
+	font-size: 15px;
+	font-family: "microsoft yahei";
+	width:188px;
+	height: 22px;
+	margin-left: 17px;
+	line-height: 22px;
+	border: 1px solid #b3b3b3;
+	
+	border-top: none;
+	background-color: white;
+	cursor: pointer;
+}
+.singleDropItem:hover
+{
+    background-color: #e1e1e1;
+    color: #4D4D4D;
+}
+.lastDropItem {
+	font-size: 15px;
+	font-family: "microsoft yahei";
+	width:188px;
+	height: 22px;
+	margin-left: 17px;
+	line-height: 22px;
+	border: 1px solid #b3b3b3;
+	
+	border-top: none;
+	background-color: white;
+	cursor: pointer;
+}
+.lastDropItem:hover
+{
+    background-color: #e1e1e1;
+    color: #4D4D4D;
+}
+ .submitlogin {
+ 	margin-top: 20px;
+ 	border-style: solid;
+ 	border-width: 1px;
+ 	border-color: rgb( 129, 128, 128);
+ 	border-radius: 6px;
+ 	background-image: -moz-linear-gradient( 90deg, rgb(130, 129, 129) 0%, rgb(173, 173, 173) 100%);
+ 	background-image: -webkit-linear-gradient( 90deg, rgb(130, 129, 129) 0%, rgb(173, 173, 173) 100%);
+ 	background-image: -ms-linear-gradient( 90deg, rgb(130, 129, 129) 0%, rgb(173, 173, 173) 100%);
+ 	box-shadow: inset 0px 0px 0px 0px rgba(0, 0, 0, 0.12);
+ 	width: 333px;
+ 	height: 39px;
+ 	font-size: 18.799px;
+ 	font-family: "Microsoft YaHei";
+ 	color: rgb( 255, 255, 255);
+ 	text-align: center;
+ 	margin-bottom: 25px;
+}
+.foot {
+	font-size: 13px;
+	color: #8d8c8c;
+	margin-bottom: 20px;
+	text-align:center;
+	margin-top: -10px;
+}
+.foot span{
+	display:inline-block;
+	margin-bottom:20px;
+}
+

@@ -1,0 +1,44 @@
+﻿div.treenode
+{
+    font-size: 12pt;
+}
+
+span.treeheads
+{
+    height: auto;
+    width: auto;
+    margin: 0 5px;
+    padding: 0;
+    display: inline;
+}
+
+span.treehead
+{
+    width: 25px;
+    height: 25px;
+    margin: 0;
+    padding: 0;
+    display: inline;
+    line-height: 25px;
+}
+
+span.treetitle
+{
+    height: 25px;
+    display: inline;
+    margin: 0;
+    padding: 0;
+    line-height: 25px;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+span.treetitle.selected
+{
+    background-color: #58C4A0;
+    color: #fff;
+}
+
+span.treechildren
+{
+}

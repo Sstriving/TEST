@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/app/config.css" />
+    <script type="text/javascript" src="../../../common/commonjsloader.js"></script>
+    <script type="text/javascript" src="../../../core/corejsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../base.loader.js"></script>
+    <script type="text/javascript" src='../SimpleTVConverter.js'></script>
+    
+    <script type="text/javascript" src='userRoleMappingConfig.js'></script>
+    <script type="text/javascript" src='Converter.js'></script>
+</head>
+<body onload="init()" style="margin: 2px; font-family: 微软雅黑;
+    font-size: 12pt; overflow: hidden" scroll="no"command="NotifyTitle" onclick="commit(this)"condFields="cmd_ActiveApplication">
+<div style="display:none" field="cmd_ActiveApplication" conv="Form_ConstValueConverter" command="-">'ActiveApplication'</div>
+<div id="moduleMananger" style="width: 60px; height: 25px; right: 50px; top: 10px;
+        position: fixed;">
+    </div>
+    <div style="width: 99%; height: 99%; overflow: hidden; position: fixed;">
+        <div style="width: 60%; height: 100%; float: left;">
+            <div style="height: auto; width: auto; margin-left: 5px; border:solid 1px #E0E0E0;">
+                <div id="UserListOfRole" field="UserListOfRole" conv="SimpleTVConverter" style="height: 620px;
+                    width: 100%; margin: 0 auto;">
+                </div>
+                <div field="SelectedUserID" conv="SelectedButtonDisabledConv('delUserid')" valuemember="UserCode">
+                </div>
+            </div>
+            <div style="width: 100%; height: auto; text-align: right;">
+                <input id="delUserid" type="button" value="删除" command='RemoveUser' onclick='if(confirm("确认删除当前选中的用户角色配置信息吗？"))commit(this);' style="border: 0;
+                    padding: 3px 15px; width: 70px; height: 30px; text-align: center; background: #31A580;
+                    color: #000000; cursor: pointer; display: inline-block; font-weight: bold; font-size: 12pt;" /></div>
+        </div>
+        <div style="width: 40%; height: 100%; float: right;">
+            <div style="margin: 0 auto; padding: 0; width: 400px; height: auto; display: block;
+                line-height: 30px;">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td colspan="2" style="font-size: 16pt; color: #31A580;">
+                                角色用户关系配置
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right" style="width: 150px;">
+                                角色：
+                            </td>
+                            <td>
+                                <div style="width: 108px; height: 20px; text-align: left; border: solid 1px #E0E0E0;
+                                    line-height: 20px; display: block;" valuemember="RoleID" displaymember="RoleName"
+                                    field="RoleList" onchange="changeFieldValue(this)" itemfield="SelectedRoleID"
+                                    valuechanged="valueChanged" conv="ConvListSelectNullable.ListConverter" itemconv="ConvListSelectNullable.ItemConverter">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right" style="width: 150px;">
+                                用户查询：
+                            </td>
+                            <td>
+                                <div style="width: 124px; text-align: left; border: 0; border-bottom: solid 1px #E0E0E0;
+                                    line-height: 20px; font-family: 微软雅黑; font-size: 12pt; margin: 0 auto;" valuemember="UserCode"
+                                    displaymember="UserName" inputmember="UserName" field="SearchUserList" onchange="changeFieldValue(this)"
+                                    itemfield="SearchUserID" valuechanged="valueChanged" conv="ConvEditSelectNullable.ListConverter"
+                                    itemconv="ConvEditSelectNullable.ItemConverter">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right" style="width: 150px;">
+                                用户账号：
+                            </td>
+                            <td>
+                                <div field="UserCode" conv="ReadOnlyValueConv" style="width: 124px; height: 20px;">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                用户名：
+                            </td>
+                            <td>
+                                <div field="UserName" conv="ReadOnlyValueConv" style="width: 124px; height: 20px;">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                输入码：
+                            </td>
+                            <td>
+                                <div field="CreateTime" conv="ReadOnlyValueConv" style="width: 124px; height: 20px;">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                备注：
+                            </td>
+                            <td>
+                                <div field="Remark" conv="ReadOnlyValueConv" style="width: 124px; height: 20px;">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                显示顺序：
+                            </td>
+                            <td>
+                                <div field="DisplayNO" conv="ReadOnlyValueConv" style="width: 124px; height: 20px;">
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="width: 100%; height: auto; text-align: center;">
+                    <input type="button" value="保存" command="OK" onclick='commit(this);' style="border: 0;
+                        padding: 3px 15px; width: 70px; height: 30px; text-align: center; background: #31A580;
+                        color: #000000; cursor: pointer; display: inline-block; font-weight: bold; font-size: 12pt;" />
+                    <input type="button" value="重置" command="Clear" onclick='commit(this);' style="border: 0;
+                        padding: 3px 15px; width: 70px; height: 30px; text-align: center; background: #31A580;
+                        color: #000000; cursor: pointer; display: inline-block; font-weight: bold; font-size: 12pt;" />
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+</html>

@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+    <meta charset="UTF-8" />
+    <script type="text/javascript" src="../../common/commonjsloader.js"></script>
+    <script type="text/javascript" src="../../core/corejsloader.js"></script>
+    <script type="text/javascript" src="../base.loader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../attach.conv.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../app.js"></script>
+    <script type="text/javascript" src="studysearch.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../css/system.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/app/StudyMatchs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/app/app.css" />
+</head>
+
+<body onload="init(); study_search();" style="width: 90%;height: 600px;" formid="StudyMatchModule" scroll="no">
+    <div style="display:none">
+        <div field="f_NotifyDataType" command="-" conv="StaticValueConv('object')"></div>
+        <div field="f_ExportArgs" command="-"></div>
+    </div>
+    <div class="studysearch">
+        <div class="divGroupTitle divGroupTitleMatch" style="z-index:1444;">检查图像</div>
+        <div id="StudySearchModule">
+            <div parameters="[{'id':'ExamRequestTimeRangeStart','name':'StudyTimeStart'},
+                  {'id':'ExamRequestTimeRangeEnd','name':'StudyTimeEnd'},
+                  {'id':'PatientNameFilter','name':'PatientName'},
+                  {'id':'PatientID','name':'PatientID'},
+                  {'id':'EquipmentAETitle','name':'EquipmentAETitle'}]" style="position: relative;" conv="KeyDataSetConv" field="StudyParameter">
+                <table class="StudyMatch">
+                    <tr class="exStudyMatch">
+                        <td class="inputItemLabel">患者编号</td>
+                        <td>
+                            <input class="inputItemText input-width" onchange="changeFieldValue(this.parentNode.parentNode.parentNode.parentNode.parentNode);" id="PatientID" />
+                        </td>
+                        <td class="inputItemLabel">设备名称</td>
+                        <td>
+                            <input class="inputItemText input-width" onchange="changeFieldValue(this.parentNode.parentNode.parentNode.parentNode.parentNode);" id="EquipmentAETitle" />
+                        </td>
+                    </tr>
+                    <tr class="exStudyMatch">
+                        <td class="inputItemLabel">姓名</td>
+                        <td>
+                            <input class="inputItemText input-width" id="PatientNameFilter" onchange="changeFieldValue(this.parentNode.parentNode.parentNode.parentNode.parentNode)" />
+                        </td>
+                        <td class="inputItemLabel">性别</td>
+                        <td>
+                            <div style="width: 202px;" field="SexList" itemfield="SexCodeFilters" conv="TileCheckListConv" valuemember="SexCode" displaymember="SexName">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="exStudyMatch">
+                        <td class="inputItemLabel">影像类型</td>
+                        <td>
+                            <div valuemember="ModalityCode" displaymember="ModalityName" inputmember="ModalityName" itemfield="ModalityCodeFilters" itemvaluemember="ModalityCode" itemdisplaymember="ModalityName" valuechanged="valueChanged" field="ModalityList" conv="CheckableListConv({ 'label': 'unselectedLabels',
+                                'text': 'unselectedText',
+                                'selectedLabel': 'selectedLabels',
+                                'selectedText': 'selectedText',
+                                'unselectedLabel': 'unselectedLabels',
+                                'unselectedText': 'unselectedText',
+                                'selectedItem':'selectedItem',
+                                'unselectedItem':'unselectedItem',
+                                'dropItem':'dropItems',
+                                'menu': 'menu',
+                                'first':'firstDropItems',
+                                'middle':'middleDropItems',
+                                'single':'singleDropItems',
+                                'last':'lastDropItems'
+                                })"></div>
+                        </td>
+                        <td class="inputItemLabel">
+                            匹配状态
+                        </td>
+                        <td>
+                            <div style="z-index: 100000" valuemember="Key" displaymember="Value" inputmember="Value" itemfield="CurrStudyMatchStatus" itemvaluemember="Key" itemdisplaymember="Value" valuechanged="valueChanged" field="StudyMatchStatusList" conv="CheckableListConv({ 'label': 'unselectedLabels',
+                                'text': 'unselectedText',
+                                'selectedLabel': 'selectedLabels',
+                                'selectedText': 'selectedText',
+                                'unselectedLabel': 'unselectedLabels',
+                                'unselectedText': 'unselectedText',
+                                'selectedItem':'selectedItem',
+                                'unselectedItem':'unselectedItem',
+                                'dropItem':'dropItems',
+                                'menu': 'menu',
+                                'first':'firstDropItems',
+                                'middle':'middleDropItems',
+                                'single':'singleDropItems',
+                                'last':'lastDropItems'
+                                },{'height':200})">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="exStudyMatch">
+                        <td class="inputItemLabel">检查日期</td>
+                        <td colspan="3">
+                            <input class="inputItemText input-widths" id="ExamRequestTimeRangeStart" conv="" onchange="changeFieldValue(this.parentNode.parentNode.parentNode.parentNode.parentNode);" onclick="WdatePicker({onpicked:function(){}, dateFmt:'yyyy-MM-dd', readOnly: true});"
+                            /> -
+                            <input class="inputItemText input-widths" id="ExamRequestTimeRangeEnd" conv="" onchange="changeFieldValue(this.parentNode.parentNode.parentNode.parentNode.parentNode);" onclick="WdatePicker({onpicked:function(){}, dateFmt:'yyyy-MM-dd', readOnly: true});"
+                            />
+                        </td>
+                    </tr>
+                    <tr class="exStudyMatch">
+                        <td colspan="4">
+                            <input class="button" type="button" value="查询" onclick="study_search();" />
+                            <input class="button flatButton" type="button" value="清空" onclick="search_reset(this);" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div id="div" class="matchTableHeight" style="width:100%;float:left;" field="StudyList" itemsubformid="StudyMatchModule" command="-" conv="TwoLevelTableViewConv(null,{ 'view': 'tableView', 'header': 'tableHeader', 'headerCell': 'tableHeaderCell', 'row': 'tableRow', 'rowCell': 'tableRowCell', 'subView': 'subTableView','selected':'selectedTableRow','unselected':'unselectedTableRow'})"
+                                columns="[{ 'Name': 'ShiftSubView', 'Description': '','Width':40,'Command':'ShiftSubView' },
+                        { 'Name': 'Register', 'Description': '创建报告','Width':60 ,'Command':'FastRegister'},
+                        { 'Name': 'ViewImage', 'Description': '阅片', 'Width':30,'Command':'LoadImage' },
+                        { 'Name': 'PatientID', 'Description': '患者编号', 'DisplayIndex':4,'Width':80 },
+                        { 'Name': 'PatientName', 'Description': '患者姓名', 'DisplayIndex':5,'Width':60},
+                        { 'Name': 'PatientSexName', 'Description': '患者性别', 'DisplayIndex':6,'Width':80},
+                        { 'Name': 'AccessionNum', 'Description': '流水号', 'DisplayIndex':7,'Width':120},
+                        { 'Name': 'StudyTime', 'Description': '检查时间', 'DisplayIndex':8,'Width':60},
+                        { 'Name': 'StudyDesc', 'Description': '描述', 'DisplayIndex':9,'Width':120},
+                        { 'Name': 'EquipmentAETitle', 'Description': '设备名称', 'DisplayIndex':10,'Width':60},
+                        { 'Name': 'ModalityCode', 'Description': '影像类型', 'DisplayIndex':11,'Width':80},
+                        { 'Name': 'PatientBirthDate', 'Description': '生日', 'DisplayIndex':12,'Width':80},
+                        { 'Name': 'PatientAge', 'Description': '年龄', 'DisplayIndex':13,'Width':80},
+                        { 'Name': 'BodyPartExam', 'Description': '检查部位', 'DisplayIndex':14,'Width':80},
+                        { 'Name': 'StudyInstanceUID', 'Description': '图像标识', 'DisplayIndex':15,'Width':150}
+                        ]" subColumns="[{ 'Name': 'UnmatchExamRequest', '': '','Width':30,'Command':'UnmatchExamRequest' },
+                        { 'Name': 'ExamRequestID', 'Description': '申请编号','Width':60 },
+                        { 'Name': 'PatientID', 'Description': '患者编号', 'Width':60 },
+                        { 'Name': 'PatientName', 'Description': '患者姓名', 'DisplayIndex':5,'Width':60},
+                        { 'Name': 'PatientSexName', 'Description': '患者性别', 'DisplayIndex':6,'Width':60},
+                        { 'Name': 'PatientAge', 'Description': '患者年龄', 'DisplayIndex':7,'Width':60},
+                        { 'Name': 'DeviceName', 'Description': '设备名称', 'DisplayIndex':8,'Width':60},
+                        { 'Name': 'ModalityName', 'Description': '检查类型', 'DisplayIndex':9,'Width':60},
+                        { 'Name': 'BodyPartNames', 'Description': '检查部位', 'DisplayIndex':10,'Width':60},
+                        { 'Name': 'ExamMethodNames', 'Description': '检查方法', 'DisplayIndex':11,'Width':80},
+                        { 'Name': 'StatusName', 'Description': '状态', 'DisplayIndex':12,'Width':80},
+                        { 'Name': 'ExamRequestTime', 'Description': 'ExamRequestTime', 'DisplayIndex':13,'Width':80},
+                        { 'Name': 'AccessionNO', 'Description': '流水号', 'DisplayIndex':14,'Width':80},
+                        { 'Name': 'PatientSourceName', 'Description': '患者来源', 'DisplayIndex':15,'Width':150},
+                        { 'Name': 'RegisterUserName', 'Description': '登记医师', 'DisplayIndex':15,'Width':150}
+                        ]" itemfield="CurrStudy" valuechanged="valueChanged" itemValueMember="StudyInstanceUID" subViewFormID="StudyMatchModule" subViewMember="ExamRequestList" subViewValueMember="ExamRequestID" subViewField="MatchExamRequestList" subViewCommand="MatchExamRequestList"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

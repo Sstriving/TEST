@@ -1,0 +1,105 @@
+.infolist {
+	padding: 15px 0px;
+}
+
+.infos {
+	margin-top: 10px;
+	height: 30px;
+	line-height: 30px;
+	width: 100%;
+}
+
+.fn-clear {
+	clear: both;
+}
+
+.infolistspan {
+	display: inline-block;
+	height: 28px;
+	margin-left: 25px;
+	line-height: 26px;
+	font-size: 14px;
+	color: rgb(77, 77, 77);
+	width: 70px;
+	text-align: left;
+	float: left;
+}
+
+.inputWidth {
+	width: 100px;
+	float: left;
+}
+
+.inputbigWidth {
+	width: 200px;
+	float: left;
+}
+.input-hisbox{
+	width: 180px;
+	height:22px;
+	line-height:22px;
+}
+.readonlyText {
+	font-size: 14px;
+	width: 79px;
+	height: 27px;
+	line-height: 26px;
+	float: left;
+	color: #4D4D4D;
+	text-align: center;
+	border-bottom: 1px dashed #c5c5c5;
+}
+
+.CompareTitle {
+	width: 92%;
+	height: 32px;
+	line-height: 32px;
+	float: left;
+	margin: 15px 16px 0 16px;
+	color: #4D4D4D;
+	font-size: 16px;
+	border-bottom: 1px solid #b0b0b0;
+	text-align: center;
+}
+
+.CompareList {
+	width: 92%;
+	border-style: solid;
+	border-width: 1px;
+	border-color: rgb(179, 179, 179);
+	background-color: rgb(255, 255, 255);
+	box-shadow: inset 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+	float: left;
+	margin: 13px 16px;
+}
+
+.divGroup-left {
+	width: 50%;
+	float: left;
+}
+
+.divGroup-right {
+	float: right;
+	width: 50%;
+}
+.historybox{
+	margin-top:20px;
+	padding-left:25px;
+}
+.btns{
+	  border: 1px solid #b9b9b9;
+	  text-align: center;
+	  width:59px;
+	  height:24px;
+	  margin: 0px 15px;
+	  color:#4D4D4D;
+	  font-size:14px;
+	  font-family:"microsoft yahei";
+	  border-radius:11px ;
+      background-image: -moz-linear-gradient( 90deg, rgb(223,223,223) 0%, rgb(243,243,243) 100%);
+	  background-image: -webkit-linear-gradient( 90deg, rgb(223,223,223) 0%, rgb(243,243,243) 100%);
+	  background-image: -ms-linear-gradient( 90deg, rgb(223,223,223) 0%, rgb(243,243,243) 100%);
+}
+.clear {
+	clear: both;
+}

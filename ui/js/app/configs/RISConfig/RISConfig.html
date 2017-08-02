@@ -1,0 +1,247 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>全局配置</title>
+    <script type="text/javascript" src="../../../common/commonjsloader.js"></script>
+    <script type="text/javascript" src="../../../core/corejsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../base.loader.js"></script>
+    <script type="text/javascript" src='../SimpleTVConverter.js'></script>
+    <script type="text/javascript" src="RISConfig.js"></script>
+</head>
+
+<body onload="init()" style="background-color: #FFFFFF; margin: 2px; font-family: 微软雅黑;
+    font-size: 12pt; overflow: hidden" scroll="no" command="NotifyTitle" onclick="commit(this)"
+      condfields="cmd_ActiveApplication">
+<div style="display: none" field="cmd_ActiveApplication" conv="Form_ConstValueConverter" command="-">
+    'ActiveApplication'
+</div>
+<div id="moduleMananger" style="width: 60px; height: 25px; right: 50px; top: 10px;
+        position: fixed;">
+</div>
+<div style="width: 45%;left: 0; height: 99%; overflow: hidden; position: absolute;">
+    <table>
+        <tr style="line-height: 50px">
+
+            <td colspan="2" style="font-size: 16pt; color: #31A580;">
+                <span>全局配置</span>
+            </td>
+        </tr>
+        <!--<tr>-->
+            <!--<td style="text-align: right;">-->
+                <!--<b>报告模式</b>：-->
+            <!--</td>-->
+            <!--<td>-->
+                <!--<div id="IsSimpleMode" field="IsSimpleMode" conv="CustomSelectConv" style="width: 300px;-->
+        <!--text-align: left; border-left: 0; border-right: 0; border-top: 0; border-bottom: solid 0px #E0E0E0;-->
+        <!--font-family: 微软雅黑; font-size: 12pt;">-->
+                <!--</div>-->
+            <!--</td>-->
+        <!--</tr>-->
+        <tr>
+            <td style="text-align: right;">
+                <b>报告锁定超时时间（秒）</b>：
+            </td>
+            <td>
+                <input field="ExamLockValidTimeSpan" onchange="changeFieldValue(this)" maxlength="64" style="width: 300px; text-align: left; border-left: 0; border-right: 0; border-top: 0;
+                        border-bottom: solid 1px #E0E0E0; font-family: 微软雅黑; font-size: 10pt;"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">
+                <b>已打印-->已驳回的有效时间（秒）</b>：
+            </td>
+            <td>
+                <input field="FromPrintedToRejectedValidTimeSpan" onchange="changeFieldValue(this)" maxlength="64"
+                       style="width: 300px; text-align: left; border-left: 0; border-right: 0;
+                        border-top: 0; border-bottom: solid 1px #E0E0E0; font-family: 微软雅黑; font-size: 10pt;"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="white-space: nowrap; text-align: right">
+                <b>PACSGateway实现</b>：
+            </td>
+            <td style="white-space: nowrap; text-align: left">
+                <div style="width: 300px; text-align: left; border: solid 1px #E0E0E0; line-height: 20px;"
+                     valuemember="KeyCode" displaymember="KeyName" field="PACSGatewayImplementList"
+                     onchange="changeFieldValue(this)" itemfield="PACSGatewayImplement" valuechanged="valueChanged"
+                     conv="ConvListSelect.ListConverter" itemconv="ConvListSelect.ItemConverter"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="white-space: nowrap; text-align: right">
+                <b>HISGateway实现</b>：
+            </td>
+            <td style="white-space: nowrap; text-align: left">
+                <div style="width: 300px; text-align: left; border: solid 1px #E0E0E0; line-height: 20px;"
+                     valuemember="KeyCode" displaymember="KeyName" field="HISGatewayImplementList"
+                     onchange="changeFieldValue(this)" itemfield="HISGatewayImplement" valuechanged="valueChanged"
+                     conv="ConvListSelect.ListConverter" itemconv="ConvListSelect.ItemConverter"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="white-space: nowrap; text-align: right">
+                <b>PatientIDGenerator实现</b>：
+            </td>
+            <td style="white-space: nowrap; text-align: left">
+                <div style="width: 300px; text-align: left; border: solid 1px #E0E0E0; line-height: 20px;"
+                     valuemember="KeyCode" displaymember="KeyName" field="PatientIDGeneratorImplementList"
+                     onchange="changeFieldValue(this)" itemfield="PatientIDGeneratorImplement"
+                     valuechanged="valueChanged" conv="ConvListSelect.ListConverter"
+                     itemconv="ConvListSelect.ItemConverter"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="white-space: nowrap; text-align: right">
+                <b>AccessionNOGenerator实现</b>：
+            </td>
+            <td style="white-space: nowrap; text-align: left">
+                <div style="width: 300px; text-align: left; border: solid 1px #E0E0E0; line-height: 20px;"
+                     valuemember="KeyCode" displaymember="KeyName" field="AccessionNOGeneratorImplementList"
+                     onchange="changeFieldValue(this)" itemfield="AccessionNOGeneratorImplement"
+                     valuechanged="valueChanged" conv="ConvListSelect.ListConverter"
+                     itemconv="ConvListSelect.ItemConverter"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="white-space: nowrap; text-align: right">
+                <b>DataPrinter实现</b>：
+            </td>
+            <td style="white-space: nowrap; text-align: left">
+                <div style="width: 300px; text-align: left; border: solid 1px #E0E0E0; line-height: 20px;"
+                     valuemember="KeyCode" displaymember="KeyName" field="DataPrinterImplementList"
+                     onchange="changeFieldValue(this)" itemfield="DataPrinterImplement" valuechanged="valueChanged"
+                     conv="ConvListSelect.ListConverter" itemconv="ConvListSelect.ItemConverter"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="white-space: nowrap; text-align: right">
+                <b>PACSGatewayUrl</b>：
+            </td>
+            <td>
+                <input field="PACSGatewayUrl" onchange="changeFieldValue(this)" maxlength="64" style="width: 300px; text-align: left; border-left: 0; border-right: 0;
+                        border-top: 0; border-bottom: solid 1px #E0E0E0; font-family: 微软雅黑; font-size: 10pt;"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="white-space: nowrap; text-align: right">
+                <b>值班时间范围</b>：
+            </td>
+            <td>
+                <input field="OnDutyTimeBegin" valuechanged="valueChanged" onchange="changeFieldValue(this)"
+                       onclick="WdatePicker({onpicked:function(){}, dateFmt:'yyyy-MM-dd HH:mm:ss', readOnly: true ,qsEnabled:false,autoUpdateOnChanged:true});"/>
+                &nbsp;至&nbsp;
+                <input field="OnDutyTimeEnd" valuechanged="valueChanged" onchange="changeFieldValue(this)"
+                       onclick="WdatePicker({onpicked:function(){}, dateFmt:'yyyy-MM-dd HH:mm:ss', readOnly: true ,qsEnabled:false,autoUpdateOnChanged:true});"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="white-space: nowrap; text-align: right">
+                <b>值班审核医生</b>：
+            </td>
+            <td style="white-space: nowrap; text-align: left">
+                <div style="width: 150px; text-align: left; border: solid 1px #E0E0E0; line-height: 20px;"
+                     onchange="changeFieldValue(this)" valuechanged="valueChanged" field="UserList"
+                     itemfield="OnDutyReviewUserCode" valuemember="UserCode" displaymember="UserName"
+                     conv="ConvListSelect.ListConverter" itemconv="ConvListSelect.ItemConverter"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div style="width: 100%; height: auto; text-align: center;margin-top: 20px">
+                    <input type="button" value="保存" command="SaveRISConfig" onclick='commit(this);' style="border: 0;
+                            padding: 3px 15px; width: 70px; height: 30px; text-align: center; background: #31A580;
+                            color: #000000; cursor: pointer; display: inline-block; font-weight: bold; font-size: 12pt;"/>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div style="width:48%;left: 48%;top: 4%;height: 50%;overflow: hidden;position: absolute">
+    <table>
+        <tr>
+            <td style="white-space: nowrap; text-align: center">
+            </td>
+            <td style="white-space: nowrap; text-align: center">
+                <h4>系统类型</h4>
+            </td>
+            <td style="white-space: nowrap; text-align: center">
+                <h4>报告模式</h4>
+            </td>
+        </tr>
+        <tr>
+            <td style="white-space: nowrap;">
+                <b>模式配置</b>
+            </td>
+            <td style="white-space: nowrap; ">
+                <input field="SimpleModeKey" onchange="changeFieldValue(this)" maxlength="64"
+                       style="width: 200px; text-align: left; border-left: 0; border-right: 0; border-top: 0;
+                        border-bottom: solid 1px #E0E0E0; font-family: 微软雅黑; font-size: 10pt;"/>
+            </td>
+            <td style="white-space: nowrap; text-align: right">
+                <div id="SimpleModeValue" field="SimpleModeValue" conv="CustomSelectConv" style="width: 300px;
+        text-align: center; border-left: 0; border-right: 0; border-top: 0; border-bottom: solid 0px #E0E0E0;
+        font-family: 微软雅黑; font-size: 12pt;">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <div style="height:210px;overflow: scroll; width: auto; margin-left: 5px; border: solid 1px #E0E0E0;">
+                    <div id="SimpleModeRecords" field="SimpleModeRecords" conv="SimpleTVConverter"
+                         style="height: 210px;  margin: 0 auto;">
+                    </div>
+                    <div field="SelectedPKID" valuemember="ID">
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <!--<tr>-->
+        <!--<td colspan="3">-->
+        <!--<div style="width: 100%; height: auto; text-align: center;">-->
+        <!--<input type="button" value="保存" command="SaveCAImplement" onclick='commit(this);'-->
+        <!--style="float: right; border: 0;-->
+        <!--padding: 3px 15px; width: 70px; height: 30px; text-align: center; background: #31A580;-->
+        <!--color: #000000; cursor: pointer; display: inline-block; font-weight: bold; font-size: 12pt;"/>-->
+        <!--</div>-->
+        <!--</td>-->
+        <!--</tr>-->
+    </table>
+</div>
+<div style="width: 99%;height:40%;overflow: hidden;position: absolute;top: 55%;">
+    <hr/>
+    <table>
+        <tr>
+            <td colspan="2" style="font-size: 16pt; color: #31A580;">
+                <span>本地配置</span>
+            </td>
+        </tr>
+        <tr style="line-height: 50px">
+            <td style="white-space: nowrap; text-align: right">
+                <b>影像工作站AETitle</b>：
+            </td>
+            <td style="white-space: nowrap; text-align: left">
+                <div style="width: 150px; text-align: left; border: solid 1px #E0E0E0; line-height: 20px;"
+                     valuemember="AETitle" displaymember="AETitle" field="AETitleListByWorkStation"
+                     onchange="changeFieldValue(this)" itemfield="AETitleByWorkStation" valuechanged="valueChanged"
+                     conv="ConvListSelect.ListConverter" itemconv="ConvListSelect.ItemConverter"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div style="width: 100%; height: auto;margin-left: 24px;text-align: center;">
+                    <input type="button" value="保存" command="SaveDcmConfig" onclick='commit(this);' style="border: 0;
+                            padding: 3px 15px; width: 70px; height: 30px; text-align: center; background: #31A580;
+                            color: #000000; cursor: pointer; display: inline-block; font-weight: bold; font-size: 12pt;"/>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+
+
+</html>

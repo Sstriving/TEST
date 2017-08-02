@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>报告对比</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/app/app.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/system.css" charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/controls.css" charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/app/report.css" charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/app/compare.css" />
+    <script type="text/javascript" charset="utf-8" src="../../../common/commonjsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../../core/corejsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../base.loader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../attach.conv.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../app.js"></script>
+    <script type="text/javascript" charset="utf-8" src='../report.js'></script>
+    <script type="text/javascript" charset="utf-8" src='../report.conv.js'></script>
+</head>
+
+<body onload="init();">
+    <div style="margin-top: 15px;">
+        <div class="divGroup" style="background-color: #e6e6e6; float: left;">
+            <div class="divGroupTitle" style="width: 136px;">
+                当前报告</div>
+            <div class="CompareTitle">
+                xxxx医院报告单</div>
+            <div class="CompareList" style="overflow:auto;height:700px">
+                <div class="infolist">
+                    <div class="infos">
+                        <span class="infolistspan">姓名</span>
+                        <div field="PatientName" class="readonlyText">
+                        </div>
+                        <span class="infolistspan">性别</span>
+                        <div field="SexList" class="readonlyText" valuemember="SexCode" displaymember="SexName" inputmember="SexName" itemfield="CurrSexCode" itemvaluemember="SexCode" itemdisplaymember="SexName" conv="ReadOnlyListConv">
+                        </div>
+                        <span class="infolistspan">年龄</span>
+                        <div field="PatientAge" class="readonlyText" style="width: 59px; margin-right: 0px;" conv="ApplyPatientAgeConv">
+                        </div>
+                        <div style="width: 20px; line-height: 27px; border-bottom-color: rgb(197, 197, 197);
+                            border-bottom-width: 1px; border-bottom-style: dashed; float: left; color: #4d4d4d;" valuemember="AgeUnitCode" displaymember="AgeUnitName" inputmember="AgeUnitName" itemfield="CurrAgeUnitCode" itemvaluemember="AgeUnitCode"
+                            itemdisplaymember="AgeUnitName" valuechanged="valueChanged" field="AgeUnitList" conv="ReadOnlyListConv">
+                        </div>
+                        <span class="infolistspan">科室</span>
+                        <div class="readonlyText" valuemember="DeptID" displaymember="DeptName" inputmember="DeptName" itemfield="CurrApplicationDept" itemvaluemember="DeptID" itemdisplaymember="DeptName" valuechanged="valueChanged" field="ApplicationDeptList" conv="ReadOnlyListConv(true)">
+                        </div>
+                    </div>
+                    <div class="infos fn-clear">
+                        <span class="infolistspan">申请医生</span>
+                        <div class="readonlyText" valuemember="DoctorID" displaymember="DoctorName" field="CurrApplicationDoctor" conv="ReadonlyDoctorNameConv">
+                        </div>
+                        <span class="infolistspan">影像类型</span>
+                        <div class="readonlyText" valuemember="ModalityCode" displaymember="ModalityName" inputmember="ModalityName" itemfield="CurrModalityCode" itemvaluemember="ModalityCode" itemdisplaymember="ModalityName" valuechanged="valueChanged" field="ModalityList"
+                            conv="ReadOnlyListConv">
+                        </div>
+                    </div>
+                    <div class="infos fn-clear" style="margin-left: 25px;">
+                        <div field="ItemUIDList" conv="ReadOnlyExamItemListConv" style="color: #4d4d4d">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <span style="padding-left: 25px; color: #4D4D4D;">影像所见</span>
+                    <div field="Finding" conv="ReadOnlyNoBlankTextValueConv" style="min-height: 25mm;
+                        word-wrap: break-word; word-break: break-all;">
+                    </div>
+                    <span style="padding-left: 25px; color: #4D4D4D;">诊断意见</span>
+                    <div field="Impression" conv="ReadOnlyNoBlankTextValueConv" style="min-height: 15mm;
+                        word-wrap: break-word; word-break: break-all;">
+                    </div>
+                </div>
+                <div class="infolist">
+                    <div class="infos">
+                        <span class="infolistspan">阴阳性</span>
+                        <div class="readonlyText" field="BePositive" conv="BePositiveConv">
+                        </div>
+                    </div>
+                    <div class="infos">
+                        <span class="infolistspan">危急值</span>
+                        <div class="readonlyText" field="CriticalFlagList" itemfield="CurrCriticalFlagCode" valuechanged="valueChanged" conv="ReadOnlyListConv" valuemember="CriticalFlagCode" displaymember="CriticalFlagName" itemvaluemember="CriticalFlagCode" itemdisplaymember="CriticalFlagName">
+                        </div>
+                    </div>
+                    <div class="infos">
+                        <span class="infolistspan">ICD10</span>
+                        <div class="readonlyText" style="width: 220px" field="ICD10List" itemfield="CurrICD10Code" valuechanged="valueChanged" conv="ReadOnlyListConv" valuemember="ICD10Code" displaymember="ICD10Name" itemvaluemember="ICD10Code" itemdisplaymember="ICD10Name">
+                        </div>
+                    </div>
+                    <div class="infos fn-clear">
+                        <span class="infolistspan">报告医生</span>
+                        <div class="readonlyText" field="ReportUserList" itemfield="CurrReportUserCode" valuechanged="valueChanged" conv="ReadOnlyListConv" valuemember="UserCode" displaymember="UserName" itemvaluemember="UserCode" itemdisplaymember="UserName" style="width: 100px; font-size: 11.25pt; font-family: 宋体;
+                            float: left; margin-left: 10px;">
+                        </div>
+                    </div>
+                    <div class="infos">
+                        <span class="infolistspan">报告日期</span>
+                        <div class="readonlyText" field="ReportTime" style="width: 180px;">
+                        </div>
+                    </div>
+                    <div class="infos jldb fn-clear">
+                        <span class="infolistspan">审核医生</span>
+                        <div class="readonlyText" field="ReviewUserList" itemfield="CurrReviewUserCode" valuechanged="valueChanged" conv="ReadOnlyListConv" valuemember="UserCode" displaymember="UserName" itemvaluemember="UserCode" itemdisplaymember="UserName" style="width: 100px; font-size: 11.25pt; font-family: 宋体;
+                            float: left; margin-left: 10px;">
+                        </div>
+                    </div>
+                    <div class="infos">
+                        <span class="infolistspan">审核日期</span>
+                        <div class="readonlyText" style="width: 180px" field="ReviewTime">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+    <OBJECT classid="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2" height="0" id="wb" width="0"></OBJECT>
+    <style>
+        #text {
+            font-size: 25pt;
+            color: red;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript">
+        var backgroundPrint = true;
+        var curFieldNames = ['PatientName', 'PatientID'];
+
+        function Prompt(data) {
+            data = eval('(' + data + ')');
+            curFieldNames.forEach(function(fieldName) {
+                SetElementContent(fieldName, eval('data.' + fieldName));
+            })
+        }
+
+        function SetElementContent(fieldName, value) {
+            var ele = document.getElementById(fieldName)
+            if (!ele) return;
+            switch (ele.tagName) {
+                case 'DIV':
+                    ele.innerText = value;
+                    break;
+                case 'SPAN':
+                    ele.innerText = value;
+                    break;
+                case 'INPUT':
+                    ele.value = value;
+                    break;
+                default:
+                    ele.innerText = value;
+                    break;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="text">
+        <span>患者：</span><span style='margin-left:10px' id="PatientName">name</span>
+        <br>
+        <span>患者编号：</span><span style='margin-left:10px' id="PatientID">id</span>
+        <br>
+        <span>需尽快书写报告！</span>
+    </div>
+</body>
+
+</html>

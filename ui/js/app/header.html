@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+    <script type="text/javascript" charset="utf-8" src="../common/commonjsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../core/corejsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="base.loader.js"></script>
+    <script type="text/javascript" src='header.js'></script>
+<body formID="HeaderModule" onload="init()" style="overflow-y: hidden;margin:2px">
+    <div style="display: none">
+        <div field="cmd_NavigateModule" command="-" conv="StaticValueConv('NavigateModule')">
+        </div>
+        <div field="f_NotifyDataType" command="-" conv="StaticValueConv('object')">
+        </div>
+        </div>
+    <div style="width: 100%; height: 100%;" field="ModuleList" conv="ModuleListConv"
+        valuechanged="valueChanged" itemfield="ModuleName" itemconv="ModuleNameConv"
+        itemvaluechanged="valueChanged">
+    </div>
+</body>
+</html>

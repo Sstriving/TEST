@@ -1,0 +1,191 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "宋体";
+    color: #000;
+    font-size: 15px;
+}
+
+.print {
+    width: 625px;
+    height: 808px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    font-size: 30pt;
+    font-weight: bold;
+    word-spacing: -25px;
+    letter-spacing: 10px;
+    /*padding-top:50px;*/
+}
+
+h3 {
+    padding-left: 3px;
+    padding-top: 5px;
+    font-weight: bold;
+    font-size: 16pt;
+    padding-bottom: 5px;
+}
+
+h4 {
+    text-align: center;
+    font-size: 18pt;
+    /*font-weight:bold;*/
+}
+
+.printTime {
+    width: 100%;
+    height: 37px;
+    line-height: 37px;
+    border-bottom: 2px solid #000000;
+}
+
+.printimg {
+    width: 100%;
+    margin-top: -2px;
+    border-bottom: 2px solid #000000;
+}
+
+.timeLabel {
+    float: right;
+    font-weight: bold;
+    font-size: 12pt;
+}
+
+.timeIfo {
+    float: right;
+    margin-left: 11pt;
+}
+
+.printInfo {
+    width: 100%;
+    height: 37px;
+    line-height: 37px;
+    border-bottom: 1px dashed #000000;
+}
+
+.printbodyInfo {
+    width: 100%;
+    height: 70px;
+    line-height: 37px;
+    border-bottom: 1px dashed #000000;
+}
+
+.lable {
+    width: 70px;
+    float: left;
+    font-weight: 600;
+    margin-left: 5px;
+    font-weight: bold;
+    font-size: 12pt;
+}
+
+.shortlable {
+    width: 50px;
+    float: left;
+    font-weight: 600;
+    font-weight: bold;
+    font-size: 12pt;
+}
+
+.midlable {
+    width: 67px;
+    float: left;
+    font-weight: 600;
+    /*margin-left:10px;*/
+    font-weight: bold;
+    font-size: 12pt;
+}
+
+.timediv {
+    float: right;
+}
+
+.info {
+    width: 100px;
+    height: 37px;
+    float: left;
+    font-size: 11pt;
+    margin-left: 10px;
+}
+
+.midinfo {
+    width: 45px;
+    height: 37px;
+    float: left;
+    font-size: 11pt;
+    margin-left: 5px;
+}
+
+.infoage {
+    width: 75px;
+    overflow: hidden;
+    float: left;
+    margin-left: -5px;
+}
+
+.infos {
+    min-width: 30px;
+    float: left;
+    margin-right: 5px;
+}
+
+.printcontent {
+    /*line-height:5mm;*/
+    margin: 10px;
+    word-wrap: break-word;
+    font-size: 14pt;
+    height: auto;
+    min-height: 40mm;
+}
+
+.printFoot {
+    width: 100%;
+    height: 37px;
+    line-height: 37px;
+    border-bottom: 2px solid #000000;
+    border-top: 2px solid #000000;
+}
+
+.footer {
+    padding-top: 5px;
+    font-size: 11pt;
+}
+
+.address {
+    float: right;
+    margin-right: 8px;
+    font-size: 11pt;
+}
+
+.printclass {
+    min-height: 100%;
+    position: relative;
+    width: 190mm;
+    margin: 0 auto;
+    /* overflow-y: auto;
+        overflow-x:hidden;*/
+}
+
+.content {
+    padding: 10px;
+    /* padding-bottom:60px;*/
+    /*Height of the footer */
+}
+
+.footerdiv {
+    /* position:absolute;
+        padding-left: 10px;
+        padding-right: 10px;
+        bottom:0;
+        width:98%;
+        height:60px;*/
+    /* Height of the footer  */
+    padding-left: 10px;
+    padding-right: 10px;
+}

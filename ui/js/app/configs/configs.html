@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../../../css/app/config.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/system.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/app/app.css" />
+    <script type="text/javascript" src="../../common/commonjsloader.js"></script>
+    <script type="text/javascript" src="../../core/corejsloader.js"></script>
+    <script type="text/javascript" src="../base.loader.js"></script>
+    <script type="text/javascript" src='../../common/controls/Menu.js'></script>
+    <script type="text/javascript" src="configs.js"></script>
+    <script type="text/javascript" src="Conv.js"></script>
+    <style type="text/css">
+        .configPage {
+            color: #666;
+            font-size: 15px;
+            font-family: 宋体;
+            overflow: hidden;
+            cursor: pointer;
+            padding: 8px 0px 8px 0;
+            text-align: center;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .configPage:hover {
+            color: orange;
+        }
+        
+        .selectedPage {
+            background-color: #6d6d6d;
+            color: White;
+        }
+        
+        .unselectedPage {
+            color: black;
+        }
+    </style>
+</head>
+
+<body onload="initConfigModule()" command="NotifyTitle" onclick="commit(this)" condfields="cmd_ActiveApplication">
+    <!--  <div style="display: none">
+        <div field="cmd_ActiveApplication" conv="Form_ConstValueConverter" command="-">
+            'ActiveApplication'</div>
+        <div field="cmd_NavigateModule" command="-" conv="StaticValueConv('NavigateModule')">
+        </div>
+        <div field="cmd_ExitApplication" command="-" conv="StaticValueConv('ExitApplication')">
+        </div>
+        <div field="f_NotifyDataType" command="-" conv="StaticValueConv('object')">
+        </div>
+    </div> -->
+    <div style="display:none">
+        <div field="cmd_ActiveApplication" conv="Form_ConstValueConverter" command="-">
+            'ActiveApplication'</div>
+        <div field="cmd_NavigateModule" command="-" conv="StaticValueConv('NavigateModule')"></div>
+        <div field="cmd_ExitApplication" command="-" conv="StaticValueConv('ExitApplication')"></div>
+        <div field="f_NotifyDataType" command="-" conv="StaticValueConv('object')"></div>
+        <div field="f_AddExamRequest" command="-" conv="StaticValueConv('AddExamRequest')"></div>
+        <div field="cmd_OpenHelpFile" command="-" conv="StaticValueConv('OpenHelpFile')"></div>
+        <div field="CloseReport" command='-' conv="CloseReportConv"></div>
+        <div field="cmd_MinWindow" command="-" conv="StaticValueConv('MinWindow')"></div>
+        <div field="CloseReport_Request" command='-' conv="StaticValueConv('Request')" style="display: none"></div>
+        <div field="CloseReport_Close" command='-' conv="StaticValueConv('Close')" style="display: none"></div>
+    </div>
+    </div>
+    <div class="Header">
+        <div class="logos">
+            <img src="../../../img/logo.png" alt="logo" />
+            <span>翼展影像存档与通讯系统</span>
+        </div>
+        <div class="HeaderMain">
+            <div class="functions" style="display: inline-block; cursor: pointer" field="arg_NavigateModule_RegisterModule" conv="StaticValueConv('RegisterModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_NavigateModule_RegisterModule"
+                onclick="commit(document.getElementById('divReportModule'));commit(this)" title="新建患者">
+                <a>登记</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer" field="arg_NavigateModule_SearchModule" conv="StaticValueConv('SearchModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_NavigateModule_SearchModule"
+                onclick="commit(document.getElementById('divReportModule'));commit(this)" title="查询患者">
+
+                <a> 查询</a>
+            </div>
+            <div class="functions" id="divReportModule" style="display: inline-block;
+                            cursor: pointer" field="arg_NavigateModule_ReportModule" conv="StaticValueConv('ReportModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_NavigateModule_ReportModule" onclick="commit(this)"
+                title="报告">
+                <a>报告</a>
+            </div>
+            <div class="functions" style="display: inline-block;
+                                cursor: pointer" field="arg_NavigateModule_ImageViewModule" conv="StaticValueConv('ImageViewModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_NavigateModule_ImageViewModule" onclick="commit(this)"
+                title="阅片">
+                <a>阅片</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer" field="arg_NavigateModule_ReportAssignModule" conv="StaticValueConv('ReportAssignModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_NavigateModule_ReportAssignModule"
+                onclick="commit(this)" title="报告分配">
+                <a>报告分配</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer" field="arg_Navigate_StudyMatchModule" conv="StaticValueConv('StudyMatchModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_Navigate_StudyMatchModule"
+                onclick="commit(this)" title="图像匹配">
+                <a>图像匹配</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer" field="arg_Navigate_StatisticsModule" conv="StaticValueConv('StatisticsModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_Navigate_StatisticsModule"
+                onclick="commit(this)" title="数据统计">
+                <a>统计</a>
+            </div>
+            <div class="selectterm" style="display: inline-block; cursor: pointer" field="arg_Navigate_ConfigsModule" conv="StaticValueConv('ConfigsModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_Navigate_ConfigsModule" onclick="commit(this)"
+                title="配置">
+                <a>配置</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer" command="NotifyTitle" condfields="cmd_OpenHelpFile" onclick="commit(this)" title="帮助">
+                <a>帮助</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer" field="arg_Navigate_VersionModule" conv="StaticValueConv('VersionModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_Navigate_VersionModule" onclick="commit(this)"
+                title="版本">
+                <a>关于</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer" command="NotifyTitle" condfields="cmd_ExitApplication" onclick="commit(this)" title="退出">
+                <a>退出</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer;float:right" command="NotifyTitle" condfields="cmd_MinWindow" onclick="minWindow()" title="最小化">
+                <a>最小化</a>
+            </div>
+        </div>
+    </div>
+    <div style="position: fixed; bottom: 0px; top: 103px; left: 0px; right: 0px;">
+        <div>
+            <div style="width: 124px; overflow-y: scroll; overflow-x: hidden; position: absolute; height:850px;
+                border-right: 1px solid #bbb;" field="ConfigPageList" conv="TabPageListConv({'item':'configPage', 'selected': 'selectedPage', 'unselected': 'unselectedPage' })" valuemember="Name" displaymember="Description" valuechanged="valueChanged"
+                itemfield="CurrConfigPage" itemvaluemember="Name" itemdisplaymember="Description">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

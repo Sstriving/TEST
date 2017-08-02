@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>查询</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=11" /> 
+    <meta name="Description" content="" />
+    <meta name="Keywords" content="" />
+    <link rel="stylesheet" type="text/css" href="../../css/base.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/smartMenu.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/controls.css" />
+    
+    <script type="text/javascript" charset="utf-8" src="../common/commonjsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../core/corejsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="base.loader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../common/Plugins/jqselect.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../common/Plugins/jquery-smartMenu.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../common/Plugins/easyscroll.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../common/Plugins/mousewheel.js"></script>
+    <script type="text/javascript">
+        function getArgs() {
+            var args = {}; 
+            var match = null;
+            var search = decodeURIComponent(location.search.substring(1));
+            
+            var reg = /(?:([^&]+)=([^&]+))/g;
+            while ((match = reg.exec(search)) !== null) {
+                args[match[1]] = match[2];
+            }
+            return args;
+        }
+
+        var menuMain;
+       function init(style) {
+//            var showTime = function () {
+//                var time = new Date();
+//                var year = time.getFullYear();
+//                var month = time.getMonth() + 1;
+//                var date = time.getDate();
+//                var hour = time.getHours();
+//                var minute = time.getMinutes();
+//                var seconds = time.getSeconds();
+//                var s = month + "月" + (date < 10 ? ("0" + date) : date) + "日";
+//                s += " ";
+//                s += (hour < 10 ? ("0" + hour) : hour) + ":" + (minute < 10 ? ("0" + minute) : minute) + ":" + (seconds < 10 ? ("0" + seconds) : seconds);
+//                document.getElementById("divTime").innerText = s;
+//                document.getElementById("divTime").textContent = s;
+//            }
+//            setInterval(showTime, 1000);
+//            showTime();
+//            var divMainMenu = document.getElementById("divMainMenu");
+//            var formID = getArgs().formID;
+//            if (formID) document.body.setAttribute("formID", formID);
+//            menuMain = new Menu(divMainMenu, style);
+//            menuMain.Fold();
+//            menuMain.DrawItem = function (parent, curr, total, index, ele) {
+//                var data = curr.GetData();
+//                ele.innerHTML = "";
+//                Form.CopyFormAttributes(data, ele);
+//                ele.onclick = function () {
+//                    menuMain.Fold();
+//                    data.action(ele);
+//                }
+//                ele.innerText = data.desc;
+//                ele.texContent = data.desc;
+//                return true;
+//            }
+//            var items = eval(divMainMenu.getAttribute('items'));
+//            for (var i = 0; i < items.length; i++) {
+//                menuMain.Items().Add(items[i]);
+//            }
+//            var check = Event.HookMouseOut(divMainMenu, function (leave) {
+//                if (leave) {
+//                    menuMain.Fold();
+//                }
+//                else {
+//                    menuMain.Unfold({ 'x': -20, 'y': divMainMenu.offsetHeight });
+//                }
+//            });
+       }
+    </script>
+</head>
+<body onload='init(
+        {
+            "single": "mainMenu",
+            "first": "mainMenu",
+            "middle": "mainMenu",
+            "last": "mainMenu"
+        });' style="background: url(img/body_bg.jpg) top center no-repeat;background-color:#F0F0F0" command="NotifyTitle"
+    onclick="commit(this)" condfields="cmd_ActiveApplication">
+    <div style="display: none" field="cmd_ActiveApplication" conv="Form_ConstValueConverter" command="-">
+        'ActiveApplication'</div>
+    <div class="top">
+        <div class="logo">
+            <div id="divMainMenu" style="width: 44px; height: 0px; display:none;">
+                <div style="display: none">
+                    <div field="cmd_NavigateModule" command="-" conv="StaticValueConv('NavigateModule')">
+                    </div>
+                    <div field="cmd_ExitApplication" command="-" conv="StaticValueConv('ExitApplication')">
+                    </div>
+                    <div field="f_NotifyDataType" command="-" conv="StaticValueConv('object')">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <script type="text/javascript">
+           document.writeln('<iframe src="' + getArgs().src + '" id="main-iframe" allowtransparency="true" frameborder="0" style="width: 100%; height: 100%;"></iframe>');
+        </script>
+    </div>
+</body>
+</html>

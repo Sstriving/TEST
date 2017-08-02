@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/app/config.css" />
+    <script type="text/javascript" src="../../../common/commonjsloader.js"></script>
+    <script type="text/javascript" src="../../../core/corejsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../base.loader.js"></script>
+    <script type="text/javascript" src='SchematicImageConfig.js'></script>
+    <script type="text/javascript" src='Converter.js'></script>
+    <script type="text/javascript" charset="utf-8" src="../SimpleTVConverter.js"></script>
+</head>
+<body onload="init()" scroll="no" command="NotifyTitle" onclick="commit(this)" condfields="cmd_ActiveApplication">
+    <div style="display: none" field="cmd_ActiveApplication" conv="Form_ConstValueConverter"
+        command="-">
+        'ActiveApplication'
+    </div>    
+    <div class="mainConfigBox">
+        <div class="configListBox">
+            <div style="height: auto; width: auto; margin-left: 5px; border: solid 1px #E0E0E0;">
+                <div id="SchematicImageRecords" field="SchematicImageRecords" conv="SimpleTVConverter" style="height: 620px;
+                    width: 100%; margin: 0 auto;">
+                </div>
+                <div field="SelectedPKCode"  valuemember="ExamTypeID" conv="SelectedPKCodeConv()">
+                </div>
+            </div>
+        </div>
+      <div style="width: 40%; height: 100%; float: right;">
+            <div style="margin: 0 auto; padding: 0; width: 400px; height: auto; display: block;
+                line-height: 30px;">
+                <table id="TableConfigSchematicImage">
+                    <tr>
+                        <td colspan="2" style="font-size: 16pt; color: #31A580;">
+                            <span>示意图与检查类型</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;">
+                            检查类型：
+                        </td>
+                        <td>
+                            <div style="width: 150px; text-align: left; border: solid 1px #E0E0E0; line-height: 20px;"
+                            valuemember="ExamTypeID" displaymember="ExamTypeName" field="ExamTypeList" inputmember="ExamTypeName"
+                            onchange="changeFieldValue(this)" itemfield="ExamTypeID" valuechanged="valueChanged"
+                          conv="ConvEditSelectNullable.ListConverter" itemconv="ConvEditSelectNullable.ItemConverter"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;">
+                            示意图：
+                        </td>
+                        <td>
+                            <div id="spot" style=" display:none"></div>
+                            <img conv="ImageConv" command="-"  field="SchematicImageUrl"  style="text-align: left;border-left: 0; border-right: 0; border-top: 0; border-bottom: solid 1px #E0E0E0;z-index:0;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;">
+                            示意图路径：
+                        </td>
+                        <td>
+                            <div style="width:100px;height:30px;">
+                                <div style="position:absolute; z-index:2">
+                                    <input field="SchematicImageUrl" style="border:0; background-color: #F0F0F0;">
+                                </div>
+                                <div style="position:absolute; z-index:1">
+                                    <input type="file" field="SchematicImageUrl" onchange="changeFieldValue(this)"/ style="border:0;">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div style="width: 100%; height: auto; text-align: center;">
+                                <input type="button" value="新建" command="NewSchematicImage" onclick='commit(this);' style="border: 0;
+                                    padding: 3px 15px; width: 70px; height: 30px; text-align: center; background: #31A580;
+                                    color: #000000; cursor: pointer; display: inline-block; font-weight: bold; font-size: 12pt;" />
+                                <input type="button" value="保存" command="SaveSchematicImage" onclick='commit(this);' style="border: 0;
+                                    padding: 3px 15px; width: 70px; height: 30px; text-align: center; background: #31A580;
+                                    color: #000000; cursor: pointer; display: inline-block; font-weight: bold; font-size: 12pt;" />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

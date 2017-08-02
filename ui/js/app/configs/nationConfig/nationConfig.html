@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/app/config.css" />
+    <script type="text/javascript" src="../../../common/commonjsloader.js"></script>
+    <script type="text/javascript" src="../../../core/corejsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../base.loader.js"></script>
+    <script type="text/javascript" src='../SimpleTVConverter.js'></script>
+    <script type="text/javascript" src='nationConfig.js'></script>
+</head>
+<body onload="init()" scroll="no" command="NotifyTitle" onclick="commit(this)" condfields="cmd_ActiveApplication">
+    <div style="display: none" field="cmd_ActiveApplication" conv="Form_ConstValueConverter"
+        command="-">
+        'ActiveApplication'
+    </div>
+    <div class="mainConfigBox">
+        <div class="configListBox">
+            <div style="height: auto; width: auto; margin-left: 5px; border: solid 1px #E0E0E0;">
+                <div id="NationRecords" field="NationRecords" conv="SimpleTVConverter" style="height: 620px;
+                    width: 100%; margin: 0px auto;">
+                </div>
+                <div field="SelectedPKCode" conv="SelectedPKeleDisabledConv('NationalityCode','forzenid','activeid')"
+                    valuemember="NationalityCode">
+                </div>
+            </div>
+            <div style="width: 100%; height: auto; text-align: right;">
+                <input type="button" value="置顶" command='MoveTop' onclick='commit(this);' class="cmdBtn" />
+                <input type="button" value="上移" command='MoveUp' onclick='commit(this);' class="cmdBtn" />
+                <input type="button" value="下移" command='MoveDown' onclick='commit(this);' class="cmdBtn" />
+                <input type="button" value="置底" command='MoveBottom' onclick='commit(this);' class="cmdBtn" />
+                <div id="frozenNationID" style="width: 250px; height: 30px; float: right; display: block;">
+                    <input type="button" value="查看冻结民族" style="width: 120px;" command='FrozenNationList'
+                        onclick='commit(this);IsDisabledOnClick("frozenNationID","activeNationID");'
+                        class="cmdBtn" />
+                    <input id="forzenid" type="button" value="冻结" command='DeleteNation' onclick='if(confirm("确认冻结当前选中的民族信息吗？"))commit(this);'
+                        disabled="disabled" class="cmdBtn" />
+                </div>
+                <div id="activeNationID" style="width: 250px; height: 30px; float: right; display: none;">
+                    <input type="button" value="查看激活民族" style="width: 120px;" command='ActivedNationList'
+                        onclick='commit(this);IsDisabledOnClick("activeNationID","frozenNationID");'
+                        class="cmdBtn" />
+                    <input id="activeid" type="button" value="激活" command='ActiveNation' onclick='IsDisabledOnClick("activeNationID","frozenNationID");commit(this);'
+                        disabled="disabled" class="cmdBtn" />
+                </div>
+            </div>
+        </div>
+        <div style="width: 40%; height: 100%; float: right;">
+            <div style="margin: 0 auto; padding: 0; width: 400px; height: auto; display: block;
+                line-height: 30px;">
+                <table id="TableConfigNation">
+                    <tr>
+                        <td colspan="2" style="font-size: 16pt; color: #31A580;">
+                            <span>民族配置</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;">
+                            民族代码：
+                        </td>
+                        <td>
+                            <input id="NationalityCode" field="NationalityCode" onchange="changeFieldValue(this)" maxlength="16" style="width: 160px;
+                                text-align: left; border-left: 0; border-right: 0; border-top: 0; border-bottom: solid 1px #E0E0E0;
+                                font-family: 微软雅黑; font-size: 10pt;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;">
+                            民族名称：
+                        </td>
+                        <td>
+                            <input field="NationalityName" onchange="changeFieldValue(this)" maxlength="16" style="width: 160px;
+                                text-align: left; border-left: 0; border-right: 0; border-top: 0; border-bottom: solid 1px #E0E0E0;
+                                font-family: 微软雅黑; font-size: 10pt;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;">
+                            输入码：
+                        </td>
+                        <td>
+                            <input field="InputCode" onchange="changeFieldValue(this)" maxlength="16" style="width: 160px;
+                                text-align: left; border-left: 0; border-right: 0; border-top: 0; border-bottom: solid 1px #E0E0E0;
+                                font-family: 微软雅黑; font-size: 10pt;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div style="width: 100%; height: auto; text-align: center;">
+                                <input type="button" value="新建" command="NewNation" onclick='commit(this);' style="border: 0;
+                                    padding: 3px 15px; width: 70px; height: 30px; text-align: center; background: #31A580;
+                                    color: #000000; cursor: pointer; display: inline-block; font-weight: bold; font-size: 12pt;" />
+                                <input type="button" value="保存" command="SaveNation" onclick='commit(this);' style="border: 0;
+                                    padding: 3px 15px; width: 70px; height: 30px; text-align: center; background: #31A580;
+                                    color: #000000; cursor: pointer; display: inline-block; font-weight: bold; font-size: 12pt;" />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=11" />
+<meta name="Description" content="" />
+<meta name="Keywords" content="" />
+<script type="text/javascript" src='login.js'></script>
+<link rel="stylesheet" type="text/css" href="../../../css/app/login.css" />
+<script type="text/javascript" src="../../common/commonjsloader.js"></script>
+<script type="text/javascript" src="../../core/corejsloader.js"></script>
+<script type="text/javascript" src='../base.loader.js'></script>
+<style type="text/css">
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "microsoft yahei";
+    }
+    
+    .header {
+        height: 27px;
+        background-color: #313131;
+        text-align: right;
+    }
+    
+    .header img {
+        padding-right: 30px;
+        padding-top: 13px;
+    }
+    
+    .wingspan {
+        height: 131px;
+        background-color: #313131;
+        text-align: center;
+    }
+    
+    .wingspan img {
+        width: 66px;
+        height: 62px;
+        margin-top: 14px;
+    }
+    
+    .wingspan p {
+        font-size: 20px;
+        color: #bababa;
+        margin: 7px 0px 0px 0px;
+        line-height: 30px;
+    }
+    
+    .logins {
+        text-align: center;
+    }
+    
+    .text {
+        width: 225px;
+        height: 32px;
+        line-height: 30px;
+        margin: 0 auto;
+        margin-top: 50px;
+        border-bottom: 1px solid #b2b2b2;
+    }
+    
+    .text .user {
+        display: inline-block;
+        float: left;
+        width: 18px;
+        height: 18px;
+        background: url(../../../img/user_icon.png);
+        margin-top: 7px;
+    }
+    
+    .names {
+        height: 30px;
+        line-height: 30px;
+        width: 196px;
+        float: right;
+        font-size: 14px;
+        border: none;
+        padding-left: 10px;
+    }
+    
+    .passwords {
+        width: 225px;
+        height: 32px;
+        line-height: 30px;
+        margin: 0 auto;
+        margin-top: 6px;
+        border-bottom: 1px solid #b2b2b2;
+    }
+    
+    .pw {
+        display: inline-block;
+        float: left;
+        width: 18px;
+        height: 18px;
+        background: url(../../../img/pw_icon.png);
+        margin-top: 7px;
+    }
+    
+    .password {
+        height: 30px;
+        line-height: 30px;
+        width: 196px;
+        float: right;
+        font-size: 14px;
+        border: none;
+        padding-left: 10px;
+    }
+    
+    .submit {
+        width: 225px;
+        height: 40px;
+        line-height: 40px;
+        margin: 0 auto;
+        margin-top: 30px;
+        background-color: #3f3d3e;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+        color: #fff;
+    }
+    
+    .dibu {
+        text-align: center;
+        line-height: 20px;
+        color: #959595;
+        font-size: 14px;
+        margin-top: 50px;
+    }
+    
+    .login-one {
+        width: 724px;
+        height: 450px;
+        margin: 0 auto;
+    }
+    
+    .menu {
+        border-width: 1px 0px 0px 0px;
+        position: absolute;
+    }
+</style>
+
+<body onload="init()">
+    <div class="login-one">
+        <div class="header">
+            <div command="NotifyTitle" condfields="cmd_ExitApplication" onclick='commit(this)' style="background-image: url(../../../img/close1.png); background-repeat:no-repeat;width:18px; height:18px; margin-top:5px; margin-right:2px;">
+
+            </div>
+            <!--    <button command="NotifyTitle" condfields="cmd_ExitApplication" onclick='commit(this)' type="submit"  style=" background-image: url(../../../img/close1.png); width:18px; height:18px; top:0px; border:none;"></button>
+    -->
+            <div style="display: none">
+                <div field="cmd_ExitApplication" command="-" conv="StaticValueConv('ExitApplication')">
+                </div>
+            </div>
+        </div>
+        <div class="wingspan">
+            <img src="../../../img/logo.png" />
+            <p>
+                wingspan影像存档与通讯系统</p>
+        </div>
+        <div class="logins">
+            <div class="text">
+                <div class="user">
+                </div>
+                <div itemfield="UserCodeFilters" valuechanged="valueChanged" valuemember="UserCode" displaymember="UserName" field="UserCodeList" conv="LoginUserCodeConv(
+                                        { 
+                                        'dropItem': 'dropItem', 
+                                        'single': 'singleDropItem', 
+                                        'first': 'firstDropItem',
+                                        'middle': 'middleDropItem', 
+                                        'menu': 'menu',
+                                        'last': 'lastDropItem' 
+                                        },
+                                        {'width':207,'height':230},null,true)">
+                </div>
+            </div>
+            <div class="passwords">
+                <div class="pw">
+                </div>
+                <input type="password" id="" value="" class="password" placeholder="密码" field="Password" onchange="changeFieldValue(this)" />
+            </div>
+            <input type="submit" id="" name="" value="登录" class="submit" id="userLogin" command='Login' onclick='commit(this)' />
+        </div>
+        <div class="dibu">
+            <div field="Version" style=" margin-top:-15px;">
+            </div>
+            <!--  <div style=" margin-top:-15px;">翼展科技COPYRIGHT WINGSPAN 2015版权所有（Build：2.6.2.0）</div> -->
+            <br /> 400-686-0956
+        </div>
+    </div>
+</body>
+
+</html>

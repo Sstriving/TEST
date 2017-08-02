@@ -1,0 +1,33 @@
+
+body
+{
+    background-color: #F0F0F0;
+    margin: 2px; 
+    font-family: ËÎÌו;
+    overflow: hidden
+}
+.cmdBtn
+{
+    border: 0px;
+    padding: 3px 15px; 
+    width: 70px; 
+    height: 30px; 
+    float: left; 
+    text-align: center;
+    background: #31A580; 
+    color: #000000; 
+    cursor: pointer; 
+    display: block; 
+    font-weight: bold;
+    font-size: medium; 
+    margin-left: 5px;
+}
+.mainConfigBox
+{
+    width: 99%; height: 99%; overflow: hidden; position: fixed;
+ }
+.configListBox
+    {
+        width: 60%; height: 100%; float: left;
+   }
+     

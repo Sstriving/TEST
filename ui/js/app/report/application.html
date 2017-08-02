@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>查看申请单</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="../../../css/system.css" charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../../../css/controls.css" charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../../../css/app/report.css" charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../../../css/app/app.css" charset="utf-8" />
+    <script type="text/javascript" charset="utf-8" src="application.js"></script>
+</head>
+
+<body onload="load();">
+    <div id="Div_Application" style="background-color: #4D4D4D; width: 100%;">
+        <div style="float: left; margin: 10px 0 10px 10px;">
+            <input type="button" class="button" value="打印" onclick="PrintApplication()">
+            <input style="margin-left:40px;" type="button" class="button" value="上一页" onclick="PreviousPage()">
+            <span id="txtCurrPage" style="color:white;">0/0</span>
+            <input type="button" class="button" value="下一页" onclick="NextPage()">
+
+            <input style="margin-left:40px;" type="button" class="button" value="还原" onclick="javascript:imagB_Application.eventFunc().resetTransf()">
+            <!-- <input type="button" class="button" value="放大" onclick="javascript:imagB_Application.eventFunc().scale('toBig')"> -->
+            <!-- <input type="button" class="button" value="缩小" onclick="javascript:imagB_Application.eventFunc().scale('toSmall')"> -->
+            <input type="button" class="button" value="左转" onclick="javascript:imagB_Application.eventFunc().rotate(-90)">
+            <input type="button" class="button" value="右转" onclick="javascript:imagB_Application.eventFunc().rotate(90)">
+            <input type="button" class="button" value="翻转" onclick="javascript:imagB_Application.eventFunc().rotate(180)">
+        </div>
+        <div style="width:100%; overflow:hidden; position: relative;">
+            <img id="Img_Application" />
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    var imagB_Application = new ImageBox({
+        targetElement: document.querySelector('#Img_Application'),
+        initWidth: document.body.offsetWidth,
+        scaleDetail: 0.1 //可选参数，单次缩放比
+    });
+    imagB_Application.start(); //启动
+
+    var img = document.getElementById("Img_Application");
+    img.parentNode.style.height = dialogHeight.substr(0, dialogHeight.length - 2) + "px";
+</script>
+
+</html>

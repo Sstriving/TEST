@@ -1,0 +1,63 @@
+<html>
+<head>
+    <style type="text/css">
+         p
+        {
+            margin: 0 auto;
+        }
+        /*br
+        {
+            display: none;
+        } */
+        body
+        {
+            word-wrap: break-word;
+            word-break: break-all;
+        }
+    </style>
+    <script type="text/javascript" charset="utf-8" >
+        function loadResource(type, value) {
+            switch (type) {
+                case 'style':
+                    document.writeln("<link rel='stylesheet' type='text/css' href='" + value + "' \/>");
+                    break;
+                case 'script':
+                    document.writeln("<script type='text/javascript' charset='utf-8' src='" + value + "'><\/script>");
+                    break;
+            }
+        }
+        function parseResource() {
+            var url = window.location + "";
+            var index = url.indexOf("?");
+            if (index > -1) {
+                var type = null;
+                var value = null;
+                for (var i = index + 1; i < url.length; i++) {
+                    switch (url[i]) {
+                        case '&':
+                            if (type && value) loadResource(type, value);
+                            type = null;
+                            value = null;
+                            break;
+                        case '=':
+                            if (type) value = value ? (value + url[++i]) : url[++i];
+                            break;
+                        default:
+                            if (value) {
+                                value += url[i];
+                            } else {
+                                type = type ? (type + url[i]) : url[i];
+                            }
+                            break;
+                    }
+                }
+                if (type && value) loadResource(type, value);
+            }
+        }
+        parseResource();
+        </script>
+        <script type="text/javascript" charset="utf-8" src="RichText.js"></script>
+</head>
+<body contenteditable="true" style="background-color: #fff; height: 100%; overflow-y:auto;color:#4D4D4D;padding:0px 5px;">
+</body>
+</html>

@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>报告痕迹</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+    <link rel="stylesheet" type="text/css" href="../../../css/app/app.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/system.css" charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../../../css/controls.css" charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../../../css/app/report.css" charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../../../css/app/trace.css" />
+    <script type="text/javascript" charset="utf-8" src="../../common/commonjsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../core/corejsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../base.loader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../attach.conv.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../app.js"></script>
+    <script type="text/javascript" charset="utf-8" src='report.followup.js'></script>
+</head>
+<body onload="init();">
+    <div style="margin-top: 37px;">
+        <iframe src="reportcompare/compare1.html" allowtransparency="true" frameborder="0" style="width: 500px; height: 97%; position: fixed; left: 20px; top:22px;"></iframe>
+        <div style="display: none">
+            <input id="ReportFollowUpID"/>
+            <div field="LoadReportFollowUp" conv="LoadReportFollowUpConv"></div>
+        </div>
+        <div class="divGroup reportTraceWidth" style="background-color: #fff; margin-left: 540px;">
+            <div class="divGroupTitle" style="width: 136px;">报告随访</div>
+            <div class="reportTraceheight" style="width: 100%; overflow: auto;">
+                <table width="100%" style="width:100%; height:100%;">
+                    <tr width="100%" style="height:50%;">
+                        <td valign="top">
+                            <span>提示：双击随访记录，可以在编辑区域修改随访内容。</span>
+                            <div style="position: relative; top: 10px; right: 0px; bottom: 0px; left:10px; height: 95%;
+                                width: 99%; " field="ReportFollowUpList" conv="SearchTableViewConv(null,{ 'view': 'tableView', 'header': 'tableHeader', 'headerCell': 'tableHeaderCell', 'row': 'tableRow', 'rowCell': 'tableRowCell', 'subView': 'subTableView','selected':'selectedTableRow','unselected':'unselectedTableRow'})"
+                                columns="[{ 'Name': 'ReportFollowUpID', 'Description': '随访编号', 'DisplayIndex': 0 ,'Width':40 },
+                                          { 'Name': 'FollowUpData', 'Description': '随访日期', 'DisplayIndex': 1 ,'Width':50 },
+                                          { 'Name': 'FollowUpContent', 'Description': '随访内容', 'DisplayIndex': 2 ,'Width':200 },
+                                          { 'Name': 'FollowUpUserName', 'Description': '随访医生', 'DisplayIndex': 3 ,'Width':60 }]">
+                            </div>
+                            <hr />
+                        </td>
+                    </tr>
+                    <tr width="100%" style="height:50%;">
+                        <td style="border:1px;" valign="top">
+                            <div style="margin:10px 0 0 20px;">
+                                <div>
+                                    <span class="inputItemLabel">随访日期：</span>
+                                    <input id="FollowUpData" class="inputItemText input-width" onclick="WdatePicker({onpicked:function(){}, dateFmt:'yyyy-MM-dd', readOnly: true});" />
+
+                                    <span id="OperateTip" style="float: right; margin-right:20px;"></span>
+                                </div>
+                                <div>
+                                    <span class="inputItemLabel">随访内容：</span>
+                                    <br />
+                                    <textarea id="FollowUpContent" style="width: 96%; height:220px;"></textarea>
+                                </div>
+                                <div style="margin-top:10px;">
+                                    <span class="inputItemLabel">随访医生：</span>
+                                    <div valuemember="UserCode" displaymember="UserName" inputmember="UserName"
+                                        itemField = "SelectedUserCode" itemvaluemember="UserCode" itemdisplaymember="UserName"
+                                        valuechanged="valueChanged" itemFrontField="true" field="UserList" 
+                                        conv="FilterableListConv(
+                                        {
+                                        'dropItem': 'dropItem', 
+                                        'single': 'singleDropItem', 
+                                        'first': 'firstDropItem',
+                                        'middle': 'middleDropItem', 
+                                        'menu': 'menu',
+                                        'last': 'lastDropItem' 
+                                        },
+                                        {
+                                        'width':207,
+                                        'height':200
+                                        },true)">
+                                    </div>
+
+                                    <div style="height: 30px; display: inline-block; cursor: pointer; float: right; margin-right:20px;" title="保存报告随访">
+                                        <input type="button" class="button" value="保存" onclick="SaveReportFollowUp(this);" />
+                                    </div>
+                                    <div style="height: 30px; display: inline-block; cursor: pointer; float: right; margin-right:10px;" title="清空内容，并新建报告随访">
+                                        <input type="button" class="button flatButton" value="清空" onclick="LoadReportFollowUp(true);" />
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

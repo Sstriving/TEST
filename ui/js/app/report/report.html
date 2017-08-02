@@ -1,0 +1,618 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>报告</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="../../../css/system.css" charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../../../css/controls.css" charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../../../css/app/report.css" charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../../../css/app/app.css" />
+    <script type="text/javascript" charset="utf-8" src="../../common/commonjsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../core/corejsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../base.loader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../attach.conv.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../app.js"></script>
+    <script type="text/javascript" charset="utf-8" src='templetes.js'></script>
+    <script type="text/javascript" charset="utf-8" src='report.conv.js'></script>
+    <script type="text/javascript" charset="utf-8" src='report.js'></script>
+    <script type="text/javascript" charset="utf-8" src="../print.js"></script>
+    <script type="text/javascript">
+        function GetField(formID, fieldName) {
+            var form = formCallCenter.GetFormByID(formID);
+            switch (fieldName) {
+                case "CurrBodyPartIDList_Sys":
+                    var examItems = document.getElementById("examItems").children[0];
+                    var bodyPartString = "";
+                    for (var i = 0; i < examItems.children.length; i++) {
+                        if (examItems.children[i].children[0].__ExamItemBodyPartObject["BodyPartName"]) {
+                            bodyPartString += examItems.children[i].children[0].__ExamItemBodyPartObject["BodyPartName"] + ",";
+                        }
+                    }
+                    if (bodyPartString.length > 0) bodyPartString = bodyPartString.substr(0, bodyPartString.length - 1);
+                    return form ? [bodyPartString] : [null];
+                case "AttachList":
+                    var attachDIV = document.getElementById("attachDIV");
+                    var attachList = {};
+                    attachList.GroupName = "68579a1f-acc7-46aa-9166-e4eca3fb13ca";
+                    attachList.AttachList = [];
+                    var root = attachDIV.children[0];
+                    for (var i = 0; i < root.children.length; i++) {
+                        var attach = root.children[i].__bindedData;
+                        if (attach.Report && attach.Report.Index > -1) attachList.AttachList[attachList.AttachList.length] = attach;
+                    }
+                    return [attachList];
+                default:
+
+                    var val = form.GetField(fieldName);
+                    if (!val) return;
+                    if (typeof(val) == "string" || typeof(val) == "number" || fieldName == "CurrApplicationDept" || fieldName == "CurrApplicationDoctor") {
+                        return form ? [val] : [null];
+                    } else {
+                        return form ? val : [null];
+                    }
+            }
+        }
+
+        function ShowOrHideAttachDIV(btn) {
+            var div = document.getElementById("attachDIV");
+            if (div.style.display == "none") {
+                div.style.display = "inline-block";
+                btn.value = "隐藏报告图像";
+            } else {
+                div.style.display = "none";
+                btn.value = "显示报告图像";
+            }
+        }
+    </script>
+</head>
+
+<body onload="init();" style="overflow-y: scroll">
+    <div field="23579a1f-acc7-4673-9166-e4eca3fb1315" style="display: none"> </div>
+    <div field="LoginUserCode" style="display: none"> </div>
+    <div field="CurrReportExamRequestID" style="display: none"> </div>
+    <div field="RejectReport" command="-" conv="AfterRejectReport" style="display: none"></div>
+    <input field="Ext_PACSInstanceCount" value='' onchange="changeFieldValue(this)" style="display: none" />
+    <div style="display: none">
+        <div field="cmd_NavigateModule" command="-" conv="StaticValueConv('NavigateModule')">
+        </div>
+        <div field="cmd_ExitApplication" command="-" conv="StaticValueConv('ExitApplication')">
+        </div>
+        <div field="f_NotifyDataType" command="-" conv="StaticValueConv('object')">
+        </div>
+        <div field="f_AddExamRequest" command="-" conv="StaticValueConv('AddExamRequest')">
+        </div>
+        <div field="CloseReport" command='-' conv="CloseReportConv">
+        </div>
+        <div field="CloseReport_Request" command='-' conv="StaticValueConv('Request')" style="display: none">
+        </div>
+        <div field="CloseReport_Close" command='-' conv="StaticValueConv('Close')" style="display: none">
+        </div>
+        <div field="CloseReport_Save" command='-' conv="StaticValueConv('Save')" style="display: none">
+        </div>
+        <div field="ShowNotice" command='-' conv="ShowNoticeConv" style="display: none">
+        </div>
+    </div>
+    <div>
+        <!-- 提供报告打印的字段-->
+        <div style="display: none">
+            <input field="ExamRequestID" />
+            <input field="ExamRequestTime" />
+            <input field="CASignatureUrl_Report" />
+            <input field="CASignatureUrl_Review" />
+        </div>
+        <div style="position: absolute; top: 5px; left: 20px;">
+            历史检查次数(仅供参考)：<span formid='ReportCompareModule' field="CompareHistoryList" conv="HistoryExamCountConv"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span conv="ReadOnlyModeConv" field="ReadOnlyMode"></span>
+        </div>
+        <!--报告编辑界面，左侧内容编辑区域-->
+        <div class="reportLeft">
+            <table style="width: 100%; height: 100%;">
+                <!--患者基本信息编辑区域-->
+                <tr style="width: 100%; height: 25%;">
+                    <td>
+                        <table style="width: 100%; height: 100%; line-height: 30px; margin-top: -20px;">
+                            <!--第1行：姓名、年龄、性别-->
+                            <tr>
+                                <td class="inputItemLabel">
+                                    患者姓名<em style="color: Red">*</em>
+                                </td>
+                                <td>
+                                    <input class="inputItemText input-width" field="PatientName" conv="" valuechanged="valueChanged" onchange="changeFieldValue(this);" />
+                                </td>
+                                <td class="inputItemLabel">
+                                    患者年龄
+                                </td>
+                                <td>
+                                    <div field="PatientAge" conv="PatientAgeConv">
+                                    </div>
+                                    <div style="z-index: 100000" valuemember="AgeUnitCode" displaymember="AgeUnitName" inputmember="AgeUnitName" itemfield="CurrAgeUnitCode" itemvaluemember="AgeUnitCode" itemdisplaymember="AgeUnitName" valuechanged="valueChanged" field="AgeUnitList" conv="FilterableListConv(
+                                        { 
+                                        'dropItem': 'dropItem_short', 
+                                        'single': 'singleDropItem_short', 
+                                        'first': 'firstDropItem_short',
+                                        'middle': 'middleDropItem_short', 
+                                        'last': 'lastDropItem_short' 
+                                        },
+                                        null,true)">
+                                    </div>
+                                </td>
+                                <td class="inputItemLabel">
+                                    患者性别
+                                </td>
+                                <td>
+                                    <div style="z-index: 100000" valuemember="SexCode" displaymember="SexName" inputmember="SexName" itemfield="CurrSexCode" itemvaluemember="SexCode" itemdisplaymember="SexName" valuechanged="valueChanged" field="SexList" conv="TileListConv(null,false)">
+                                    </div>
+                                </td>
+                            </tr>
+                            <!--第2行：主诉、影像类型、检查状态-->
+                            <tr>
+                                <td class="inputItemLabel">
+                                    主诉
+                                </td>
+                                <td>
+                                    <div style="z-index: 100000;" itemfield="CurrComplain" valuechanged="valueChanged" field="ComplainList" conv="WritableListConv(
+                                        { 
+                                        'dropItem': 'dropItem', 
+                                        'single': 'singleDropItem', 
+                                        'first': 'firstDropItem',
+                                        'middle': 'middleDropItem', 
+                                        'menu': 'menu',
+                                        'last': 'lastDropItem' 
+                                        },
+                                        {'height':240},null,true)">
+                                    </div>
+                                </td>
+                                <td class="inputItemLabel">
+                                    影像类型
+                                </td>
+                                <td>
+                                    <div style="z-index: 100000" valuemember="ModalityCode" displaymember="ModalityName" inputmember="ModalityName" itemfield="CurrModalityCode" itemvaluemember="ModalityCode" itemdisplaymember="ModalityName" valuechanged="valueChanged" field="ModalityList"
+                                        conv="FilterableModalityListConv(
+                                        {
+                                        'dropItem': 'dropItem', 
+                                        'single': 'singleDropItem', 
+                                        'first': 'firstDropItem',
+                                        'middle': 'middleDropItem', 
+                                        'last': 'lastDropItem', 
+                                        'menu': 'menu' 
+                                        },
+                                        {
+                                        'width':207
+                                        },true)">
+                                    </div>
+                                </td>
+                                <td class="inputItemLabel laber-padding">
+                                    检查状态
+                                </td>
+                                <td>
+                                    <div class="readonlyText" id="statusdiv" style="color: #4d4d4d; font-weight: bold;" field="ExamStatusList" valuemember="StatusCode" displaymember="StatusName" inputmember="StatusName" itemfield="CurrExamStatusCode" itemvaluemember="StatusCode" itemdisplaymember="StatusName"
+                                        valuechanged="valueChanged" conv="ExamStatusReadOnlyListConv">
+                                    </div>
+                                    <!--备注：用于设置“报告保存”按钮状态的Conv，请勿移动位置-->
+                                    <div field="CurrExamStatusCode" conv="SetSaveReportButtonVisibilityConv" style="display: none;">
+                                    </div>
+                                </td>
+                            </tr>
+                            <!--第3行：送检科室、送检医生、门诊号-->
+                            <tr>
+                                <td class="inputItemLabel">
+                                    送检科室
+                                </td>
+                                <td>
+                                    <div style="z-index: 100000" valuemember="DeptID" displaymember="DeptName" inputmember="DeptName" itemfield="CurrApplicationDept" itemvaluemember="DeptID" itemdisplaymember="DeptName" valuechanged="valueChanged" field="ApplicationDeptList" conv="WritableListConv(
+                                        { 
+                                        'dropItem': 'dropItem', 
+                                        'single': 'singleDropItem', 
+                                        'first': 'firstDropItem',
+                                        'middle': 'middleDropItem', 
+                                        'menu': 'menu',
+                                        'last': 'lastDropItem' 
+                                        },
+                                        {'width':207,
+                                        'height':200},true)">
+                                    </div>
+                                </td>
+                                <td class="inputItemLabel">
+                                    送检医生
+                                </td>
+                                <td>
+                                    <div style="z-index: 100000" valuemember="DoctorID" displaymember="DoctorName" inputmember="DoctorName" itemfield="CurrApplicationDoctor" itemvaluemember="DoctorID" itemdisplaymember="DoctorName" valuechanged="valueChanged" field="ApplicationDoctorList"
+                                        conv="WritableListConv(
+                                        { 
+                                        'dropItem': 'dropItem', 
+                                        'single': 'singleDropItem', 
+                                        'first': 'firstDropItem',
+                                        'middle': 'middleDropItem', 
+                                        'menu': 'menu',
+                                        'last': 'lastDropItem' 
+                                        },
+                                        {'width':207,
+                                        'height':200},true)">
+                                    </div>
+                                </td>
+                                <td class="inputItemLabel">
+                                    门诊号
+                                </td>
+                                <td>
+                                    <input class="inputItemText input-width" field="OutPatientNO" conv="" valuechanged="valueChanged" onchange="changeFieldValue(this);" />
+                                </td>
+                            </tr>
+                            <!--第4行：住院号、病房号、病床号-->
+                            <tr>
+                                <td class="inputItemLabel">
+                                    住院号
+                                </td>
+                                <td>
+                                    <input class="inputItemText input-width" field="InHospitalNO" conv="" valuechanged="valueChanged" onchange="changeFieldValue(this);" />
+                                </td>
+                                <td class="inputItemLabel">
+                                    病房号
+                                </td>
+                                <td>
+                                    <input class="inputItemText input-width" field="RoomNO" conv="" valuechanged="valueChanged" onchange="changeFieldValue(this);" />
+                                </td>
+                                <td class="inputItemLabel">
+                                    病床号
+                                </td>
+                                <td>
+                                    <input class="inputItemText input-width" field="BedNO" conv="" valuechanged="valueChanged" onchange="changeFieldValue(this);" />
+                                </td>
+                            </tr>
+                            <!--第5行：部位、项目、方法-->
+                            <tr>
+                                <td colspan="6">
+                                    <div field="ItemUIDList" conv="ExamRequestItemListConv(0,{ 'label': 'unselectedLabels',
+                                                                    'text': 'unselectedText',
+                                                                    'selectedLabel': 'selectedLabels',
+                                                                    'selectedText': 'selectedText',
+                                                                    'unselectedLabel': 'unselectedLabels',
+                                                                    'unselectedText': 'unselectedText',
+                                                                    'selectedItem': 'selectedItem',
+                                                                    'unselectedItem': 'unselectedItem',
+                                                                    'dropItem': 'dropItem_mid',
+                                                                    'dropText': 'dropText_mid',
+                                                                    'dropImage': 'dropImage_mid',
+                                                                    'menu': 'menu',
+                                                                    'first': 'firstDropItem_mid',
+                                                                    'middle': 'middleDropItem_mid',
+                                                                    'single': 'singleDropItem_mid',
+                                                                    'last': 'lastDropItem_mid'
+                                                                    })">
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <!--影像所见、诊断意见编辑区域-->
+                <tr style="width: 100%; height: 55%;">
+                    <td>
+                        <div id="FloatDiv" style="background-color: #dedede; width: 500px; height: 550px;
+                            position: absolute; display: none; margin-left: 880px; margin-top: -130px; z-index: 99999;
+                            -moz-border-radius: 15px; -webkit-border-radius: 15px; border-radius: 15px; box-shadow: 3px 3px 3px #B8B8B8;
+                            -moz-box-shadow: 3px 3px 3px #B8B8B8; -webkit-box-shadow: 3px 3px 3px #B8B8B8;
+                            overflow: auto;">
+                            <div style="margin-top: 10px; margin-left: 20px; height: 225px;">
+                                <span style="font-size: 25px; font-weight: bold">影像所见：</span>
+                                <div style="height: 200px; overflow-y: auto;" field="GatewayFinding" onchange="changeFieldValue(this)" conv="GatewayConv" command='-'>
+                                </div>
+                            </div>
+                            <div style="margin-top: 10px; margin-left: 20px; height: 225px;">
+                                <span style="font-size: 25px; font-weight: bold">诊断意见：</span>
+                                <div style="height: 200px; overflow-y: auto" field="GatewayImpression" onchange="changeFieldValue(this)" conv="GatewayConv" command='-'>
+                                </div>
+                            </div>
+                            <div style="float: right; margin-right: 10px;">
+                                <input type="button" class="button" value="追加" command="Additional" onclick="commit(this);HiddenDiv()" />
+                                <input type="button" class="button" value="覆盖" command="Cover" onclick="commit(this);HiddenDiv()" />
+                                <input type="button" class="button" value="关闭" onclick="HiddenDiv()" />
+                            </div>
+                        </div>
+                        <div style="width: 100%; height: 100%;">
+                            <div style="position: relative; top: 0px; left: 6px; width: 98%; height: 180px;">
+                                <div style="margin-top: -4px; float: left">
+                                    <em style="color: #4D4D4D; font-style: normal;">影像所见</em>
+                                </div>
+                                <textarea id="changFinding" field="Finding" onkeyup="changeFindingOrImpression(this)" onchange="reportFindingOrImpression(this)" conv="RichTextValueConv('../../common/Controls/RichText.html?style=../../../css/system.css&script=../jquery-1.9.1.min.js&script=../../app/report/diag-temp-menu.js')"
+                                    style="height: 100%; width: 100%; font-size:11pt;font-family: '微软雅黑';">
+                                </textarea>
+                            </div>
+                            <div style="position: relative; top: 10px; left: 6px; width: 98%; height: 170px;">
+                                <div style="margin-top: 10px; float: left">
+                                    <i style="color: #4D4D4D; font-style: normal;">诊断意见</i></div>
+                                <textarea id="changImpression" field="Impression" onkeyup="changeFindingOrImpression(this)" onchange="reportFindingOrImpression(this)" conv="RichTextValueConv('../../common/Controls/RichText.html?style=../../../css/system.css&script=../jquery-1.9.1.min.js&script=../../app/report/diag-temp-menu.js')"
+                                    style="height: 100%; width: 100%;font-size:11pt;font-family: '微软雅黑';">
+                                </textarea>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <!--报告底部信息及功能按钮区域-->
+                <tr style="width: 100%; height: 20%;">
+                    <td>
+                        <table style="width: 100%; height: 100%; line-height: 30px; margin-top: 30px;">
+                            <!--第1行：阴阳性、危急值-->
+                            <tr>
+                                <td class="inputItemLabel laber-padding">
+                                    阴阳性
+                                </td>
+                                <td>
+                                    <div style="z-index: 100000" field="BePositive" conv="BolPositiveConv(null,false)">
+                                    </div>
+                                </td>
+                                <td class="inputItemLabel laber-padding">
+                                    危急值
+                                </td>
+                                <td>
+                                    <div style="z-index: 100000" valuemember="CriticalFlagCode" displaymember="CriticalFlagName" inputmember="CriticalFlagName" itemfield="CurrCriticalFlagCode" itemvaluemember="CriticalFlagCode" itemdisplaymember="CriticalFlagName" valuechanged="valueChanged"
+                                        field="CriticalFlagList" conv="TileListConv(null,false)">
+                                    </div>
+                                </td>
+                                <td class="inputItemLabel laber-padding">
+                                    报告等级
+                                </td>
+                                <td>
+                                    <div class="readonlyText" style="color: #4d4d4d;" field="ReportLevelList" valuemember="ReportLevelCode" displaymember="ReportLevelName" inputmember="ReportLevelName" itemfield="CurrReportLevelCode" itemvaluemember="ReportLevelCode" itemdisplaymember="ReportLevelName"
+                                        valuechanged="valueChanged" conv="ExamStatusReadOnlyListConv">
+                                    </div>
+                                </td>
+                            </tr>
+                            <!--第2行：ICD10，报告医生、审核医生-->
+                            <tr>
+                                <td class="inputItemLabel laber-padding">
+                                    ICD10
+                                </td>
+                                <td>
+                                    <div style="z-index: 100000" valuemember="ICD10Code" displaymember="ICD10Name" inputmember="InputCode" itemfield="CurrICD10Code" itemvaluemember="ICD10Code" itemdisplaymember="ICD10Name" valuechanged="valueChanged" field="ICD10List" conv="FilterableListConv(
+                                        { 
+                                        'dropItem': 'dropItem', 
+                                        'single': 'singleDropItem', 
+                                        'first': 'firstDropItem',
+                                        'middle': 'middleDropItem', 
+                                        'menu': 'menu',
+                                        'last': 'lastDropItem' 
+                                        },
+                                        {
+                                        'width':207,
+                                        'height':200
+                                        },null,true)">
+                                    </div>
+                                </td>
+                                <td class="inputItemLabel laber-padding">
+                                    报告医生
+                                </td>
+                                <td>
+                                    <div style="z-index: 100000" valuemember="UserCode" displaymember="UserName" inputmember="UserName" itemfield="CurrReportUserCode" itemvaluemember="UserCode" itemdisplaymember="UserName" valuechanged="valueChanged" field="ReportUserList" conv="FilterableListConv(
+                                        { 
+                                        'dropItem': 'dropItem', 
+                                        'single': 'singleDropItem', 
+                                        'first': 'firstDropItem',
+                                        'middle': 'middleDropItem', 
+                                        'menu': 'menu',
+                                        'last': 'lastDropItem' 
+                                        },
+                                        {
+                                        'width':207,
+                                        'height':200
+                                        },true)">
+                                    </div>
+                                </td>
+                                <td class="inputItemLabel laber-padding">
+                                    审核医生
+                                </td>
+                                <td>
+                                    <div style="z-index: 100000" valuemember="UserCode" displaymember="UserName" inputmember="UserName" itemfield="CurrReviewUserCode" itemvaluemember="UserCode" itemdisplaymember="UserName" valuechanged="valueChanged" field="ReviewUserList" conv="FilterableListConv(
+                                        { 
+                                        'dropItem': 'dropItem', 
+                                        'single': 'singleDropItem', 
+                                        'first': 'firstDropItem',
+                                        'middle': 'middleDropItem', 
+                                        'menu': 'menu',
+                                        'last': 'lastDropItem' 
+                                        },
+                                        {
+                                        'width':207,
+                                        'height':200
+                                        },true)">
+                                    </div>
+                                </td>
+                            </tr>
+                            <!--第3行：报告日期、审核日期-->
+                            <tr>
+                                <td class="inputItemLabel laber-padding">
+                                    影像评级
+                                </td>
+                                <td>
+                                    <div style="z-index: 100000" valuemember="ImageLevelID" displaymember="ImageLevelName" inputmember="ImageLevelName" itemfield="CurrImageLevel" itemvaluemember="ImageLevelID" itemdisplaymember="ImageLevelName" valuechanged="valueChanged" field="ImageLevelList"
+                                        conv="WritableListConv(
+                                        { 
+                                        'dropItem': 'dropItem', 
+                                        'single': 'singleDropItem', 
+                                        'first': 'firstDropItem',
+                                        'middle': 'middleDropItem', 
+                                        'menu': 'menu',
+                                        'last': 'lastDropItem' 
+                                        },
+                                        {'width':207,
+                                        'height':200},true)">
+                                    </div>
+                                </td>
+                                <td class="inputItemLabel laber-padding">
+                                    报告日期
+                                </td>
+                                <td>
+                                    <input class="inputItemText input-width" field="ReportTime" conv="" valuechanged="valueChanged" onchange="changeFieldValue(this);" onclick="WdatePicker({onpicked:function(){}, 
+                                    dateFmt:'yyyy-MM-dd HH:mm:ss', readOnly: true ,qsEnabled:false,autoUpdateOnChanged:true});" />
+                                </td>
+                                <td class="inputItemLabel laber-padding">
+                                    审核日期
+                                </td>
+                                <td>
+                                    <input class="inputItemText input-width" field="ReviewTime" conv="" valuechanged="valueChanged" onchange="changeFieldValue(this);" onclick="WdatePicker({onpicked:function(){}, 
+                                    dateFmt:'yyyy-MM-dd HH:mm:ss', readOnly: true,qsEnabled:false,autoUpdateOnChanged:true});" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="inputItemLabel laber-padding">
+                                    评级备注
+                                </td>
+                                <td colspan="5">
+                                    <input class="inputItemText input-width" style="width: 90%;" field="ImageLevelRemark" conv="" valuechanged="valueChanged" onchange="changeFieldValue(this);" />
+                                </td>
+                            </tr>
+                            <!--第4行：报告功能按钮-->
+                            <tr>
+                                <td colspan="6" align="center" style="height: 60px;">
+                                    <div id="btnSaveReport" style="width: 78px; height: 30px; display: inline-block;
+                                        cursor: pointer;" title="保存报告">
+                                        <input type="button" class="button" value="保存" command="SaveReport" onclick="commit(this);" />
+                                    </div>
+                                    <div id="divPrintElement" onmouseover="ShowDivPreview()" onmouseout="HideDivPreview()" command="PrintReport" onclick="HideDivPreview();PrintReport(this)" field="PrintReport" conv="PrintReportConv" style="width: 78px; height: 30px; display: inline-block;
+                                        cursor: pointer; position: relative;">
+                                        <input type="button" class="button" value="打印" />
+                                        <div id="divpreview" style="display: none" class="printview">
+                                            <div class="printviews" field="ReportTempList" conv="ReportConvMgr.PrintTempListConv('divPrintElement')" onclick="window.event.cancelBubble = true;window.event.returnValue = false;" valuechanged="valueChanged">
+                                            </div>
+                                        </div>
+                                        <div id="arrow" style="display: none" class="arrow">
+                                            <i></i>
+                                        </div>
+                                    </div>
+                                    <div field="CondPrintReport" style="display: none" command="-" conv="CondPrintReportConv">
+                                    </div>
+                                    <!--<div id="divPreviewElement" onmouseover="ShowPreview()" onmouseout="HidePreview()"  onclick="HidePreview();SetPreview()" style="width: 78px; height: 30px; display: inline-block;
+                                        cursor: pointer; position: relative;" title="预览"  >
+                                        <input type="button" class="button" value="预览" />
+                                        <div id="previewabc" onmouseover="ShowPreview()" onmouseout="HidePreview()" style="display: none;
+                                            z-index: 9999; position: absolute;" class="printview">
+                                            <div class="printviews" field="PreviewTempList" conv="PreviewTempListConv('divPreviewElement')"
+                                                onclick="window.event.cancelBubble = true;window.event.returnValue = false;"
+                                                command='-'>
+                                            </div>
+                                        </div>
+                                        <div id="divarrow" style="display: none" class="arrow">
+                                            <i></i>
+                                        </div>
+                                    </div>-->
+                                    <div field="CondPreviewReport" style="display: none" command="-" conv="CondPreviewReportConv">
+                                    </div>
+                                    <div style="width: 78px; height: 30px; display: inline-block; cursor: pointer" title="审核报告">
+                                        <input type="button" class="button" value="审核" command="ReviewReport" onclick="commit(this)" />
+                                    </div>
+                                    <div style="width: 78px; height: 30px; display: inline-block; cursor: pointer" title="驳回报告">
+                                        <input type="button" class="button" value="驳回" command="RejectReport" onclick="commit(this)" />
+                                    </div>
+                                    <div style="width: 108px; height: 30px; display: inline-block; cursor: pointer" title="报告图像">
+                                        <input id="btnShowOrHideAttachDIV" type="button" class="button" style="width: 108px;" value="显示报告图像" onclick="ShowOrHideAttachDIV(this)" />
+                                    </div>
+                                    <div onmouseover="ShowOrHideFollowUpStatus(true);" onmouseout="ShowOrHideFollowUpStatus(false);" style="width: 108px; height: 30px; display: inline-block; cursor: pointer; position: relative;">
+                                        <input type="button" class="button" value="设置随访状态" style="width: 100%;" />
+                                        <div id="Div_SetFollowUpStatus" style="display: none; left: 0;" class="printview">
+                                            <div class="printviews" onclick="window.event.cancelBubble = true; window.event.returnValue = false;" valuechanged="valueChanged">
+                                                <span onclick="SetFollowUpStatus(this,'Waiting'); ShowOrHideFollowUpStatus(false);">需要随访</span>
+                                                <span onclick="SetFollowUpStatus(this,'NoNeed');  ShowOrHideFollowUpStatus(false);">不做随访</span>
+                                            </div>
+                                        </div>
+                                        <div id="Arrow_FollowUpStatus" style="display: none; left:46px;" class="arrow">
+                                            <i></i>
+                                        </div>
+                                    </div>
+                                    <div style="width: 100px; height: 30px; display: inline-block; cursor: pointer;" title="查看申请单">
+                                        <div id="ArgsOfApplication" style="display: none" field="AttachList" command="-" conv="ApplicationConv">
+                                        </div>
+                                        <input type="button" class="button" style="width: 100px;" value="查看申请单" onclick="OpenApplication();">
+                                    </div>
+                                    <div style="width: 78px; height: 30px; display: inline-block; cursor: pointer; margin-left: 35px;" title="云影报告">
+                                        <input type="button" class="button" value="云影报告" onclick="ShowDiv()" />
+                                    </div>
+                                    <a frontfield="true" field="yypdf" conv="YunYingPDFConv" target="__blank" onmouseover="setYunYingPDFLink(this)" onblur="setYunYingPDFLink(this)">下载云影报告</a>
+                                    <div style="width: 78px; height: 30px; display: inline-block; cursor: pointer;" title="报告评级">
+                                        <input type="button" class="button" value="报告评级" onclick="ReportLevelShow()" />
+                                    </div>
+                                    <div style="width: 78px; height: 30px; cursor: pointer; float:right;" title="报告分离">
+                                        <input type="button" class="button" value="报告分离" command="ReportCopyAndSeparate" onclick="commit(this)" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" align="center">
+                                    <div name="attach-curr" style="display: none; width: 90%; position: relative;" id="attachDIV" field="AttachList" conv="ExamRequestConvMgr.ExamRequestAttachList_SysConv_ReportThumbnail('68579a1f-acc7-46aa-9166-e4eca3fb13ca',{'rows':2,'cols':4})">
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="ReportLevel" style="position: absolute; left: 300px; top: 300px; background: #D0D0D0;
+            width: 300px; height: 110px; border-radius: 15px; display: none">
+            <table style="margin-top: 10px; margin-left: 10px; margin-bottom: -100px;">
+                <tr>
+                    <td class="inputItemLabel laber-padding">
+                        审核评级
+                    </td>
+                    <td>
+                        <div id="ReportLevelList" style="z-index: 100000" valuemember="ReportLevelCode" displaymember="ReportLevelName" inputmember="ReportLevelName" itemvaluemember="ReportLevelCode" itemfield="CurrReportLevelFilters" itemfrontfield="true" itemdisplaymember="ReportLevelName"
+                            field="ReportLevelList" conv="FilterableListConv(
+                                        {
+                                     'dropItem': 'dropItem', 
+                                        'single': 'singleDropItem', 
+                                        'first': 'firstDropItem',
+                                        'middle': 'middleDropItem', 
+                                        'menu': 'menu',
+                                        'last': 'lastDropItem' 
+                                        },
+                                        {
+                                        'width':207,
+                                        'height':200
+                                        },true)">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="inputItemLabel laber-padding">
+                        评级备注
+                    </td>
+                    <td>
+                        <input class="inputItemText input-width" field="ReportLevelRemark" conv="" id="Remark" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <!--  <center>-->
+                        <div style="width: 78px; display: inline-block; cursor: pointer; margin-left: 10px;" title="保存报告评级">
+                            <input command="SetReportLevel" type="button" class="button" style="width: 108px;" value="保存报告评级" onclick="commit(this);ReportLevelHide()" condfields="ReportLevel" />
+                        </div>
+                        <div style="width: 78px; display: inline-block; cursor: pointer; margin-left: 50px;" title="取消">
+                            <input type="button" class="button" style="width: 108px;" value="取消" onclick="ReportLevelHide()" />
+                        </div>
+                        <!--   </center>-->
+                        <div style="display: none">
+                            <div field="ReportLevel" command="-" style="display: none;" conv="SetReportLevelConv">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--报告编辑界面，右侧特殊功能区域-->
+        <div class="reportBtnRight" field="RightFrontGroupList" command="-" itemfield="RightFrontGroup" itemcommand="-" valuemember="GroupCode" displaymember="GroupName" conv="FrontGroupListConv({'itemBorder': 'groupItemBorder2',
+                                      'itemBounds_L': 'groupItemBounds_Left2', 'itemBounds_R': 'groupItemBounds_Right2', 
+                                      'selected': 'selectedFrontGroup', 'unselected': 'unselectedFrontGroup'})">
+        </div>
+        <div class="reportRight">
+            <div style="display: none;" class="reportRightHeight" field="RightFrontGroup" command="-" conv="FrontGroupConv('GroupDiagTemp')">
+                <iframe frameborder="no" src="diag-temp.html" style="width: 100%; height: 100%;">
+                </iframe>
+            </div>
+            <div style="display: none;" class="reportRightHeight" field="RightFrontGroup" command="-" conv="FrontGroupConv('GroupSpecialchar')">
+                <iframe frameborder="no" src="specialchar.html" style="width: 100%; height: 100%;">
+                </iframe>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

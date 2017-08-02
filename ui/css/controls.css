@@ -1,0 +1,95 @@
+option
+{
+    border:none;
+    }
+
+/**/
+.control-table-reg-name
+{
+}
+.control-table-reg-name table
+{
+    border: none;
+    overflow: auto;
+    width: 100%;
+    color: #333;
+}
+.control-table-reg-name table th
+{
+    text-align: center;
+    height: 34px;
+    font-size: 13px;
+}
+.control-table-reg-name .tr1:hover
+{
+    background-color: #d3d3d4;
+}
+.control-table-reg-name table tr td
+{
+    text-align: center;
+    height: 34px;
+    font-size: 13px;
+}
+/**/
+
+input.table-item-single
+{
+    font-size: 13px;
+    font-family:宋体;
+    display: block;
+    width: 100px;
+    background-color: #bbb;
+    border: 1px solid #666;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+}
+
+textarea.table-item-single
+{
+    font-size: 13px;
+    font-family:宋体;
+    display: block;
+    width: 99%;
+    background-color: #bbb;
+    border: 1px solid #666;
+    line-height: 20px;
+    overflow: hidden;
+}
+
+div.table-item-single
+{
+    display: block;
+    width: 101px;
+    background-color: #bbb;
+    border: 1px solid #666;
+    height: 22px;
+    font-size: 13px;
+    font-family:宋体;
+    font-size:13px;
+    line-height: 22px;
+    overflow: hidden;
+    padding-right: 1px;
+}
+
+select.table-item-single
+{
+    font-size: 13px;
+    font-family:宋体;
+    display: block;
+    width: 120px;
+    background-color: #bbb;
+    border: 0;
+    height: 20px;
+    line-height: 20px;
+}
+select.table-item-single-short
+{
+    display: block;
+    width: 100px;
+    background-color: #bbb;
+    border: 0;
+    height: 20px;
+    line-height: 20px;
+}
+

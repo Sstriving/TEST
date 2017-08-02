@@ -1,0 +1,218 @@
+.RightFrontGroup{
+	width:100%;
+	height:30px;
+}
+.searchHead{
+	position: relative;
+	left:78px;
+	font-size: 16px;
+    color: #4d4d4d;
+}
+.searchHead i{
+	display:inline-block;
+	width:20px;
+	height:17px;
+	background:url(../../img/query_icon.png) no-repeat;
+	margin-top:7px;
+	float:left;
+}
+.searchHead abr{
+	width:1px;
+	height:16px;
+	background-color: rgb(203, 203, 203);
+	float:left;
+	margin:7px 20px 0 18px;
+}
+.searchHead span{
+	line-height:30px;
+}
+.searchMain{
+	background-color: white;
+	height: 100%;
+	width: 100%;
+	overflow:hidden;
+
+}
+.searchBox{
+	margin: 20px 20px 10px 20px;
+    height: 150px;
+    border-radius: 5px;
+    box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+    background-color:#f2f2f2;
+}
+.inputSearch{
+	width:194px;
+	height:24px;
+	line-height:24px;
+}
+.query_conditon{
+	float:left;
+	height:40px;
+	line-height:25px;
+	position:relative;
+}
+
+.query_conditon_title{
+	width:57px;
+	display:inline-block;
+	line-height:24px;
+	vertical-align:middle;
+	text-align:left;
+	color:#4d4d4d;
+	font-size:14px;
+	float:left;
+	margin-right:18px;;
+}
+
+.query_conditon_inputborder{
+	height:20px;
+	display:inline-block;
+	vertical-align:middle;
+	float:left;
+	margin-right:20px;
+}
+
+.query_conditon_input{
+	height:20px;
+	width:140px;
+	border:1px solid #B8B8B8;
+	line-height:20px;
+	vertical-align:middle;
+	font-size:12px;
+	color:#717171;
+}
+.tabletitle{
+	height:36px;
+	line-height:36px;
+	border-bottom:1px solid #bfbfbf;
+	background-image: -moz-linear-gradient( 90deg, rgb(217,217,217) 1%, rgb(237,237,237) 100%);
+    background-image: -webkit-linear-gradient( 90deg, rgb(217,217,217) 1%, rgb(237,237,237) 100%);
+    background-image: -ms-linear-gradient( 90deg, rgb(217,217,217) 1%, rgb(237,237,237) 100%);
+    box-shadow: 0px 1px 0px 0px rgba(191, 191, 191, 0.004),inset 0px 1px 0px 0px rgba(255, 255, 255, 0.51);
+    border-radius:5px 5px 0 0;
+}
+
+.query-model-button:hover
+{
+    background-color: #9b9b9b;
+    box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.45),inset 0px 1px 1px 0px rgba(0, 0, 0, 0.34);
+    color: White;
+    background-image:none;
+}
+
+.query-model-button{
+  width: 56px;
+  height: 19px;
+  line-height:1px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(168, 168, 168);
+  border-radius:10px;
+  font-family: "microsoft yahei";
+  box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.65),inset 0px 2px 0px 0px rgba(255, 255, 255, 0.3);	
+  color:#4D4D4D;
+  margin-right:13px;
+}
+
+.query-model-button-click{
+  width: 56px;
+  height: 19px;
+  line-height:1px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(168, 168, 168);
+  border-radius:10px;
+  font-family: "microsoft yahei";
+  background-color: #9b9b9b;
+  box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.45),inset 0px 1px 1px 0px rgba(0, 0, 0, 0.34);
+  color: White;
+  background-image:none;
+  margin-right:13px;
+}
+
+.search {
+	height: auto;
+	overflow:hidden;
+	margin: 20px 10px;
+	background-color: rgba(242, 242 242, 0);
+	border-style: solid;
+  	border-width: 1px;
+  	border-color: rgb(179, 179, 179);
+	box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+	border-radius: 4px;
+	padding-bottom: 2px;
+}
+
+.infolist {
+	padding-top: 10px;
+	padding-left: 46px;
+	padding-bottom: 60px;
+}
+
+.infos {
+	margin-top:10px;
+	height: 30px;
+	width: 100%;
+}
+.infolistspan {
+	display: inline-block;
+	height:24px;
+	line-height:24px;
+	font-size: 14px;
+	color: rgb(77, 77, 77);
+	width: 80px;
+	text-align: center;
+	float: left;
+}
+
+.inputWidthforSearch {
+	width: 193px;
+	height:24px;
+	line-height:24px;
+	float: left;
+}
+.arrow
+{
+    margin-top:-20px;
+	width: 0px;
+    height:0px;
+    border-left:10px solid transparent;
+    border-right:10px solid transparent;
+    border-top:10px solid #B2B2B2;
+   	position:absolute;
+   	left:30px;
+   	top:11px;
+}
+.arrow i{
+    margin-top:-20px;
+    display:block;
+    height:0;
+    width:0;
+	border-left:10px solid transparent;
+    border-right:10px solid transparent;
+    border-top:10px solid #f1f1f1;
+}
+.printview{
+	width: 110px;
+  	height:75px;
+    z-index: 100000;
+    text-align: center;
+}
+.printviews{
+	background-color: #f1f1f1;
+	border:1px solid #b2b2b2;
+  	border-radius:5px;
+    width: 80px;
+  	height:40px;
+    z-index: 100000;
+    text-align: center;
+}
+.printview span{
+	color:#4D4D4D;
+	font-size:14px;
+	border-bottom:1px solid #B2B2B2;
+}
+.printview span:last-child{
+	border:none;
+}
+

@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+     <meta http-equiv="X-UA-Compatible" content="IE=11" />
+     <link rel="stylesheet" type="text/css" href="../../../../css/controls.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/system.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/app/config.css" />
+    <script type="text/javascript" src="../../../common/commonjsloader.js"></script>
+    <script type="text/javascript" src="../../../core/corejsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../base.loader.js"></script>
+	<script type="text/javascript" src="../../../app/app.js"></script>
+    <script type="text/javascript" src='reportDiagTempConfig.js'></script>
+    <script type="text/javascript" charset="utf-8" src='../../report/templetes.js'></script>
+    <style type="text/css">
+        .currColor
+        {
+            display :inline-block;
+            position:relative;
+            cursor :default;
+            padding-left:2px;
+            padding-right:2px;
+            width:28px;
+            text-align:center;
+        }
+        .currColor .Menu
+        {
+            font-size:15px;
+            position:absolute;
+            top:4px;
+            left:2px;
+            z-index:99999999;
+            padding-left:0px;
+            padding-right:0px;
+            background-color:#f0f0f0;
+        }
+        .currColor .Blue
+        {
+            font-size:15px;
+            background-color: transparent;
+            color:Blue;
+            list-style:none;
+        }
+        .currColor .Blue:hover
+        {
+            background-color:Blue;
+            color:Red;
+            list-style:none;
+        }
+        .currColor .Red
+        {
+            font-size:15px;
+            background-color: transparent;
+            color:Red;
+            list-style:none;
+        }
+        .currColor .Red:hover
+        {
+            background-color:Red;
+            color:Blue;
+            list-style:none;
+        }
+        .currColor .Black
+        {
+            font-size:15px;
+            background-color: transparent;
+            color:Black;
+            list-style:none;
+        }
+        .currColor .Black:hover
+        {
+            background-color:Black;
+            color:White;
+            list-style:none;
+        }
+        
+        .currFont
+        {
+            display :inline-block;
+            position:relative;
+            cursor :default;
+            padding-left:2px;
+            padding-right:2px;
+            width:40px;
+            text-align:center;
+        }
+        .currFont .Menu
+        {
+            font-size:15px;
+            position:absolute;
+            top:4px;
+            left:2px;
+            z-index:99999999;
+            padding-left:0px;
+            padding-right:0px;
+            background-color:#f0f0f0;
+        }
+        .currFont .Font
+        {
+            font-size:15px;
+            background-color: transparent;
+            color:Black;
+            list-style:none;
+        }
+        .currFont .Font:hover
+        {
+            background-color:Black;
+            color:White;
+            list-style:none;
+        }
+    </style>
+    <script>
+	//lml:
+        root().richTextHtml = '../../../common/Controls/RichText.html?style=../../../../css/system.css&script=../../jquery-1.9.1.min.js&script=../../report/diag-temp-menu.js&script=../../../core/Map.js&script=../../../core/OO.js&script=../../../core/Domain.js&script=../../../core/Form.js&script=../../../core/Event.js&script=../../../app/app.js';
+    </script>
+</head>
+<body onload="init()" style="margin: 2px; font-family: 微软雅黑; font-size: 12pt;"
+     command="NotifyTitle" onclick="commit(this)" condfields="cmd_ActiveApplication">
+    <div style="display: none" field="cmd_ActiveApplication" conv="Form_ConstValueConverter"
+        command="-">
+        'ActiveApplication'</div>
+    <div style="width: 99%; height: 99%; position: fixed;">
+        <div id="moduleMananger" style="width: 60px; height: 25px; right: 50px; top: 10px;
+            position: fixed;">
+        </div>
+        <div style="width: 28%; height: 100%; float: left;overflow:hidden;position:relative;">
+            <div style="top:0px;bottom:52px; left:0px;right:0px;  
+                border: solid 2px #E0E0E0;overflow:hidden;position:absolute;">
+                 <div field="NullValue" command="-" conv="StaticValueConv(null)"></div>
+                <span field="DiagTempTypeList" command="-" conv="TileListConv(null,true)"
+                valuemember="DiagTempTypeCode" displaymember="DiagTempTypeName" itemfield="CurrDiagTempTypeCode"
+                  onclick="LoadDiagTemp()" itemvaluechanged="valueChanged" itemcondfields="CurrDiagTempTypeCode,NullValue">
+                模板类型</span>
+                <div field="CurrDiagTempFolderID" command="-" conv="CacheValueConv" style="overflow:auto;position:absolute;left:0px;right:0px;top:24px;bottom:0px">
+                    <div style="display:none" field="SelectedPKID" conv="TreeViewConv.SelectTreeNodeConv">此节点暂时必须放在此处</div>
+                    <div id="diagtemplatelist" field="DiagTemplateList" conv="TreeViewConv(null,{ 'view': 'treeView', 'header': 'tableHeader', 'headerCell': 'tableHeaderCell', 'row': 'tableRow', 'rowCell': 'treeRowCell','leaf':'treeLeaf', 'subView': 'subTableViewTree','selected':'selectedTableRow','unselected':'unselectedTableRow'},'../../../core/img/')"
+                    parentmember="ParentDiagTempID" valuemember="ReportDiagTempID" displaymember="ReportDiagTempName"
+                    typemember="IsLeaf" childrenmember="Data" command="DiagTemplateList" style="position:absolute;left:0px;right:0px;top:0px;bottom:0px" condfields="CurrDiagTempTypeCode,CurrDiagTempFolderID">
+                </div>
+                </div>
+                <input id="SelectedReportDiagTempID" field="SelectedPKID" conv="SelectedPKIDConv"
+                    style="display: none" />
+            </div>
+            <div style="width: 100%; height: auto; text-align: right; bottom:12px;position:absolute">
+                <input id="btnDelete" type="button" value="删除" command='DeleteReportDiagTemp' onclick='if(confirm("确认删除当前选中的诊断词条配置信息吗？"))commit(this);FocusReportDiagTempName();'
+                    style="border: 0; padding: 3px 15px; width: 70px; height: 30px; float: right;
+                    background: #31A580; color: #000000; cursor: pointer; display: block; font-weight: bold;
+                    font-size: medium;" />
+                <input id="Button1" type="button" value="置顶" command='MoveFirstReportDiagTemp' onclick='commit(this);FocusReportDiagTempName();'
+                    style="border: 0; padding: 3px 15px; width: 70px; height: 30px; float: left;
+                    background: #31A580; color: #000000; cursor: pointer; display: block; font-weight: bold;
+                    font-size: medium;" />
+                <input id="Button2" type="button" value="上移" command='MovePreviousReportDiagTemp' onclick='commit(this);FocusReportDiagTempName();'
+                    style="border: 0; padding: 3px 15px; width: 70px; height: 30px; float: left;
+                    background: #31A580; color: #000000; cursor: pointer; display: block; font-weight: bold;
+                    font-size: medium;" />
+                <input id="Button3" type="button" value="下移" command='MoveNextReportDiagTemp' onclick='commit(this);FocusReportDiagTempName();'
+                    style="border: 0; padding: 3px 15px; width: 70px; height: 30px; float: left;
+                    background: #31A580; color: #000000; cursor: pointer; display: block; font-weight: bold;
+                    font-size: medium;" />
+                <input id="Button4" type="button" value="置底" command='MoveLastReportDiagTemp' onclick='commit(this);FocusReportDiagTempName();'
+                    style="border: 0; padding: 3px 15px; width: 70px; height: 30px; float: left;
+                    background: #31A580; color: #000000; cursor: pointer; display: block; font-weight: bold;
+                    font-size: medium;" />
+            </div>
+        </div>
+        <div style="width: 70%; height: auto; float: right;">
+            <table id="Table1" style="width: 100%; height: 100%; margin: 0px auto; line-height: 40px; 
+                float: left;">
+                <tr>
+                    <td colspan="2" style="font-size: 16pt; color: #31A580;">
+                        <span>诊断词条配置</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;width:90px;">
+                        词条名称：
+                    </td>
+                    <td>
+                        <input id="ReportDiagTempName" field="ReportDiagTempName" onchange="changeFieldValue(this)"
+                            maxlength="64" style="width: 90%; text-align: left; border-left: 0; border-right: 0;
+                            border-top: 0; border-bottom: solid 1px #E0E0E0; font-family: 微软雅黑; font-size: 10pt;" />
+                    </td>
+                </tr>
+                <tr id="Finding" style=" visibility:hidden;">
+                    <td style="text-align: right;">
+                        影像所见：
+                    </td>
+                    <td>
+                        <div style="height: 200px;">
+                            <textarea style="height: 100%; width: 100%;font-family: 微软雅黑; font-size: 12pt;" field="Finding" onchange="changeFieldValue(this)" conv="RichTextValueConv(root().richTextHtml)">
+                            </textarea>
+                        </div>
+                    </td>
+                </tr>
+                <tr id="Impression" style="visibility:hidden;">
+                    <td style="text-align: right;">
+                        诊断意见：
+                    </td>
+                    <td>
+                        <div style="height: 180px;">
+                            <textarea style="height: 100%; width: 100%;font-family: 微软雅黑; font-size: 12pt;"  field="Impression" onchange="changeFieldValue(this)" conv="RichTextValueConv(root().richTextHtml)">
+                            </textarea>
+                        </div>
+                    </td>
+                </tr>
+                <tr  style="display:none;">
+                    <td style="text-align: right;" >
+                        词条类型：
+                    </td>
+                    <td>
+                        <div id="IsPublicField" field="IsPublicField" conv="CustomSelectConv" style="width: 150px;
+                            text-align: left; border-left: 0; border-right: 0; border-top: 0; border-bottom: solid 0px #E0E0E0;
+                            font-family: 微软雅黑; font-size: 12pt;">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div style="width: 100%; height: auto; text-align: center;">
+                
+                            <input id="CreateGroup" type="button" value="新建组" command="NewReportDiagTemp" onclick='commit(this);FocusReportDiagTempName();HiddenDiv()'
+                                style="border: 0;  width: 80px; height: 30px; 
+                                background: #31A580; color: #000000; cursor: pointer;
+                                font-weight: bold; font-size: 12pt;"  />
+                                  <input id="CreateModel" type="button" value="新建模板"  command="NewReportDiagTemp" onclick="commit(this);FocusReportDiagTempName();ShowDiv();"
+                                style="border: 0;  width: 80px; height: 30px; 
+                                background: #31A580; color: #000000; cursor: pointer;
+                                font-weight: bold; font-size: 12pt;" />
+                            <input type="button" value="保存" command="SaveReportDiagTemp" onclick='commit(this);FocusReportDiagTempName();location.reload()'
+                                style="border: 0; padding: 3px 15px; width: 70px; height: 30px; text-align: center;
+                                background: #31A580; color: #000000; cursor: pointer; display: inline-block;
+                                font-weight: bold; font-size: 12pt;" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

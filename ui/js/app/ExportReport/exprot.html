@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+    <script type="text/javascript" charset="utf-8" src="../../common/commonjsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../core/corejsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../app/base.loader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../core/Domain.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../attach.conv.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../print.js"></script>
+     <script type="text/javascript" charset="utf-8" src="exprot.js"></script>
+       <script type="text/javascript" charset="utf-8" src="../../app/app.js"></script>
+    <script type="text/javascript" charset="utf-8" src='../report/report.conv.js'></script>
+    <script type="text/javascript" charset="utf-8" src='../report/report.js'></script>
+    <link rel="stylesheet" type="text/css" href="../../../css/app/print.css" />
+    <!--<link rel="stylesheet" type="text/css" href="../../../../../../css/system.css" />-->
+
+    <script type="text/javascript">
+        function loadData4PDF(data) {
+            if (!data) return;
+            var eleList = [];
+
+            var form = new Form(document.body);
+            var json = eval('(' + data + ')');
+            for (var i = 0; i < document.all.length; i++) {
+                var field = document.all[i].getAttribute("field");
+                if (field != "" && field != null) {
+                    if (field == "ItemUIDList") {
+                        var List = json[field];
+                        if (List != null) {
+                            var BodyPartName = List.BodyPartNames.split(',');
+                            var ExamItemName = List.ExamItemNames.split(',');
+                            var ExamMethodName = List.ExamMethodNames.split(',');
+                            var BodyPart = "";
+                            for (var j = 0; j < BodyPartName.length; j++) {
+                                if (j > 0)
+                                    BodyPart += ",";
+                                BodyPart += BodyPartName[j] + " ";
+                                BodyPart += ExamItemName[j] + " ";
+                                BodyPart += ExamMethodName[j] + " ";
+                            }
+                            form.SetField(field, [BodyPart]);
+                        }
+                    } else {
+                        form.SetField(field, [json[field]]);
+                    }
+                }
+            }
+            printAndClose();
+                
+        }
+        function testScale() {
+            return 4.0;
+            var div1 = document.createElement("div");
+            div1.style.display = "hidden";
+            var div2 = document.createElement("div");
+            div2.style.height = "20mm";
+            div1.appendChild(div2);
+            document.body.appendChild(div1);
+            var height = div1.offsetHeight;
+            document.body.removeChild(div1);
+            return (height / 20);
+        }
+
+        function printAndClose(nCmdID, nCmdExecOpt) {
+            var scale = testScale();
+
+            var printEle = document.getElementById('tabprint');
+            printEle.style.height = "";
+            var div2 = document.getElementById('divspace');
+            div2.innerHTML = "";
+            div2.style.display = "none";
+            var h = printEle.offsetHeight;
+
+            var pageHeight = parseInt((297 - printMarginTop - printMarginBottom) * scale + "", 10);
+            var pageCount = parseInt((printEle.offsetHeight + pageHeight - 12) / pageHeight + "", 10);
+            //var pageCount = parseInt(printEle.offsetHeight / pageHeight, 10);
+            //printEle.style.height = (pageCount * pageHeight-100)+ "px";
+
+            if (printEle.offsetHeight - (pageCount - 1) * pageHeight > 60) {
+                var div1 = document.createElement("div");
+                var paddingTop = pageCount * pageHeight - h; //(pageCount * pageHeight -h)/2 -100;
+                div1.style.cssText = "height:" + paddingTop + "px;";
+
+                div2.style.display = "";
+                div2.appendChild(div1);
+                printEle.style.height = pageCount * pageHeight + "px";
+            }
+        }
+        function ShortTimeConv() {
+            Form_SingleValueConv.apply(this);
+            this.ApplyValue = function (ele, val) {
+                if (val && val != "") {
+                    var date = new Date(val.replace(/-/g, "/"));
+                    date = new Date(date.getTime()).Format("yyyy-MM-dd");
+                    Element(ele).setText(date);
+                }
+            }
+        }
+
+        function CAHashConv() {
+            Form_SingleValueConv.apply(this);
+            this.ApplyValue = function (ele, val) {
+                if (val && val != "") {
+                    ele.style.visibility = "visible";
+                    Element(ele).setText(Element(ele).getText() + val);
+                } else {
+                    ele.style.visibility = "hidden";
+                    Element(ele).setText("");
+                }
+            }
+        }
+
+        function CASignatureUrl_Report_Conv() {
+            Form_SingleValueConv.apply(this);
+            this.ApplyValue = function (ele, val) {
+                if (val) {
+                    document.getElementById("report_user").style.display = "none";
+                    document.getElementById("caimgdiv_Report").style.display = "";
+                    document.getElementById("caimgid_Report").src = val;
+                }
+            }
+        }
+
+        function CASignatureUrl_Review_Conv() {
+            Form_SingleValueConv.apply(this);
+            this.ApplyValue = function (ele, val) {
+                if (val) {
+                    document.getElementById("review_user").style.display = "none";
+                    document.getElementById("caimgdiv_Review").style.display = "";
+                    document.getElementById("caimgid_Review").src = val;
+                }
+            }
+        }
+        //云影网关二维码Conv
+        function TwoDimensionCodeConv() {
+            Form_SingleValueConv.apply(this);
+            this.ApplyValue = function (ele, val) {
+                //手动配置：二维码网关地址
+                var address = "http://127.0.0.1/DGWWebService/BarCode/GetReportBarCode.aspx";
+                //手动配置：云影网关ID，例如：029_3
+                var gatewayid = "";
+
+                var src = address + "?gatewayid=" + gatewayid + "&examrequestid=" + val + "&tmp=" + Math.random();
+                var img = ele.children[0].children[0];
+                img.onerror = function (e, i) {
+                    return function () {
+                        e.style.visibility = "hidden";
+                        delete i.__src;
+                    }
+                } (ele, img);
+                img.onload = function (e, i) {
+                    return function () {
+                        e.style.visibility = "visible";
+                        delete i.__src;
+                    }
+                } (ele, img);
+                img.__src = img.src = src;
+            }
+        }
+    </script>
+    <title>打印报告</title>
+</head>
+
+<body style="background-color: White;">
+    <div style="display:none"></div>
+    <div field="CurrReportExamRequestID" style="display:none"></div>
+    <div field="AppDirectory" style="display:none"></div>
+    <div class="printclass"  id="tabprint">
+        <div class="content">
+            <h1>
+                <img src="../../../img/cross.png" width="35px;" style="margin-bottom: -5px;" />XXXX医院</h1>
+            <h4>
+                <span field="CurrModalityCode">
+                    </span>检查报告单</h4>
+            <div>
+                <div class="printTime">
+                <!-- 云影网关二维码显示（打印报告页面左上角） -->
+               <!--  <div field="CurrReportExamRequestID" conv="TwoDimensionCodeConv" style="position: absolute; left: 10px; top: 0px;">
+                    <div style="position: relative;">
+                        <img style="width:96px; height:96px;"/>
+                    </div>
+                    <div style="position: relative; top: -2px; width:100px; white-space: normal; line-height: 8px;">
+                        <span style="font-size:8pt; font-family:'黑体';">此为访问您数字胶片之凭证，请妥善保管</span>
+                    </div>
+                </div> -->
+                    <div class="timediv">
+                        <span class="lable">检查日期</span>
+                        <div field="ExamDateTime" style=" width:230px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="printInfo">
+                    <span class="shortlable" style="margin-left: 5px;">姓&nbsp;&nbsp;名</span>
+                    <div class="info" field="PatientName">
+                    </div>
+                    <span class="midlable">性&nbsp;&nbsp;&nbsp;&nbsp;别</span>
+                    <div class="info" field="CurrSexCode">
+                    </div>
+                    <span class="shortlable">年&nbsp;&nbsp;龄</span>
+                    <div class="info" field="PatientAge" style="width: 30px;">
+                    </div>
+                    <div class="infoage" field="CurrAgeUnitCode">
+                    </div>
+                    <span class="lable">影&nbsp;像&nbsp;号</span>
+                    <div class="info" field="ExamRequestID">
+                    </div>
+                </div>
+                <div class="printInfo">
+                    <span class="shortlable" style="margin-left: 5px;">科&nbsp;&nbsp;室</span>
+                    <div class="info" field="CurrApplicationDept">
+                    </div>
+                    <span class="midlable">住&nbsp;院&nbsp;号</span>
+                    <div class="info" field="InHospitalNO">
+                    </div>
+                    <span class="shortlable">床&nbsp;&nbsp;号</span>
+                    <div class="info" field="BedNO" style="width: 98px;">
+                    </div>
+                    <span class="lable">设备类型</span>
+                    <div class="info" field="CurrModalityCode">
+                    </div>
+                </div>
+                <div class="printInfo">
+                    <span class="lable">检查部位</span>
+                    <!-- <div class="info" field="CurrBodyPartIDList_Sys" id="bodypartlist" style="width: 80%;">
+                    </div> -->
+                    <div class="info" field="ItemUIDList" style="width: 80%;">
+                    </div>
+                </div>
+                <div class="printimg">
+                    <div field="AttachList" conv="ExamRequestRISExportConvMgr('68579a1f-acc7-46aa-9166-e4eca3fb13ca',{'rows':2,'cols':4},true)" style="position: relative;">
+                    </div>
+                </div>
+                <div class="printContent">
+                    <h3>
+                        检查所见</h3>
+                    <div class="printcontent" style="min-height: 75mm; margin-left: 10px; font-size: 15pt;" field="Finding" conv="ReadOnlyRichTextValueConv">
+                    </div>
+                </div>
+                <div class="printContent">
+                    <h3>
+                        诊断意见</h3>
+                    <div class="printcontent" style="min-height: 15mm; margin-left: 10px; font-size: 15pt;" field="Impression" conv="ReadOnlyRichTextValueConv">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="display: none;" id="divspace">
+        </div>
+           <div class="footerdiv">
+            <div class="printFoot">
+                <div>
+                    <span class="lable">报告医生</span>
+                    <div id="report_user" class="infos" style="width: 170px;" field="CurrReportUserCode" >
+                    </div>
+                    <div field="CASignatureUrl_Report" style="display:none;" conv="CASignatureUrl_Report_Conv"></div>
+                    <div id="caimgdiv_Report" class="infos" style="display:none; height:40px;width:110px">
+                        <img id="caimgid_Report" height="45px;" style="width:120px;" src="" />
+                    </div>
+                    <span class="lable" style="margin-left:50px;">审核医生</span>
+                    <div id="review_user" class="infos" field="CurrReviewUserCode" itemfield="CurrReviewUserCode">
+                    </div>
+                    <div field="CASignatureUrl_Review" style="display:none;" conv="CASignatureUrl_Review_Conv"></div>
+                    <div id="caimgdiv_Review" class="infos" style="display:none; height:40px;width:110px">
+                        <img id="caimgid_Review" height="45px;" style="width:120px;" src="" />
+                    </div>
+                    <div style="float: right; margin-right: 10px;">
+                        <span class="lable">报告日期</span>
+                        <div field="ReportTime" style=" width:230px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <span>(此影像资料仅供临床医师参考)</span>
+                <!--<span field="CAHash" conv="CAHashConv" style="display:block;white-space: nowrap; font-size: 10px; margin-left: 5px;visibility:hidden">此报告已经过CA认证，HASH值为：</span>-->
+                <!--<span class="address">地址:XXXX</span>-->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

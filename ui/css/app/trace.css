@@ -1,0 +1,63 @@
+.infolist {
+	padding: 67px 54px 20px 32px;
+}
+
+.infos {
+	margin-top: 10px;
+	height: 30px;
+	line-height: 30px;
+}
+
+.fn-clear {
+	clear: both;
+}
+
+.infolistspan {
+	display: inline-block;
+	height: 28px;
+	line-height: 26px;
+	font-size: 14px;
+	color: rgb(77, 77, 77);
+	width: 70px;
+	text-align: left;
+	float: left;
+}
+
+.inputWidth {
+	width: 100px;
+	float: left;
+}
+
+.inputbigWidth {
+	width: 200px;
+	float: left;
+}
+
+.readonlyText {
+	font-size: 14px;
+	width: 79px;
+	height: 27px;
+	line-height: 26px;
+	float: left;
+	text-align: center;
+	color: #4D4D4D;
+	border-bottom: 1px dashed #c5c5c5;
+	margin-right: 27px;
+}
+
+.Text-output {
+	float: left;
+	width: 125px;
+	line-height: 26px;
+	color: rgb(77, 77, 77);
+}
+
+.Bottom-line {
+	border-bottom: 1px dashed #c5c5c5;
+	margin: 0px 30px;
+}
+
+.Output-date {
+	line-height: 26px;
+	color: rgb(77, 77, 77);
+}

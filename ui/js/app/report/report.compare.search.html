@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>查询</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+    <script type="text/javascript" charset="utf-8" src="../../common/commonjsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../core/corejsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../app/base.loader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../app/app.js"></script>
+    <script type="text/javascript" charset="utf-8" src="report.compare.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../css/controls.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/system.css" />
+    <style type="text/css">
+        .tableView,
+        .tableHeaderCell {
+            background-color: #fff;
+        }
+        
+        body {
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body onload="init();">
+    <div id="div" style="position: absolute; top: 10px; bottom: 0px; left:10px; height: 98%;
+        width: 95%; right: 0px;" field="CompareHistoryList" conv="SearchTableViewConv(null,{ 'view': 'tableView', 'header': 'tableHeader', 'headerCell': 'tableHeaderCell', 'row': 'tableRow', 'rowCell': 'tableRowCell', 'subView': 'subTableView','selected':'selectedTableRow','unselected':'unselectedTableRow'})"
+        columns="[{ 'Name': 'PatientName', 'Description': '姓名', 'DisplayIndex': 0,'Width':80 },
+                  { 'Name': 'PatientSexName', 'Description': '性别', 'DisplayIndex': 1 ,'Width':60},
+                  { 'Name': 'PatientAge', 'Description': '患者年龄', 'DisplayIndex': 2 ,'Width':60},
+                  { 'Name': 'ExamDateTime', 'Description': '检查日期', 'DisplayIndex': 3 ,'Width':120},
+                  { 'Name': 'BodyPartNames', 'Description': '部位', 'DisplayIndex': 4 ,'Width':100 },
+                  { 'Name': 'ExamRequestID', 'Description': '检查号', 'DisplayIndex': 10 ,'Width':100 },
+                  { 'Name': 'ExamRequestTime', 'Description': '检查申请时间', 'DisplayIndex': 11 ,'Width':140 }]" itemfield="SelectedExamRequestID" itemvaluemember="ExamRequestID">
+    </div>
+</body>
+
+</html>

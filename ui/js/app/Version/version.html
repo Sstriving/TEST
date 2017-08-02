@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+    <meta name="Description" content="" />
+    <meta name="Keywords" content="" />
+    <title>关于</title>
+    <link href="../../../css/system.css" rel="stylesheet" type="text/css" />
+    <link href="../../../css/app/search.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/app/app.css" />
+    <script type="text/javascript" charset="utf-8" src="../../common/commonjsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../core/corejsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../app/base.loader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../app/app.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../version/version.js"></script>
+</head>
+<body onload="init()">
+    <div style="display: none">
+        <div field="cmd_NavigateModule" command="-" conv="StaticValueConv('NavigateModule')">
+        </div>
+        <div field="f_NotifyDataType" command="-" conv="StaticValueConv('object')">
+        </div>
+        <div field="cmd_FormBounds" command="-" conv="StaticValueConv('FormBounds')">
+        </div>
+        <div field="f_NotifyArrayType" command="-" conv="StaticValueConv('array')">
+        </div>
+        <div field="f_FormBounds_x" command="-" conv="UIElementBoundsConv(document.getElementById('divForm'),'x',0)">
+        </div>
+        <div field="f_FormBounds_y" command="-" conv="UIElementBoundsConv(document.getElementById('divForm'),'y',0)">
+        </div>
+        <div field="f_FormBounds_w" command="-" conv="UIElementBoundsConv(document.getElementById('divForm'),'width',0)">
+        </div>
+        <div field="f_FormBounds_h" command="-" conv="UIElementBoundsConv(document.getElementById('divForm'),'height',0)">
+        </div>
+    </div>
+    <div id="divForm" style="width: 598px; height:467px; margin-top:-13px;border-radius:10px;margin-left:-10px ;background-image:url(../../../img/背景.png);background-repeat:no-repeat;background-size：cover;" condfields="cmd_FormBounds,f_NotifyArrayType,f_FormBounds_x,f_FormBounds_y,f_FormBounds_w,f_FormBounds_h"
+        command='NotifyTitle'>
+        <div style="background-image:url(../../../img/logo1.png);background-repeat:no-repeat; width:188px; height:56px;position:absolute; top:30px; left:50px; ">
+        </div>
+        <div style="position:absolute; top:130px; left:50px; width:500px;">
+        <hr style="border:2px dotted #999999;" />
+        </div>
+<!--        <div style="position:absolute; top:150px; left:50px;">
+        <font color="#999999" size="5px">&nbsp;&nbsp;&nbsp;Restore PACS 2.8</font>
+        </div>-->
+        <div style="position:absolute; top:150px; left:50px;">
+        <font color="#999999" size="4px">&nbsp;&nbsp;&nbsp;&nbsp;Restore PACS 2.0</font>
+        </div>
+        <div style="position:absolute; top:180px; left:50px;">
+             <font color="#999999" size="4px">  
+           <div field="Version">
+                </div>
+	<!-- &nbsp;&nbsp;&nbsp;&nbsp;Build:2.6.2.0 -->
+</font>
+        </div>
+        <div  style="position:absolute; top:210px; left:50px;">
+            <font color="#999999" size="4px">&nbsp;&nbsp;&nbsp;&nbsp;Copyright 2012 All rights reserved</font>
+        </div>
+        <div style="position:absolute; top:240px; left:50px; width:500px;">
+        <hr style="height:1px;border:none;border-top:1px solid #999999; width:480px;" />
+        </div>
+        <div  style="position:absolute; top:260px; left:50px;">
+             <font color="#999999" size="4px">&nbsp;&nbsp;&nbsp;&nbsp;西安翼展电子科技有限公司</font></font>
+        </div>
+        <div  style="position:absolute; top:290px; left:50px;">
+             <font color="#999999" size="4px">&nbsp;&nbsp;&nbsp;&nbsp;Tel:400-686-0956</font></font>
+        </div>
+        <div  style="position:absolute; top:320px; left:50px;">
+             <font color="#999999" size="4px">&nbsp;&nbsp;&nbsp;&nbsp;Mail:restore.service@wingspan.cn</font></font>
+        </div>
+        <div style="position:absolute; bottom:100px; left:50px; width:500px;">
+                  <hr style="border:2px dotted #999999;width:100%" />
+        </div>
+        <div style="position:absolute; bottom:80px; left:50px;">
+
+             &nbsp;&nbsp;&nbsp;&nbsp;<a href="#"  style="text-decoration:none;"><font color="#4aa6dd"><b>   >>许可同意书  </b></font></a>
+        </div>
+        <div style="position:absolute; bottom:30px;  right:50px;">
+             <div class="functions" style="display: inline-block; cursor: pointer"command="NotifyTitle"
+                    field="arg_NavigateModule" conv="StaticValueConv()" condfields="cmd_NavigateModule,f_NotifyDataType,arg_NavigateModule"
+                    onclick="commit(this)" title="关闭">
+               <font color="#999999  "><b><a>关闭</a></b></font></div>
+        </div>
+    </div>
+</body>
+</html>

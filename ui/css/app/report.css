@@ -1,0 +1,295 @@
+.reportTab {
+    overflow-y: auto;
+    width: 100%;
+    height: 28px;
+    border-bottom: 1px solid #C7C7C5;
+    background-image: -moz-linear-gradient( 90deg, rgb(217, 217, 217) 1%, rgb(237, 237, 237) 100%);
+    background-image: -webkit-linear-gradient( 90deg, rgb(217, 217, 217) 1%, rgb(237, 237, 237) 100%);
+    background-image: -ms-linear-gradient( 90deg, rgb(217, 217, 217) 1%, rgb(237, 237, 237) 100%);
+    box-shadow: 0px 1px 0px 0px rgba(191, 191, 191, 0.004), inset 0px 1px 0px 0px rgba(255, 255, 255, 0.51);
+}
+
+
+/*TAB页签控件 start*/
+
+.Tab {
+    width: auto;
+    height: 28px;
+    font-size: 16px;
+    color: #4D4D4D;
+    line-height: 28px;
+    padding: 0 15px;
+    text-align: center;
+    float: left;
+    cursor: pointer;
+}
+
+.unselectedTab {}
+
+.selectedTab {
+    background-color: #9b9b9b;
+    color: #fff;
+}
+
+
+/*TAB页签控件 end*/
+
+.reportBtn {
+    z-index: 10000;
+    position: absolute;
+    top: 148px;
+    left: 30%;
+    height: 30px;
+}
+
+.reportBtnRight {
+    z-index: 10000;
+    position: absolute;
+    top: 18px;
+    right: 6%;
+    height: 30px;
+}
+
+.groupItemBorder2 {
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    border: 1px solid rgba(154, 154, 154, 1);
+    border-right-width: 0;
+}
+
+.groupItemBounds_Left2 {
+    width: 90px;
+    line-height: 30px;
+    border-radius: 5px 0px 0px 5px;
+}
+
+.groupItemBounds_Right2 {
+    width: 90px;
+    line-height: 30px;
+    border-radius: 0px 5px 5px 0px;
+}
+
+
+/*���������桢����Աȡ�����ۼ�*/
+
+.groupItemBorder3 {
+    width: 116px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    border: 1px solid rgba(154, 154, 154, 1);
+    border-right-width: 0;
+}
+
+.groupItemBounds_Left3 {
+    width: 116px;
+    line-height: 30px;
+    border-radius: 5px 0px 0px 5px;
+    border: 1px solid rgba(154, 154, 154, 1);
+    border-right-width: 0;
+}
+
+.groupItemBounds_Middle3 {
+    width: 116px;
+    line-height: 30px;
+    border-radius: 0px 0px 0px 0px;
+    border: 1px solid rgba(154, 154, 154, 1);
+}
+
+.groupItemBounds_Right3 {
+    width: 116px;
+    line-height: 30px;
+    border-radius: 0px 5px 5px 0px;
+    border: 1px solid rgba(154, 154, 154, 1);
+}
+
+.reportMain {
+    border-radius: 4px;
+    background-color: #F2F2F2;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(179, 179, 179);
+    box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+    height: 800px;
+    overflow: auto;
+    margin-top: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.reportLeft {
+    float: left;
+    width: 70%;
+    margin-top: 33px;
+    margin-left: 10px;
+    border-radius: 8px;
+    background-color: #e6e6e6;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(179, 179, 179);
+    box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+    padding-top: 25px;
+    /*height: 775px; */
+}
+
+.input-width {
+    width: 202px;
+    height: 24px;
+    line-height: 24px;
+}
+
+.dropItem {
+    float: left;
+    width: 206px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 15px;
+    font-family: "microsoft yahei";
+    cursor: pointer;
+    position: relative;
+}
+
+.reportRight {
+    width: 27.5%;
+    float: right;
+    margin-top: 33px;
+    margin-right: 10px;
+    border-radius: 8px;
+    background-color: #e6e6e6;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(179, 179, 179);
+    box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+    min-height: 710px;
+}
+
+.reportCompare {
+    width: 100%;
+    margin-top: 37px;
+}
+
+.Typefaces1 {
+    border: 1px solid #b9b9b9;
+    line-height: 16px;
+    text-align: center;
+    width: 39px;
+    height: 16px;
+    margin: 0px 2px;
+    border-radius: 8px;
+    background-image: -moz-linear-gradient( 90deg, rgb(223, 223, 223) 0%, rgb(243, 243, 243) 100%);
+    background-image: -webkit-linear-gradient( 90deg, rgb(223, 223, 223) 0%, rgb(243, 243, 243) 100%);
+    background-image: -ms-linear-gradient( 90deg, rgb(223, 223, 223) 0%, rgb(243, 243, 243) 100%);
+}
+
+.Selected1 {
+    border: 1px solid #8c8c8c;
+    color: #FFF;
+    background-image: -moz-linear-gradient( 90deg, rgb(155, 155, 155) 0%, rgb(153, 153, 153) 100%);
+    background-image: -webkit-linear-gradient( 90deg, rgb(155, 155, 155) 0%, rgb(153, 153, 153) 100%);
+    background-image: -ms-linear-gradient( 90deg, rgb(155, 155, 155) 0%, rgb(153, 153, 153) 100%);
+}
+
+.Typefaces {
+    border: 1px solid #bebebe;
+    box-shadow: 0px 1px 0px 0px rgb( 255, 255, 255);
+    display: block;
+    float: left;
+    line-height: 26px;
+    text-align: center;
+    width: 68px;
+    height: 26px;
+    margin: 9px 4px 0px 4px;
+    border-radius: 8px;
+    background-image: -moz-linear-gradient( 90deg, rgb(223, 223, 223) 0%, rgb(243, 243, 243) 100%);
+    background-image: -webkit-linear-gradient( 90deg, rgb(223, 223, 223) 0%, rgb(243, 243, 243) 100%);
+    background-image: -ms-linear-gradient( 90deg, rgb(223, 223, 223) 0%, rgb(243, 243, 243) 100%);
+}
+
+.Selected {
+    border: 1px solid #4e4f54;
+    color: #FFF;
+    background-image: -moz-linear-gradient( 90deg, rgb(132, 134, 140) 0%, rgb(92, 102, 111) 100%);
+    background-image: -webkit-linear-gradient( 90deg, rgb(132, 134, 140) 0%, rgb(92, 102, 111) 100%);
+    background-image: -ms-linear-gradient( 90deg, rgb(132, 134, 140) 0%, rgb(92, 102, 111) 100%);
+}
+
+.currColor,
+.currFont {
+    position: relative;
+}
+
+.Menu {
+    z-index: 99999999;
+    display: block;
+    position: absolute;
+    left: -35px;
+    top: -13px;
+    width: 39px;
+    list-style-type: none;
+}
+
+.Font:hover,
+.Black:hover,
+.Red:hover,
+.Blue:hover {
+    background-color: #58c4a0;
+    color: #fff;
+}
+
+.printview {
+    position: absolute;
+    top: -75px;
+    left: -14px;
+    width: 110px;
+    height: 75px;
+    z-index: 100000;
+    text-align: center;
+}
+
+.printview span {
+    color: #4D4D4D;
+    font-size: 14px;
+    border-bottom: 1px solid #B2B2B2;
+    width: 100%;
+    display: block;
+}
+
+.printview span:last-child {
+    border: none;
+}
+
+.printviews {
+    background-color: #f1f1f1;
+    border: 1px solid #b2b2b2;
+    border-radius: 5px;
+    width: 110px;
+    height: 62px;
+    z-index: 100000;
+    text-align: center;
+}
+
+.arrow {
+    width: 0px;
+    height: 0px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #B2B2B2;
+    position: absolute;
+    left: 30px;
+    top: -11px;
+    z-index: 100001;
+}
+
+.arrow i {
+    position: absolute;
+    top: -12px;
+    *top: -12px;
+    left: -10px;
+    display: block;
+    height: 0;
+    width: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #f1f1f1;
+}

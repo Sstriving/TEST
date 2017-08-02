@@ -1,0 +1,359 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../../../css/app/app.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/controls.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/system.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/app/register.css" />
+    <script type="text/javascript" src="../../core/corejsloader.js"></script>
+    <script type="text/javascript" src="../../common/commonjsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../base.loader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../app/app.js"></script>
+    <script type="text/javascript" src="register.js"></script>
+    <script type="text/javascript" src="register.conv.js"></script>
+</head>
+
+<body onload="init()">
+    <div style="display: none">
+        <div field="cmd_NavigateModule" command="-" conv="StaticValueConv('NavigateModule')">
+        </div>
+        <div field="cmd_ExitApplication" command="-" conv="StaticValueConv('ExitApplication')">
+        </div>
+        <div field="f_NotifyDataType" command="-" conv="StaticValueConv('object')">
+        </div>
+        <div field="f_AddExamRequest" command="-" conv="StaticValueConv('AddExamRequest')">
+        </div>
+        <div field="cmd_OpenHelpFile" command="-" conv="StaticValueConv('OpenHelpFile')">
+        </div>
+        <div field="CloseReport" command='-' conv="CloseReportConv">
+        </div>
+        <div field="cmd_MinWindow" command="-" conv="StaticValueConv('MinWindow')">
+        </div>
+        <div field="CloseReport_Request" command='-' conv="StaticValueConv('Request')" style="display: none">
+        </div>
+        <div field="CloseReport_Close" command='-' conv="StaticValueConv('Close')" style="display: none">
+        </div>
+        <div field="ExamRequestData" command='-' conv="MessageWindow()" style="display: none">
+        </div>
+    </div>
+    <div class="Header">
+        <div class="logos">
+            <img src="../../../img/logo.png" alt="logo" />
+            <span>翼展影像存档与通讯系统</span>
+        </div>
+        <div class="HeaderMain">
+            <div class="selectterm" style="display: inline-block; cursor: pointer" field="arg_NavigateModule_RegisterModule" conv="StaticValueConv('RegisterModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_NavigateModule_RegisterModule"
+                onclick="commit(document.getElementById('divReportModule'));commit(this)" title="新建患者">
+                <a>登记</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer" field="arg_NavigateModule_SearchModule" conv="StaticValueConv('SearchModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_NavigateModule_SearchModule"
+                onclick="commit(document.getElementById('divReportModule'));commit(this)" title="查询患者">
+                <a>查询</a>
+            </div>
+            <div class="functions" id="divReportModule" style="display: inline-block; cursor: pointer" field="arg_NavigateModule_ReportModule" conv="StaticValueConv('ReportModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_NavigateModule_ReportModule"
+                onclick="commit(this)" title="报告">
+                <a>报告</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer" field="arg_NavigateModule_ImageViewModule" conv="StaticValueConv('ImageViewModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_NavigateModule_ImageViewModule"
+                onclick="commit(this)" title="阅片">
+                <a>阅片</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer" field="arg_NavigateModule_ReportAssignModule" conv="StaticValueConv('ReportAssignModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_NavigateModule_ReportAssignModule"
+                onclick="commit(this)" title="报告分配">
+                <a>报告分配</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer" field="arg_Navigate_StudyMatchModule" conv="StaticValueConv('StudyMatchModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_Navigate_StudyMatchModule"
+                onclick="commit(this)" title="图像匹配">
+                <a>图像匹配</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer" field="arg_Navigate_StatisticsModule" conv="StaticValueConv('StatisticsModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_Navigate_StatisticsModule"
+                onclick="commit(this)" title="数据统计">
+                <a>统计</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer" field="arg_Navigate_ConfigsModule" conv="StaticValueConv('ConfigsModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_Navigate_ConfigsModule" onclick="commit(this)"
+                title="配置">
+                <a>配置</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer" command="NotifyTitle" condfields="cmd_OpenHelpFile" onclick="commit(this)" title="帮助">
+                <a>帮助</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer" field="arg_Navigate_VersionModule" conv="StaticValueConv('VersionModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_Navigate_VersionModule" onclick="commit(this)"
+                title="版本">
+                <a>关于</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer" command="NotifyTitle" condfields="cmd_ExitApplication" onclick="commit(this)" title="退出">
+                <a>退出</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer; float: right" command="NotifyTitle" condfields="cmd_MinWindow" onclick="minWindow()" title="最小化">
+                <a>最小化</a>
+            </div>
+        </div>
+    </div>
+    <div class="RightFrontGroup" field="RightFrontGroupList" command="-" conv="FrontGroupListConv({'itemBorder': 'groupItemBorder', 
+          'itemBounds_R': 'groupItemBounds_Right', 
+          'itemBounds_L': 'groupItemBounds_Right', 
+          'selected': 'selectedFrontGroup', 
+          'unselected': 'unselectedFrontGroup'})" itemfield="RightFrontGroup" itemcommand="-" valuemember="GroupCode" displaymember="GroupName">
+    </div>
+    <div style="height: 700px; margin: auto; overflow: hidden; position: relative;">
+        <div style="position: absolute; top: 0; left: 0; bottom: 0; right: 0px; overflow-x: hidden;
+            overflow-y: auto;">
+            <div class="RegisterMain" field="RightFrontGroup" command="-" conv="FrontGroupConv('GroupRegister')">
+                <div class="divGroup registerLeft">
+                    <span field="RegisterMode" conv="RegisterModeConv" style="position: absolute; margin-left: 12px;
+                        margin-top: 4px"></span>
+                    <div class="divGroupTitle" style="width: 136px;">
+                        基本信息</div>
+                    <div class="Baseinfo">
+                        <div class="infos">
+                            <span class="infolistspan">检索编号</span>
+                            <input typeindex="3" id="clearRetirvetxt" class="inputItemText inputbigWidth" style="width: 330px;" onblur="HISExamRequestListRequest(this)" />
+                            <input type="button" value="读卡" class="button" onclick="commit(this)" command="ICReadCard" />
+                            <input type="button" value="关系配置" class="button" style="width: 88px;" command="HISExamItemMappingConfig" onclick="commit(this)" />
+                        </div>
+                        <div class="infos">
+                            <span class="infolistspan">姓&nbsp;&nbsp;&nbsp;&nbsp;名<em style="color: Red">*</em></span>
+                            <input id="PatientName" typeindex="6" class="inputItemText inputWidth" field="PatientName" conv="HistoryExamRequestListConv(['PatientName'])" valuechanged="valueChanged" onchange="changeFieldValue(this);" />
+                            <span class="infolistspan">姓名全拼</span>
+                            <input typeindex="9" class="inputItemText inputWidth" field="PatientNameSpell" valuechanged="valueChanged" onchange="changeFieldValue(this);" />
+                        </div>
+                        <div class="infos">
+                            <span class="infolistspan">患者编号</span>
+                            <input typeindex="6" class="inputItemText inputWidth" field="PatientID" conv="HistoryExamRequestListConv(['PatientID'])" valuechanged="valueChanged" onchange="changeFieldValue(this);" />
+                            <span class="infolistspan">身份证号</span>
+                            <input typeindex="6" class="inputItemText inputWidth" field="PatientIDCard" conv="HistoryExamRequestListConv(['PatientID'])" valuechanged="valueChanged" onchange="changeFieldValue(this);" />
+                        </div>
+                        <div class="infos">
+                            <span class="infolistspan">性&nbsp;&nbsp;&nbsp;&nbsp;别</span>
+                            <div id="PatientSex" field="SexList" conv="TileListConv(
+		                    {'unselectedItem':'unselectedItem',
+		                    'selectedItem':'selectedItem',
+		                    'unselectedLabel':'unselectedLabel',
+		                    'selectedLabel':'selectedLabel',
+		                    'unselectedText':'unselectedText',
+		                    'selectedText':'selectedText'}
+		                    )" valuemember="SexCode" displaymember="SexName" itemfield='CurrSexCode' valuechanged="valueChanged" style="display: inline-block; float: left; width: 206px;">
+                            </div>
+                            <span class="infolistspan">电&nbsp;&nbsp;&nbsp;&nbsp;话</span>
+                            <input typeindex="12" class="inputItemText inputWidth" valuechanged="valueChanged" onchange="changeFieldValue(this);" field="Telephone" />
+                        </div>
+                        <div class="infos">
+                            <span class="infolistspan">生&nbsp;&nbsp;&nbsp;&nbsp;日</span>
+                            <input typeindex="15" class="inputItemText inputWidth" field="PatientBirthDate" conv="" valuechanged="valueChanged" onchange="changeFieldValue(this);" onclick="WdatePicker({onpicked:function(){}, dateFmt:'yyyy-MM-dd', readOnly: true});" />
+                            <span class="infolistspan">年&nbsp;&nbsp;&nbsp;&nbsp;龄</span>
+                            <div field="PatientAge" conv="PatientAgeConv">
+                            </div>
+                            <div typeindex="19" valuemember="AgeUnitCode" displaymember="AgeUnitName" inputmember="AgeUnitName" itemfield="CurrAgeUnitCode" itemvaluemember="AgeUnitCode" itemdisplaymember="AgeUnitName" valuechanged="valueChanged" field="AgeUnitList" conv="FilterableListConv(
+		                                        { 
+		                                        'dropItem': 'dropItem_short', 
+		                                        'single': 'singleDropItem_short', 
+		                                        'first': 'firstDropItem_short',
+		                                        'middle': 'middleDropItem_short', 
+		                                        'last': 'lastDropItem_short' 
+		                                        },
+		                                        null,true)">
+                            </div>
+                        </div>
+                        <div class="infos">
+                            <span class="infolistspan">出生地址</span>
+                            <input typeindex="21" class="inputItemText inputbigWidth" valuechanged="valueChanged" onchange="changeFieldValue(this);" field="MailingAddress" />
+                        </div>
+                        <div class="infos">
+                            <span class="infolistspan">主&nbsp;&nbsp;&nbsp;&nbsp;诉</span>
+                            <div itemfield="CurrComplain" valuechanged="valueChanged" field="ComplainList" conv="WritableListConv(
+		                                        { 
+		                                        'dropItem': 'dropItem', 
+		                                        'single': 'singleDropItem', 
+		                                        'first': 'firstDropItem',
+		                                        'middle': 'middleDropItem', 
+                                                'menu': 'menu',
+		                                        'last': 'lastDropItem' 
+		                                        },
+		                                        {
+		                                        'width':215,
+                                                'height':200
+		                                        },null,true)">
+                            </div>
+                            <span class="infolistspan">门诊号</span>
+                            <input typeindex="23" class="inputItemText inputWidth" valuechanged="valueChanged" onchange="changeFieldValue(this);" field="OutPatientNO" />
+                        </div>
+                        <div class="infos">
+                            <span class="infolistspan">来&nbsp;&nbsp;&nbsp;&nbsp;源</span>
+                            <div valuemember="PatientSourceCode" displaymember="PatientSourceName" inputmember="PatientSourceName" itemfield="CurrPatientSourceCode" itemvaluemember="PatientSourceCode" itemdisplaymember="PatientSourceName" valuechanged="valueChanged" field="PatientSourceList"
+                                conv="FilterableListConv(
+		                                        { 
+		                                        'dropItem': 'dropItem', 
+		                                        'single': 'singleDropItem', 
+		                                        'first': 'firstDropItem',
+		                                        'middle': 'middleDropItem', 
+		                                        'last': 'lastDropItem', 
+		                                        'menu': 'menu' 
+		                                        },
+		                                        {
+		                                        'width':207
+		                                        },true)">
+                            </div>
+                            <span class="infolistspan">住院号</span>
+                            <input typeindex="26" class="inputItemText inputWidth" valuechanged="valueChanged" onchange="changeFieldValue(this);" field="InHospitalNO" />
+                        </div>
+                        <div class="infos">
+                            <span class="infolistspan">申请科室</span>
+                            <div valuemember="DeptID" displaymember="DeptName" inputmember="InputCode" itemfield="CurrApplicationDept" itemvaluemember="DeptID" itemdisplaymember="DeptName" valuechanged="valueChanged" field="ApplicationDeptList" conv="WritableListConv(
+		                                        { 
+		                                        'dropItem': 'dropItem', 
+		                                        'single': 'singleDropItem', 
+		                                        'first': 'firstDropItem',
+		                                        'middle': 'middleDropItem', 
+                                                'menu': 'menu',
+		                                        'last': 'lastDropItem' 
+		                                        },
+		                                        {
+		                                        'width':207,
+                                                'height':200
+		                                        },function(data,tester){
+                                                              if(!tester)return true;
+                                                              if(!data||!data.InputCode)return false;
+                                                              if(data.InputCode.toLowerCase().indexOf(tester.toLowerCase())>-1)return true;
+                                                              if(!data.DeptName)return false;
+                                                              if(data.DeptName.toLowerCase().indexOf(tester.toLowerCase())>-1)return true;
+                                                          })">
+                            </div>
+                            <span class="infolistspan">病房号</span>
+                            <input typeindex="29" class="inputItemText inputWidth" valuechanged="valueChanged" onchange="changeFieldValue(this);" field="RoomNO" />
+                        </div>
+                        <div class="infos">
+                            <span class="infolistspan">申请医生</span>
+                            <div valuemember="DoctorID" displaymember="DoctorName" inputmember="DoctorName" itemfield="CurrApplicationDoctor" itemvaluemember="DoctorID" itemdisplaymember="DoctorName" valuechanged="valueChanged" field="ApplicationDoctorList" conv="WritableListConv(
+		                                        { 
+		                                        'dropItem': 'dropItem', 
+		                                        'single': 'singleDropItem', 
+		                                        'first': 'firstDropItem',
+		                                        'middle': 'middleDropItem',
+                                                'menu': 'menu', 
+		                                        'last': 'lastDropItem' 
+		                                        },
+		                                        {
+		                                        'width':207,
+                                                'height':200
+		                                        },true)">
+                            </div>
+                            <span class="infolistspan">病床号</span>
+                            <input typeindex="31" class="inputItemText inputWidth" valuechanged="valueChanged" onchange="changeFieldValue(this);" field="BedNO" />
+                        </div>
+                        <div class="infos">
+                            <span class="infolistspan">影像类型</span>
+                            <div valuemember="ModalityCode" itemfield="NewExamRequestModalityCode" displaymember="ModalityName" inputmember="ModalityName" itemvaluemember="ModalityCode" itemdisplaymember="ModalityName" field="ModalityList" itemfrontfield="true" conv="FilterableModalityListConv(
+		                                        { 
+		                                        'dropItem': 'dropItem', 
+		                                        'single': 'singleDropItem', 
+		                                        'first': 'firstDropItem',
+		                                        'middle': 'middleDropItem',
+                                                'menu': 'menu', 
+		                                        'last': 'lastDropItem' 
+		                                        },
+		                                        {
+		                                        'width':207,
+                                                'height':200
+		                                        },true,true)">
+                            </div>
+                            <span class="infolistspan">
+                                <div class="addexam" style="margin-top: 4px; margin-left: 10px;" title="添加检查" onclick="addExamRequestByModality(this)">
+                                </div>
+                            </span>
+                        </div>
+                        <div class="infos">
+                            <div style='float: left; width: 570px; margin-left: 10px; margin-top: 5px; margin-bottom: 10px;
+                                "' field='ExamRequestUIDList' conv="ExamRequestListConv(0,{ 'label': 'unselectedLabels',
+                                                            'text': 'unselectedText',
+                                                            'selectedLabel': 'selectedLabels',
+                                                            'selectedText': 'selectedText',
+                                                            'unselectedLabel': 'unselectedLabels',
+                                                            'unselectedText': 'unselectedText',
+                                                            'selectedItem': 'selectedItem',
+                                                            'unselectedItem': 'unselectedItem',
+                                                            'dropItem': 'dropItem_mid',
+                                                            'dropText': 'dropText_mid',
+                                                            'dropImage': 'dropImage_mid',
+                                                            'menu': 'menu',
+                                                            'first': 'firstDropItem_mid',
+                                                            'middle': 'middleDropItem_mid',
+                                                            'single': 'singleDropItem_mid',
+                                                            'last': 'lastDropItem_mid'
+                                                            },{ 'height': 240 })">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="divGroup registerRight">
+                    <div class="divGroupTitle" style="width: 136px;">
+                        HIS信息</div>
+                    <div style="width: 100%; height: 100%;">
+                        <div style="width: 100%; height: 100%;">
+                            <div style="width: 98%; height: 93%; margin-left: 2px;" field="HISExamRequestList" command="-" conv="HISExamRequestTableViewConv(null,{ 'view': 'tableView', 'header': 'tableHeader', 'headerCell': 'tableHeaderCell', 'row': 'tableRow', 'rowCell': 'tableRowCell', 'subView': 'subTableView','selected':'selectedTableRow','unselected':'unselectedTableRow'})"
+                                columns="[{ 'Name': 'ExamRequestID', 'Description': '检查编号', 'DisplayIndex': 0,'Width':80},
+                                  { 'Name': 'HISID', 'Description': 'HIS编号', 'DisplayIndex': 1,'Width':120},
+                                  { 'Name': 'PatientName', 'Description': '姓名', 'DisplayIndex': 22,'Width':80},
+                                  { 'Name': 'PatientSex', 'Description': '性别', 'DisplayIndex': 23,'Width':60},
+                                  { 'Name': 'OrderAge', 'Description': '年龄', 'DisplayIndex': 24,'Width':80},
+                                  { 'Name': 'BirthDate', 'Description': '生日', 'DisplayIndex': 25,'Width':100},
+                                  { 'Name': 'OrderTime', 'Description': '申请时间', 'DisplayIndex': 26,'Width':100},
+                                  { 'Name': 'PatientSourceDesc', 'Description': '患者来源', 'DisplayIndex': 27,'Width':120},
+                                  { 'Name': 'DepartmentDesc', 'Description': '申请科室', 'DisplayIndex': 28,'Width':100},
+                                  { 'Name': 'DoctorDesc', 'Description': '申请医生', 'DisplayIndex': 29,'Width':100},
+                                  { 'Name': 'ModalityDesc', 'Description': '影像类型', 'DisplayIndex': 30,'Width':100},
+                                  { 'Name': 'BodyPartDesc', 'Description': '检查部位', 'DisplayIndex': 31,'Width':100},
+                                  { 'Name': 'ExamItemDesc', 'Description': '检查项目', 'DisplayIndex': 32,'Width':140},
+                                  { 'Name': 'InHospitalID', 'Description': '住院号', 'DisplayIndex': 33,'Width':100},
+                                  { 'Name': 'OutPatientID', 'Description': '门诊号', 'DisplayIndex': 34,'Width':100},
+                                  { 'Name': 'InsuranceCard', 'Description': '劳保号', 'DisplayIndex': 35,'Width':100},
+                                  { 'Name': 'MedicalCard', 'Description': '病历号', 'DisplayIndex': 36,'Width':100},
+                                  { 'Name': 'Complain', 'Description': '主诉', 'DisplayIndex': 37,'Width':120},
+                                  { 'Name': 'BePaid', 'Description': '是否缴费', 'DisplayIndex': 38,'Width':100},
+                                  { 'Name': 'CostType', 'Description': '费用类型', 'DisplayIndex': 39,'Width':100},
+                                  { 'Name': 'CostVal', 'Description': '费用', 'DisplayIndex': 40,'Width':60},
+                                  { 'Name': 'CostUnit', 'Description': '单位', 'DisplayIndex': 41,'Width':40},
+                                  { 'Name': 'IDCardNum', 'Description': '身份证号', 'DisplayIndex': 42,'Width':160},
+                                  { 'Name': 'PatientType', 'Description': '患者类型', 'DisplayIndex': 43,'Width':80},
+                                  { 'Name': 'SysTypeCode', 'Description': '系统类型', 'DisplayIndex': 44,'Width':80}]" itemcommand="ApplyHISExamRequest" itemcondfields="ApplyHISExamRequest" itemfield="ApplyHISExamRequest" itemvaluemember="ExamRequestID">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="divGroup registerRight" style="margin-top: 12px;">
+                    <div class="divGroupTitle" style="width: 136px;">
+                        历史记录</div>
+                    <div style="width: 100%; height: 100%;">
+                        <div style="width: 100%; height: 100%;" command="-">
+                            <div style="width: 98%; height: 93%; margin-left: 2px;" field="HistoryExamRequestList" command="-" conv="SearchTableViewConv(null,{ 'view': 'tableView', 'header': 'tableHeader', 'headerCell': 'tableHeaderCell', 'row': 'tableRow', 'rowCell': 'tableRowCell', 'subView': 'subTableView','selected':'selectedTableRow','unselected':'unselectedTableRow'})"
+                                columns="[{ 'Name': 'ExamRequestID', 'Description': '编号', 'DisplayIndex': 0 ,'Width':80 },
+                                  { 'Name': 'PatientName', 'Description': '姓名', 'DisplayIndex': 1 ,'Width':80 },
+                                  { 'Name': 'PatientID', 'Description': '患者编号', 'DisplayIndex': 2 ,'Width':120},
+                                  { 'Name': 'AccessionNO', 'Description': '流水号', 'DisplayIndex': 3 ,'Width':120},
+                                  { 'Name': 'ZipCode', 'Description': '邮编', 'DisplayIndex': 8,'Width':120 },
+                                  { 'Name': 'PatientAge', 'Description': '年龄', 'DisplayIndex': 4 ,'Width':120},
+                                  { 'Name': 'PatientBirthDate', 'Description': '出生日期', 'DisplayIndex': 7 ,'Width':120},
+                                  { 'Name': 'ExamRequestTime', 'Description': '申请时间', 'DisplayIndex': 6,'Width':120 },
+                                  { 'Name': 'PatientSexName', 'Description': '性别', 'DisplayIndex': 5,'Width':80 }]" itemcommand="ApplyExamRequestID" itemcondfields="ApplyExamRequestID" itemfield="ApplyExamRequestID" itemvaluemember="ExamRequestID">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--button固定在底部-->
+                <div style="margin-left:50px; float: left; text-align: center; width: 98%; position: fixed; bottom: 10px;">
+                    <input type="button" value="保存" class="button" style="width: 80px; font-weight:bold; color:green;" command="Register" onclick="commit(this); CleareRetirveId('clearRetirvetxt');" />
+                    <input type="button" value="清空" class="button" style="width: 80px; font-weight:bold;" command="ResetForm" onclick="commit(this); CleareRetirveId('clearRetirvetxt');" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display: none; top:135px; position: absolute; width: 100%; height: 900px;" field="RightFrontGroup" command="-" conv="FrontGroupConv('GroupSearch')">
+        <iframe frameborder="no" src="../search/search-register.html" style="width: 100%;
+            height: 100%;"></iframe>
+    </div>
+</body>
+
+</html>

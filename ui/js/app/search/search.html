@@ -1,0 +1,391 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+    <meta name="Description" content="" />
+    <meta name="Keywords" content="" />
+    <title>无标题文档</title>
+    <link href="../../../css/system.css" rel="stylesheet" type="text/css" />
+    <link href="../../../css/app/search.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/app/app.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/system.css" charset="utf-8" />
+    <script type="text/javascript" charset="utf-8" src="../../common/commonjsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../core/corejsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../app/base.loader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../app/app.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../app/app.conv.js"></script>
+    <script type="text/javascript" charset="utf-8" src="search.js"></script>
+    <script type="text/javascript" charset="utf-8" src="search.conv.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    </script>
+    <style type="text/css">
+        #selectedTabPage {
+            background-color: #9b9b9b;
+        }
+    </style>
+</head>
+
+<body onload="init()">
+    <div style="display: none">
+        <div field="cmd_NavigateModule" command="-" conv="StaticValueConv('NavigateModule')"> </div>
+        <div field="cmd_ExitApplication" command="-" conv="StaticValueConv('ExitApplication')"> </div>
+        <div field="cmd_MinWindow" command="-" conv="StaticValueConv('MinWindow')"> </div>
+        <div field="f_NotifyDataType" command="-" conv="StaticValueConv('object')"> </div>
+        <div field="f_AddExamRequest" command="-" conv="StaticValueConv('AddExamRequest')"> </div>
+        <div field="cmd_OpenHelpFile" command="-" conv="StaticValueConv('OpenHelpFile')"> </div>
+        <div field="CloseReport" command="-" conv="CloseReportConv"> </div>
+        <div field="CloseReport_Request" command="-" conv="StaticValueConv('Request')"> </div>
+        <div field="CloseReport_Close" command="-" conv="StaticValueConv('Close')"> </div>
+        <div field="StudyImportNotify" command="-" conv="StudyImportNotifyConv"> </div>
+        <div field="LoginUserCode"></div>
+        <div field="IsAssignedFilter" command="-"></div>
+        <div field="ReportUserList" itemfield="AssignUserCodeFilters" conv="CheckableListConv" valuemember="UserCode" displaymember="UserName" itemvaluemember="UserCode" itemdisplaymember="UserName" valuechanged="valueChanged" itemvaluechanged="valueChanged">
+        </div>
+    </div>
+    <div class="Header">
+        <div class="logos">
+            <img src="../../../img/logo.png" alt="logo" />
+            <span>翼展影像存档与通讯系统</span>
+        </div>
+        <div class="HeaderMain">
+            <div class="functions" style="display: inline-block; cursor: pointer" field="arg_NavigateModule_RegisterModule" conv="StaticValueConv('RegisterModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_NavigateModule_RegisterModule"
+                onclick="commit(document.getElementById('divReportModule'));commit(this)" title="新建患者">
+                <a>登记</a>
+            </div>
+            <div class="selectterm" style="display: inline-block; cursor: pointer" field="arg_NavigateModule_SearchModule" conv="StaticValueConv('SearchModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_NavigateModule_SearchModule"
+                onclick="commit(document.getElementById('divReportModule'));commit(this)" title="查询患者">
+                <a>查询</a>
+            </div>
+            <!--<div class="functions" style="display: inline-block; cursor: pointer" field="arg_NavigateModule_ImageSendSearchModule"
+                conv="StaticValueConv('ImageSendSearchModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_NavigateModule_ImageSendSearchModule"
+                onclick="commit(document.getElementById('divReportModule'));commit(this)" title="图片发送查询">
+                <a>发送查询</a>
+            </div>-->
+            <div class="functions" id="divReportModule" style="display: inline-block; cursor: pointer" field="arg_NavigateModule_ReportModule" conv="StaticValueConv('ReportModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_NavigateModule_ReportModule"
+                onclick="commit(this)" title="报告">
+                <a>报告</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer" field="arg_NavigateModule_ImageViewModule" conv="StaticValueConv('ImageViewModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_NavigateModule_ImageViewModule"
+                onclick="commit(this)" title="阅片">
+                <a>阅片</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer" field="arg_NavigateModule_ReportAssignModule" conv="StaticValueConv('ReportAssignModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_NavigateModule_ReportAssignModule"
+                onclick="commit(this)" title="报告分配">
+                <a>报告分配</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer" field="arg_Navigate_StudyMatchModule" conv="StaticValueConv('StudyMatchModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_Navigate_StudyMatchModule"
+                onclick="commit(this)" title="图像匹配">
+                <a>图像匹配</a>
+            </div>
+            <!--<div class="functions" style="display: inline-block; cursor: pointer" field="arg_Navigate_ResourceUseMatchModule" conv="StaticValueConv('ResourceUseMatchModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_Navigate_ResourceUseMatchModule"
+                onclick="commit(this)" title="技师功能">
+                <a>技师功能</a>
+            </div>-->
+            <div class="functions" style="display: inline-block; cursor: pointer" field="arg_Navigate_StatisticsModule" conv="StaticValueConv('StatisticsModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_Navigate_StatisticsModule"
+                onclick="commit(this)" title="数据统计">
+                <a>统计</a>
+            </div>
+            <!--<div class="functions" style="display: inline-block; cursor: pointer" field="arg_Navigate_CAVerifyModule" conv="StaticValueConv('CAVerifyModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_Navigate_CAVerifyModule" onclick="commit(this)"
+                title="CA验证">
+                <a>CA验证</a>
+            </div>-->
+            <div class="functions" style="display: inline-block; cursor: pointer" field="arg_Navigate_ConfigsModule" conv="StaticValueConv('ConfigsModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_Navigate_ConfigsModule" onclick="commit(this)"
+                title="配置">
+                <a>配置</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer" command="NotifyTitle" condfields="cmd_OpenHelpFile" onclick="commit(this)" title="帮助">
+                <a>帮助</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer" field="arg_Navigate_VersionModule" conv="StaticValueConv('VersionModule')" command="NotifyTitle" condfields="cmd_NavigateModule,f_NotifyDataType,arg_Navigate_VersionModule" onclick="commit(this)"
+                title="版本">
+                <a>关于</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer" command="NotifyTitle" condfields="cmd_ExitApplication" onclick="commit(this)" title="退出">
+                <a>退出</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer; float: right" command="NotifyTitle" condfields="cmd_MinWindow" onclick="minWindow()" title="最小化">
+                <a>最小化</a>
+            </div>
+            <div class="functions" style="display: inline-block; cursor: pointer; float: right" command="NotifyTitle" condfields="cmd_ExitApplication" onclick="loadBGSVCManager()" title="查看任务进度">
+                <a>任务进度</a>
+            </div>
+        </div>
+    </div>
+    <div class="RightFrontGroup">
+        <div class="searchHead">
+            <i></i>
+            <abr></abr>
+            <span>查询</span>
+        </div>
+    </div>
+    <div class="search">
+        <div class="infolist">
+            <div class="infos">
+                <span class="infolistspan">患者编号</span>
+                <input class="inputItemText inputWidthforSearch" valuechanged="valueChanged" onchange="changeFieldValue(this);" field="PatientIDFilter" conv="LikeSearchConv('All')" />
+                <span class="infolistspan">&nbsp;姓 名</span>
+                <input class="inputItemText inputWidthforSearch" type="text" id="" value="" field="PatientNameFilter" onchange="changeFieldValue(this)" placeholder="" conv="LikeSearchConv('All')" />
+                <span class="infolistspan">姓名拼音</span>
+                <input class="inputItemText inputWidthforSearch" type="text" id="" value="" field="PatientNameSpellFilter" onchange="changeFieldValue(this)" placeholder="" conv="LikeSearchConv('All')" />
+                <!-- <span class="infolistspan">&nbsp;性 别</span>
+                <div style="display: inline-block; float: left; width: 198px;" field="SexList" itemfield="SexCodeFilters" conv="TileCheckListConv" valuemember="SexCode" displaymember="SexName">
+                </div> -->
+
+                <span class="infolistspan">影像类型</span>
+                <div valuemember="ModalityCode" displaymember="ModalityName" inputmember="ModalityName" itemfield="ModalityCodeFilters" itemvaluemember="ModalityCode" itemdisplaymember="ModalityName" valuechanged="valueChanged" field="ModalityList" conv="CheckableModalityListConv({ 'label': 'unselectedLabels',
+                                'text': 'unselectedText',
+                                'selectedLabel': 'selectedLabels',
+                                'selectedText': 'selectedText',
+                                'unselectedLabel': 'unselectedLabels',
+                                'unselectedText': 'unselectedText',
+                                'selectedItem':'selectedItem',
+                                'unselectedItem':'unselectedItem',
+                                'dropItem':'dropItems',
+                                'menu':'menu',
+                                'first':'firstDropItems',
+                                'middle':'middleDropItems',
+                                'single':'singleDropItems',
+                                'last':'lastDropItems'
+                                })">
+                </div>
+            </div>
+            <div class="infos">
+                <span class="infolistspan">检查状态</span>
+                <div field="ExamStatusList" itemfield="ExamStatusCodeFilters" conv="CheckableListConv({ 'label': 'unselectedLabels',
+                        'text': 'unselectedText',
+                        'selectedLabel': 'selectedLabels',
+                        'selectedText': 'selectedText',
+                        'unselectedLabel': 'unselectedLabels',
+                        'unselectedText': 'unselectedText',
+                        'selectedItem':'selectedItem',
+                        'unselectedItem':'unselectedItem',
+                        'dropItem':'dropItems',
+                        'menu': 'menu',
+                        'first':'firstDropItems',
+                        'middle':'middleDropItems',
+                        'single':'singleDropItems',
+                        'last':'lastDropItems'
+                        },{'height':200})" valuemember="StatusCode" displaymember="StatusName" itemvaluemember="StatusCode" itemdisplaymember="StatusName" valuechanged="valueChanged" itemvaluechanged="valueChanged">
+                </div>
+                <span class="infolistspan">检查部位</span>
+                <div field="BodyPartList" itemfield="BodyPartIDFilters" conv="CheckableListConv({ 'label': 'unselectedLabels',
+                        'text': 'unselectedText',
+                        'selectedLabel': 'selectedLabels',
+                        'selectedText': 'selectedText',
+                        'unselectedLabel': 'unselectedLabels',
+                        'unselectedText': 'unselectedText',
+                        'selectedItem':'selectedItem',
+                        'unselectedItem':'unselectedItem',
+                        'dropItem':'dropItems',
+                        'menu':'menu',
+                        'first':'firstDropItems',
+                        'middle':'middleDropItems',
+                        'single':'singleDropItems',
+                        'last':'lastDropItems'
+                        },{'height':200})" valuemember="BodyPartID" displaymember="BodyPartName" itemvaluemember="BodyPartID" itemdisplaymember="BodyPartName" valuechanged="valueChanged" itemvaluechanged="valueChanged">
+                </div>
+                <span class="infolistspan">报告医师</span>
+                <div field="ReportUserList" itemfield="ReportUserCodeFilters" conv="CheckableListConv({ 'label': 'unselectedLabels',
+                        'text': 'unselectedText',
+                        'selectedLabel': 'selectedLabels',
+                        'selectedText': 'selectedText',
+                        'unselectedLabel': 'unselectedLabels',
+                        'unselectedText': 'unselectedText',
+                        'selectedItem':'selectedItem',
+                        'unselectedItem':'unselectedItem',
+                        'dropItem':'dropItems',
+                        'menu':'menu',
+                        'first':'firstDropItems',
+                        'middle':'middleDropItems',
+                        'single':'singleDropItems',
+                        'last':'lastDropItems'
+                        },{'height':200})" valuemember="UserCode" displaymember="UserName" itemvaluemember="UserCode" itemdisplaymember="UserName" valuechanged="valueChanged" itemvaluechanged="valueChanged">
+                </div>
+                <span class="infolistspan">审核医师</span>
+                <div field="ReviewUserList" itemfield="ReviewUserCodeFilters" conv="CheckableListConv({ 'label': 'unselectedLabels',
+                        'text': 'unselectedText',
+                        'selectedLabel': 'selectedLabels',
+                        'selectedText': 'selectedText',
+                        'unselectedLabel': 'unselectedLabels',
+                        'unselectedText': 'unselectedText',
+                        'selectedItem':'selectedItem',
+                        'unselectedItem':'unselectedItem',
+                        'dropItem':'dropItems',
+                        'menu':'menu',
+                        'first':'firstDropItems',
+                        'middle':'middleDropItems',
+                        'single':'singleDropItems',
+                        'last':'lastDropItems'
+                        },{'height':200})" valuemember="UserCode" displaymember="UserName" itemvaluemember="UserCode" itemdisplaymember="UserName" valuechanged="valueChanged" itemvaluechanged="valueChanged">
+                </div>
+            </div>
+            <div class="infos">
+                <span class="infolistspan">患者来源</span>
+                <div field="PatientSourceList" itemfield="PatientSourceCodeFilters" conv="CheckableListConv({ 'label': 'unselectedLabels',
+								'text': 'unselectedText',
+								'selectedLabel': 'selectedLabels',
+								'selectedText': 'selectedText',
+								'unselectedLabel': 'unselectedLabels',
+								'unselectedText': 'unselectedText',
+								'selectedItem':'selectedItem',
+								'unselectedItem':'unselectedItem',
+								'dropItem':'dropItems',
+								'menu': 'menu',
+								'first':'firstDropItems',
+								'middle':'middleDropItems',
+								'single':'singleDropItems',
+								'last':'lastDropItems'
+								},{'height':200})" valuemember="PatientSourceCode" displaymember="PatientSourceName" itemvaluemember="PatientSourceCode" itemdisplaymember="PatientSourceName" valuechanged="valueChanged" itemvaluechanged="valueChanged">
+                </div>
+                <span class="infolistspan">检查编号</span>
+                <input class="inputItemText inputWidthforSearch" valuechanged="valueChanged" onchange="changeFieldValue(this);" field="ExamRequestIDFilter" />
+                <span class="infolistspan">检查日期</span>
+                <div style="height: 40px;" conv="ExamRequestTimeConv(true,{'inputItemText':'inputItemText inputSearch'})" field="ExamRequestTimeRange">
+                </div>
+            </div>
+            <div class="infos">
+                <span class="infolistspan">诊断意见</span>
+                <input class="inputItemText inputWidthforSearch" type="text" value="" field="ImpressionFilter" onchange="changeFieldValue(this)" placeholder="" conv="LikeSearchConv('All')" />
+                <span class="infolistspan">影像所见</span>
+                <input class="inputItemText inputWidthforSearch" type="text" value="" field="FindingFilter" onchange="changeFieldValue(this)" placeholder="" conv="LikeSearchConv('All')" />
+                <span class="infolistspan">设备名称</span>
+                <div field="EquipmentList" itemfield="EquipmentIDFilters" conv="CheckableListConv({ 'label': 'unselectedLabels',
+								'text': 'unselectedText',
+								'selectedLabel': 'selectedLabels',
+								'selectedText': 'selectedText',
+								'unselectedLabel': 'unselectedLabels',
+								'unselectedText': 'unselectedText',
+								'selectedItem':'selectedItem',
+								'unselectedItem':'unselectedItem',
+								'dropItem':'dropItems',
+								'menu': 'menu',
+								'first':'firstDropItems',
+								'middle':'middleDropItems',
+								'single':'singleDropItems',
+								'last':'lastDropItems'
+								},{'height':200})" valuemember="EquipmentID" displaymember="EquipmentName" itemvaluemember="EquipmentID" itemdisplaymember="EquipmentName" valuechanged="valueChanged" itemvaluechanged="valueChanged">
+                </div>
+                <span class="infolistspan">阴 阳 性</span>
+                <div field="BePositiveFilters" conv="BolPositiveConv(null,false)">
+                </div>
+            </div>
+            <!-- <div class="infos">
+                <span class="infolistspan">随访状态</span>
+                <div field="FollowUpStatusList" itemfield="FollowUpStatusCodeFilters" conv="CheckableListConv({ 'label': 'unselectedLabels',
+								'text': 'unselectedText',
+								'selectedLabel': 'selectedLabels',
+								'selectedText': 'selectedText',
+								'unselectedLabel': 'unselectedLabels',
+								'unselectedText': 'unselectedText',
+								'selectedItem':'selectedItem',
+								'unselectedItem':'unselectedItem',
+								'dropItem':'dropItems',
+								'menu': 'menu',
+								'first':'firstDropItems',
+								'middle':'middleDropItems',
+								'single':'singleDropItems',
+								'last':'lastDropItems'
+								},{'height':200})" valuemember="StatusCode" displaymember="StatusName" itemvaluemember="StatusCode" itemdisplaymember="StatusName" valuechanged="valueChanged" itemvaluechanged="valueChanged">
+                </div>
+            </div> -->
+            <div class="infos">
+                <div style="float: left; margin: 13px 0 15px 20px;">
+                    <input type="button" class="button" value="分配给我的检查" style="width: 120px;" onclick="FastQuery(this,'分配给我的检查');" />
+                    <input type="button" class="button" value="未分配的检查" style="width: 100px;" onclick="FastQuery(this,'未分配的检查');" />
+                </div>
+                <input type="button" value="清空" class="button flatButton" style="float: right; margin: 13px 65px 15px 0;" command='ResetFilters' onclick="commit(this);selectPage(null)" />
+                <input id="search" type="button" typeindex="1" class="button" value="查询" style="float: right; margin: 13px 10px 15px 0" command="Search" onclick="commit(this);clearArray();" />
+                <!--批量导出-->
+                <!-- <input type="button"  class="button" value="导出" 
+                    command="ExportReport" onclick="commit(this)" condfields="ListCondExportReport" />-->
+                <div field="ListCondExportReport" command="-" conv="ListExportReportConv">
+                </div>
+                <!--批量打印-->
+                <!--  <input id="divPrintElement" type="button" typeindex="1" class="button" onmouseover="ShowDivPreview()" onmouseout="HideDivPreview()" value="集中打印" onclick="HideDivPreview();" style="margin-top: 10px;" />-->
+                <div field="CondPrintReport" command="-" conv="ListPrintReportConv">
+                </div>
+                <div id="divpreview" onmouseover="ShowDivPreview()" onmouseout="HideDivPreview()" style="display: none; z-index: 9999; position: absolute;" class="printview">
+                    <div class="printviews" field="PrintTempList" conv="PrintTempListConv('divPrintElement')" onclick="window.event.cancelBubble=true;window.event.returnValue=false;" command='-'>
+                    </div>
+                </div>
+                <div id="arrow" style="display: none" class="arrow" onmouseover="ShowDivPreview()" onmouseout="HideDivPreview()">
+                    <i></i>
+                </div>
+            </div>
+            <div style="position: relative; width: 100%; height: 98%;">
+                <div style="position: relative; margin: 20px 20px 10px 20px; height: 98%; border: 1px solid #c3c3c3; border-top-color: #939393; border-radius: 5px">
+                    <div id="selecttitle" class="tabletitle">
+                        <input style="margin-left: -210px;" type="button" value="今天" class="query-model-button" onclick="QueryRest( 'Today',null);selectPage( '今天')"></input>
+                        <input type="button" value="昨天" class="query-model-button" onclick="QueryRest( 'Yesterday',null);selectPage( '昨天')"></input>
+                        <input type="button" value="一周内" class="query-model-button" onclick="QueryRest( 'Week',null);selectPage( '一周内')"></input>
+                        <input type="button" value="未做检查(已登记)" class="query-model-button" style="width: 120px; background-color: #FFD700;" onclick="QueryRest(null, 'Registered');selectPage( '未做检查(已登记)')"></input>
+                        <input type="button" value="未写报告(已检查)" class="query-model-button" style="width: 120px; background-color: lightblue;" onclick="QueryRest(null, 'Exam');selectPage( '未写报告(已检查)')"></input>
+                        <input type="button" value="未审核(已报告)" class="query-model-button" style="width: 110px; background-color: #7FFF00;" onclick="QueryRest(null, 'Reported');selectPage( '未审核(已报告)')"></input>
+                        <input type="button" value="未打报告(已审核)" class="query-model-button" style="width: 120px; background-color: #48D1CC;" onclick="QueryRest(null, 'Reviewed');selectPage( '未打报告(已审核)')"></input>
+                        <input type="button" value="已完成(已打印)" class="query-model-button" style="width: 110px; background-color: #BCCCCC;" onclick="QueryRest(null, 'Printed');selectPage( '已完成(已打印)')"></input>
+                        <div style="float: right; margin-right: 20px; color: rgb(77, 77, 77);">
+                            <span>查询结果总条数:</span>
+                            <div style="float: right;" field="ResultRowsCount" command="-">
+                            </div>
+                        </div>
+                    </div>
+                    <!--多选框-->
+                    <!-- { 'Name': 'chkReport', 'Description': '', 'DisplayIndex': 0,'Width':48 },-->
+                    <div id="div" class="searchTableHeight" style="width: 100%;" field="SearchResultRows" command="-" conv="SearchTableViewConv(null,{ 'view': 'tableView', 'header': 'tableHeader', 'headerCell': 'tableHeaderCell', 'row':
+                    'tableRow', 'rowCell': 'tableRowCell', 'subView': 'subTableView', 'selected': 'selectedTableRow', 'unselected': 'unselectedTableRow', 'print': 'PrintTableRow', 'Examine': 'ExamineTableRow', 'Report': 'ReportTableRow', 'Register':
+                    'RegisterTableRow', 'Make': 'MakeTableRow', 'Reject': 'RejectTableRow', 'Checked': 'CheckedTableRow'}, 'search')" columns="[ 
+                            { 'Name': 'WriteReport', 'Description': '写报告', 'DisplayIndex': 0, 'Width':48 }, 
+                            { 'Name': 'ViewImage', 'Description': '阅片', 'DisplayIndex': 1, 'Width':28 }, 
+                            { 'Name': 'PatientID', 'Description': '患者编号', 'DisplayIndex': 3, 'Width':60 }, 
+                            { 'Name': 'ExamRequestID', 'Description': '检查编号', 'DisplayIndex': 19, 'Width':80 }, 
+                            { 'Name': 'PatientName', 'Description': '姓名', 'DisplayIndex': 3, 'Width':80 }, 
+                            { 'Name': 'PatientNameSpell', 'Description': '姓名拼音', 'DisplayIndex': 40, 'Width':80 }, 
+                            { 'Name': 'PatientSexName', 'Description': '性别', 'DisplayIndex': 5 , 'Width':60}, 
+                            { 'Name': 'BodyPartNames', 'Description': '部位', 'DisplayIndex': 8 , 'Width':80}, 
+                            { 'Name': 'ExamRequestTime', 'Description': '申请时间', 'DisplayIndex': 27 , 'Width':140}, 
+                            { 'Name': 'PatientAge', 'Description': '患者年龄', 'DisplayIndex': 6 , 'Width':60}, 
+                            { 'Name': 'ExamDateTime', 'Description': '检查日期', 'DisplayIndex': 11 , 'Width':140}, 
+                            { 'Name': 'ModalityName', 'Description': '影像类型', 'DisplayIndex': 7 , 'Width':80}, 
+                            { 'Name': 'PACSInstanceCount', 'Description': '图像个数', 'DisplayIndex': 2 , 'Width':80}, 
+                            { 'Name': 'FilmPrintedFlag', 'Description': '胶片打印状态', 'DisplayIndex': 2 , 'Width':100}, 
+                            { 'Name': 'Telephone', 'Description': '患者电话', 'DisplayIndex': 6 , 'Width':80}, 
+                            { 'Name': 'DeviceName', 'Description': '设备名称', 'DisplayIndex': 10 , 'Width':80}, 
+                            { 'Name': 'BodyPartNames', 'Description': '检查部位', 'DisplayIndex': 39 , 'Width':80}, 
+                            { 'Name': 'ExamItemNames', 'Description': '检查项目', 'DisplayIndex': 16 , 'Width':80}, 
+                            { 'Name': 'ExamMethodNames', 'Description': '检查方法', 'DisplayIndex': 14 , 'Width':80}, 
+                            { 'Name': 'StatusName', 'Description': '检查状态', 'DisplayIndex': 9 , 'Width':80}, 
+                            { 'Name': 'PatientSourceName', 'Description': '患者来源', 'DisplayIndex': 40 , 'Width':60}, 
+                            { 'Name': 'OutHospitalNO', 'Description': '门诊号', 'DisplayIndex': 20 , 'Width':60}, 
+                            { 'Name': 'InHospitalNO', 'Description': '住院号', 'DisplayIndex': 2 , 'Width':60}, 
+                            { 'Name': 'BedNO', 'Description': '病床号', 'DisplayIndex': 21 , 'Width':60}, 
+                            { 'Name': 'DeptName', 'Description': '申请科室', 'DisplayIndex': 22 , 'Width':60}, 
+                            { 'Name': 'DoctorName', 'Description': '申请医生', 'DisplayIndex': 23 , 'Width':80}, 
+                            { 'Name': 'Finding', 'Description': '影像所见', 'DisplayIndex': 26 , 'Width':200}, 
+                            { 'Name': 'Impression', 'Description': '诊断意见', 'DisplayIndex': 15 , 'Width':200}, 
+                            { 'Name': 'DoctorAdvice', 'Description': '医生建议', 'DisplayIndex': 28 , 'Width':200}, 
+                            { 'Name': 'IsPositive', 'Description': '阴阳性', 'DisplayIndex': 29 , 'Width':60}, 
+                            { 'Name': 'ICD10', 'Description': 'ICD10', 'DisplayIndex': 30 , 'Width':100}, 
+                            { 'Name': 'Crisis', 'Description': '危急值', 'DisplayIndex': 31 , 'Width':60}, 
+                            { 'Name': 'ReportUserName', 'Description': '报告医师', 'DisplayIndex': 12 , 'Width':80}, 
+                            { 'Name': 'ReportTime', 'Description': '报告时间', 'DisplayIndex': 33 , 'Width':120}, 
+                            { 'Name': 'ReviewUserName', 'Description': '审核医师', 'DisplayIndex': 12 , 'Width':80}, 
+                            { 'Name': 'ReviewTime', 'Description': '审核时间', 'DisplayIndex': 35 , 'Width':120}, 
+                            { 'Name': 'RegisterUserName', 'Description': '登记员', 'DisplayIndex': 36 , 'Width':80}, 
+                            { 'Name': 'PrintUserName', 'Description': '打印医师', 'DisplayIndex': 37 , 'Width':80}, 
+                            { 'Name': 'PrintTime', 'Description': '打印时间', 'DisplayIndex': 38 , 'Width':120},
+                            { 'Name': 'FollowUpStatus', 'Description': '随访状态', 'DisplayIndex': 39 , 'Width':80}]" itemfield="CurrExamRequestID" valuechanged="valueChanged" itemvaluemember="ExamRequestID">
+                    </div>
+                    <div id="showdiv" style="display: none">
+                    </div>
+                    <div style="margin: 0 auto; width: 580px;" field="SearchResultPageInfo" conv="SearchResultPageInfoConv">
+                    </div>
+                </div>
+            </div>
+            <div field="CondExportReport" command="-" conv="ExportReportConv">
+            </div>
+        </div>
+</body>
+
+</html>

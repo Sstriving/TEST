@@ -1,0 +1,939 @@
+﻿body
+{
+    font-size: 15px;
+    font-family: "microsoft yahei";
+    margin: 0px;
+    padding:0px;
+    overflow: hidden;
+}
+/*文本框 start*/
+.inputItemLabel
+{
+    font-size: 15px;
+    font-family: "microsoft yahei";
+    text-align:right;
+    padding-right:5px;
+    color:#4D4D4D;
+}
+.inputItemText
+{
+    overflow: hidden;
+    border-style: solid;
+  	border-width: 1px;
+  	border-color: rgb(179, 179, 179);
+  	background-color: rgb(255, 255, 255);
+  	box-shadow: inset 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+  	color:#4D4D4D;
+}
+/*文本框 end*/
+
+ /*button start*/
+.button
+{
+	width: 70px;
+	height: 28px;
+	border-radius:14px;
+    border: solid 1px rgba(0,0,0,.36);
+    background-image: -moz-linear-gradient( 90deg, rgb(242,242,242) 0%, rgb(236,236,236) 50%, rgb(243,243,243) 50%, rgb(255,255,255) 100%);
+    background-image: -webkit-linear-gradient( 90deg, rgb(242,242,242) 0%, rgb(236,236,236) 50%, rgb(243,243,243) 50%, rgb(255,255,255) 100%);
+    background-image: -ms-linear-gradient( 90deg, rgb(242,242,242) 0%, rgb(236,236,236) 50%, rgb(243,243,243) 50%, rgb(255,255,255) 100%);
+    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.1);
+    font-family:"microsoft yahei";
+    font-size:14px;
+    color:#4d4d4d;
+    cursor:pointer;
+}
+.flatButton{
+	width: 70px;
+	height: 28px;
+	-webkit-box-shadow: 1px 1px rgba(255,255,255,.25);
+	-moz-box-shadow: 1px 1px rgba(255,255,255,.25);
+	box-shadow: 1px 1px rgba(255,255,255,.25);
+	background-image: -webkit-linear-gradient(bottom, #59646d 1%, #85878d);
+	background-image: -moz-linear-gradient(bottom, #59646d 1%, #85878d);
+	background-image: -o-linear-gradient(bottom, #59646d 1%, #85878d);
+	background-image: -ms-linear-gradient(bottom, #59646d 1%, #85878d);
+	background-image: linear-gradient(to top, #59646d 1%, #85878d);
+	color:#fff;
+}   
+ /*button end*/
+
+/*不可输入下拉组件*/      
+.dropItems
+{
+    float: left;
+    width:194px;
+    font-size: 15px;
+    font-family: "microsoft yahei";
+    cursor:pointer;
+    position:relative;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(179, 179, 179);
+    background-color: rgb(255, 255, 255);
+    box-shadow: inset 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+}
+.dropTexts
+{
+	font-size: 14px;
+	width:90%;
+    font-family: "microsoft yahei";
+   	height: 24px;
+    line-height: 24px;
+     text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  	display:block;
+    padding-left: 2px;
+}
+.menu{
+    /*border:1px solid #b3b3b3;*/
+    border-width: 1px 0px 0px 0px;
+    margin-left:-2px;
+}
+/*可输入下拉组件*/  
+.dropText
+{
+	font-size: 14px;
+	color:#4D4D4D;
+	width:98%;
+    font-family: "microsoft yahei";
+    text-overflow: ellipsis;
+    white-space: nowrap;
+   	height: 24px;
+    line-height: 24px;
+    overflow: hidden;
+    border-style: solid;
+  	border-width: 1px;
+  	border-color: rgb(179, 179, 179);
+  	background-color: rgb(255, 255, 255);
+  	box-shadow: inset 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+}
+.dropImage
+{
+    width: 27px;
+    height:22px;
+    background: url(../img/下拉.png);
+    /*border: 10px solid red;*/
+    cursor:pointer; 
+    background-repeat: no-repeat; 
+    background-position: center; 
+   /* border-left: 4px solid transparent;
+    border-right:4px solid transparent;
+    border-top: 6px solid #535353;
+    border-bottom: 0px;*/
+   	position:absolute;
+   	right:4px;
+   	top:2px;
+}
+.firstDropItem
+{
+    font-size: 15px;
+    color:#4D4D4D;
+    font-family: "microsoft yahei";
+    width: 204px;
+    height: 22px;
+    line-height: 22px;
+   	border:1px solid #b3b3b3;
+   	border-width:1px 1px 1px 1px;
+    background-color: white;
+    margin-left:0px;
+    margin-top: 2px;
+    cursor:pointer;
+    text-align:left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.firstDropItem:hover
+{
+    background-color: #e1e1e1;
+    color: #4D4D4D;
+}
+.middleDropItem
+{
+    font-size: 15px;
+    color:#4D4D4D;
+    font-family: "microsoft yahei";
+    width: 204px;
+    height: 22px;
+    line-height: 22px;
+   	border:1px solid #b3b3b3;
+   	border-top:none;
+    background-color: white;
+    cursor:default;
+text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.middleDropItem:hover
+{
+    background-color: #e1e1e1;
+    color: #4D4D4D;
+}
+.singleDropItem
+{
+    font-size: 15px;
+    font-family: "microsoft yahei";
+    width: 204px;
+    height: 22px;
+    line-height: 22px;
+   	border:1px solid #b3b3b3;
+   	/*border-top:none;*/
+    background-color: white;
+    cursor:default;
+    margin-top: 2px;
+    text-align:left;
+    overflow:hidden;
+     color: #4D4D4D;
+text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.singleDropItem:hover
+{
+    background-color: #e1e1e1;
+    color: #4D4D4D;
+}
+.lastDropItem
+{
+    font-size: 15px;
+    color:#4D4D4D;
+    font-family: "microsoft yahei";
+    width: 204px;
+    height: 22px;
+    line-height: 22px;
+   	border:1px solid #b3b3b3;
+   	border-top:none;
+    background-color: white;
+    cursor:default;
+    text-align:left;
+    overflow:hidden;
+text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.lastDropItem:hover
+{
+    background-color: #e1e1e1;
+    color: #4D4D4D;
+}
+/*多选下拉组件*/  
+.singleDropItems
+{
+    font-size: 15px;
+    font-family: "microsoft yahei";
+    width:194px;
+    height: 22px;
+    line-height: 22px;
+    border:1px solid #b3b3b3;
+    border-width:0 1px 1px 1px;
+    margin-left:0px;
+    background-color: white;
+    cursor:pointer;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+     overflow: hidden;
+}
+.singleDropItems:hover
+{
+    background-color: #e1e1e1;
+    color: #fff;
+}    
+.firstDropItems
+{
+    font-size: 15px;
+    font-family: "microsoft yahei";
+    width:194px;
+    height: 22px;
+    line-height: 22px;
+   	border:1px solid #b3b3b3;
+    border-width:0 1px 1px 1px;
+    margin-left:0px;
+    background-color: white;
+    cursor:pointer;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+     overflow: hidden;
+}
+.firstDropItems:hover
+{
+    background-color: #e1e1e1;
+    color: #fff;
+}
+.middleDropItems
+{
+    font-size: 15px;
+    font-family: "microsoft yahei";
+    width: 194px;
+    height: 22px;
+    line-height: 22px;
+   	border:1px solid #b3b3b3;
+   	border-top:none;
+    margin-left:0px;
+    background-color: white;
+    cursor:pointer;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+     overflow: hidden;
+}
+.middleDropItems:hover
+{
+    background-color: #e1e1e1;
+    color: #4D4D4D;
+}
+.lastDropItems
+{
+    font-size: 15px;
+    font-family: "microsoft yahei";
+    width:194px;
+    height: 22px;
+    line-height: 22px;
+   	border:1px solid #b3b3b3;
+   	border-top:none;
+    margin-left:0px;
+    background-color: white;
+    cursor:default;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+     overflow: hidden;
+}
+.lastDropItems:hover
+{
+    background-color: #e1e1e1;
+    color: #4D4D4D;
+}
+.dropItem_short
+{
+    float: left;
+    height:26px;
+    line-height:24px;
+    width:35px;
+    border-style: solid;
+  	border-width: 1px;
+  	border-color: rgb(179, 179, 179);
+  	background-color: rgb(255, 255, 255);
+  	border-left-width:0;
+  	box-shadow: inset 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+    cursor:pointer;
+    position:relative;
+}
+.dropItem_short .dropText
+{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width:28px;
+    padding-left:5px;
+    display: inline-block;
+    overflow: hidden;
+    border: 0px;
+    font-size: 15px;
+    font-family: "microsoft yahei";
+    box-shadow: inset 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+}
+.dropItem_short .dropImage
+{
+    width: 12px;
+    height: 10px;
+    background: url(../img/下拉.png);
+   /* border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 6px solid #535353;
+    border-bottom: 0px;*/
+     background-repeat: no-repeat; 
+    background-position: center; 
+    cursor:pointer; 
+    position: absolute;
+    right:3px;
+    top:8px;
+    
+}
+.firstDropItem_short
+{
+    font-size: 15px;
+    font-family: "microsoft yahei";
+    width:35px;
+   	border:1px solid #b3b3b3;
+   	border-top:none;
+    background-color: white;
+    text-align:center;
+    cursor:pointer;
+    overflow:hidden;
+    margin-left:-3px;
+}
+.firstDropItem_short:hover
+{
+    background-color: #e1e1e1;
+    color: #4D4D4D;
+}
+.middleDropItem_short
+{
+    font-size: 15px;
+    font-family: "microsoft yahei";
+    width:35px;
+   	border:1px solid #b3b3b3;
+    margin-left: 0px;
+    border-top:none;
+    background-color: white;
+    text-align:center;
+    cursor:pointer;
+    overflow:hidden;
+    margin-left:-3px;
+}
+.middleDropItem_short:hover
+{
+    background-color: #e1e1e1;
+    color: #4D4D4D;
+}
+.singleDropItem_short
+{
+    font-size: 15px;
+    font-family: "microsoft yahei";
+    width: 50px;
+    height: 16px;
+    line-height: 16px;
+    border-left: 1px solid #666;
+    border-right: 1px solid #666;
+    border-bottom: 1px solid #666;
+    border-top: 1px solid #666;
+    margin-left: 0px;
+    background-color: white;
+    cursor:default;
+     overflow:hidden;
+}
+.singleDropItem_short:hover
+{
+    background-color: #666;
+    color: #4D4D4D;
+}
+.lastDropItem_short
+{
+    font-size: 15px;
+    font-family: "microsoft yahei";
+   width:35px;
+   	border:1px solid #b3b3b3;
+    margin-left: 0px;
+    border-top:none;
+    background-color: white;
+    text-align:center;
+    background-color: white;
+    cursor:pointer;
+    margin-left:-3px;
+}
+.lastDropItem_short:hover
+{
+    background-color: #e1e1e1;
+    color: #4D4D4D;
+}
+        
+.dropItem_long
+{
+    float: left;
+    height: 20px;
+    line-height: 20px;
+    width: 293px;
+    border: 1px solid #e5e3e3;
+    font-size: 15px;
+    font-family: "microsoft yahei";
+    border-bottom: 1px solid #fff;
+    border-right: 1px solid #fff;
+    border-top: 1px solid #333;
+    border-left: 1px solid #333;
+    background-color: #bbb;
+    cursor:pointer;
+}
+.dropItem_long .dropText
+{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 18px;
+    width: 275px;
+    display: inline-block;
+    overflow: hidden;
+    border: 0px;
+    font-size: 15px;
+    font-family: "microsoft yahei";
+    background-color: #bbb;
+}
+.dropItem_long .dropImage
+{
+    width: 0px;
+    height: 0px;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-top: 4px solid #666;
+    border-bottom: 0px;
+    float: right;
+    margin-right: 4px;
+    margin-top: 8px;
+}
+.firstDropItem_long
+{
+    font-size: 15px;
+    font-family: "microsoft yahei";
+    width: 286px;
+    height: 16px;
+    line-height: 16px;
+    border-left: 1px solid #666;
+    border-right: 1px solid #666;
+    border-bottom: 0px;
+    border-top: 1px solid #666;
+    margin-left: 0px;
+    background-color: white;
+    cursor:default;
+     overflow:hidden;
+}
+.firstDropItem_long:hover
+{
+    background-color: #666;
+    color: #4D4D4D;
+}
+.middleDropItem_long
+{
+    font-size: 15px;
+    font-family: "microsoft yahei";
+    width: 286px;
+    height: 16px;
+    line-height: 16px;
+    border-left: 1px solid #666;
+    border-right: 1px solid #666;
+    border-bottom: 0px;
+    border-top: 0px;
+    margin-left: 0px;
+    background-color: white;
+    cursor:default;
+     overflow:hidden;
+}
+.middleDropItem_long:hover
+{
+    background-color: #666;
+    color: #4D4D4D;
+}
+.singleDropItem_long
+{
+    font-size: 15px;
+    font-family: "microsoft yahei";
+    width: 286px;
+    height: 16px;
+    line-height: 16px;
+    border-left: 1px solid #666;
+    border-right: 1px solid #666;
+    border-bottom: 1px solid #666;
+    border-top: 1px solid #666;
+    margin-left: 0px;
+    background-color: white;
+    cursor:default;
+     overflow:hidden;
+}
+.singleDropItem_long:hover
+{
+    background-color: #666;
+    color: #4D4D4D;
+}
+.lastDropItem_long
+{
+    font-size: 15px;
+    font-family: "microsoft yahei";
+    width: 286px;
+    height: 16px;
+    line-height: 16px;
+    border-left: 1px solid #666;
+    border-right: 1px solid #666;
+    border-bottom: 1px solid #666;
+    border-top: 0px;
+    margin-left: 0px;
+    background-color: white;
+    cursor:default;
+     overflow:hidden;
+}
+.lastDropItem_long:hover
+{
+    background-color: #666;
+    color: #4D4D4D;
+}
+.selectedHiddenLabel
+{
+    cursor: default;
+    height: 12px;
+    line-height: 12px;
+    vertical-align: text-top;
+    display: inline-block;
+    margin-top: 2px;
+    margin-left: 2px;
+    display:none;
+}
+.unselectedLabel
+{
+    cursor:pointer;
+    width:16px;
+    height:16px;
+    vertical-align: text-top;
+    display: inline-block;
+    background:url(../img/unselect.png);
+    margin-top: 2px;
+}
+.selectedLabel
+{
+    cursor:pointer;
+    width:16px;
+    height:16px;
+    vertical-align: text-top;
+    display: inline-block;
+    background:url(../img/select.png);
+    margin-top: 2px;
+}
+.unselectedLabels
+{
+    cursor:pointer;
+    width:16px;
+    height:12px;
+    text-align:center;
+    vertical-align: text-top;
+    display: inline-block;
+    background: url(../img/uncheckbox.png) 3px 0 no-repeat;
+    margin-top:5px;
+    
+}
+.selectedLabels
+{
+    cursor:pointer;
+    width:16px;
+    height:12px;
+    vertical-align:text-top;
+    display: inline-block;
+    text-align:center;
+    background:url(../img/checkbox.png) 3px 0  no-repeat;
+    margin-top:5px;
+}
+.unselectedHiddenLabel
+{
+    cursor: default;
+    height: 12px;
+    line-height: 12px;
+    vertical-align: text-top;
+    display: inline-block;
+    margin-top: 2px;
+    display:none;
+}
+.selectedText
+{
+    margin-left: 4px;
+    cursor: pointer;
+    padding-right:12px;
+    color: #4D4D4D;
+}
+.unselectedText
+{
+    margin-left: 4px;
+    cursor: pointer;
+    padding-right:12px;
+    color:#4D4D4D;
+}
+.selectedItem
+{
+    display: inline-block;
+    text-align:left;
+}
+.unselectedItem
+{
+    display: inline-block;
+    text-align:left;
+}
+.editableMenu
+{
+    padding: 0px 2px;
+    margin: 0px;
+    list-style: none;
+    display: inline-block;
+}
+.editableMenu .Drop
+{
+    text-decoration: none;
+    color: Blue;
+}
+.editableMenu .List
+{
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+    position: absolute;
+    background-color: #FFF;
+    display: none;
+    z-index: 99999999;
+    border: 1px solid #666;
+}
+.editableMenu .Item
+{
+    background-color: transparent;
+    display: block;
+    line-height: 23px;
+    padding: 0px 2px;
+    color: Black;
+}
+.editableMenu .Item:hover
+{
+    background-color: #e1e1e1;
+    color: #4D4D4D;
+}
+
+.menu{
+    /*border:1px solid #b3b3b3;*/
+    border-width: 1px 0px 0px 0px;
+    margin-left:-2px;
+}
+.treeView
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    white-space: nowrap; 
+    text-align:left;
+    cursor:pointer;
+}
+.tableView
+{
+    table-layout: fixed;
+    border-collapse:collapse;
+    border-spacing:0;
+    white-space: nowrap; 
+    text-align:center;
+    cursor:pointer;
+}
+.tableHeader
+{
+	font-size:14px;
+	color:rgb(77,77,77);
+}
+.tableHeaderCell
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    padding:8px 4px 8px 4px;
+    margin:8px;
+    
+    background-color: #F0F0F0;
+    overflow:hidden;
+    text-overflow:ellipsis ;
+}
+.tableRow
+{
+	font-size:14px;
+   /* border:1px solid #ccc;
+    border-width:1px 0px 1px 0px;*/
+}
+.tableRowCell
+{
+    border-collapse:collapse;
+    border-spacing:0;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    background:url(../img/tablebd.png) repeat-x;
+}
+.treeRowCell
+{
+    border-collapse:collapse;
+    border-spacing:0;
+}
+.treeRowCell span
+{
+    display:inline-block;
+    height:20px;
+    width:20px;
+    padding:0px;
+    vertical-align:top;
+    padding-top:4px;
+    padding-left:4px;
+}
+.treeLeaf
+{
+    padding:4px 28px 2px 28px;
+}
+.subTableView
+{
+     padding: 0px 24px 0px 24px;
+     border: 1px solid #b3b3b3;
+}
+.subTableViewTree{
+    padding: 0px 0px 0px 24px;
+}
+
+.selectedTableRow
+{
+    font-weight:bold;
+    font-size:18px;
+    padding: 4px 4px 4px 4px;
+}
+
+
+.PrintTableRow
+{
+    background-color:#BCCCCC;
+    color:#4D4D4D;
+    padding: 4px 4px 4px 4px;
+}
+.ExamineTableRow
+{
+    background-color:#48D1CC;
+    color:#4D4D4D;
+    padding: 4px 4px 4px 4px;
+}
+
+.ReportTableRow
+{
+    background-color:#7FFF00;
+    color:#4D4D4D;
+    padding: 4px 4px 4px 4px;
+}
+.RegisterTableRow
+{
+    background-color:#FFD700;
+    color:#4D4D4D;
+    padding: 4px 4px 4px 4px;
+}
+.MakeTableRow
+{
+    background-color:#6495ED;
+    color:#4D4D4D;
+    padding: 4px 4px 4px 4px;
+}
+.CheckedTableRow
+{
+    background-color:lightblue;
+    color:#4D4D4D;
+    padding: 4px 4px 4px 4px;
+}
+.RejectTableRow
+{
+    background-color:#FFC0CB;
+    color:#4D4D4D;
+    padding: 4px 4px 4px 4px;
+}
+
+
+
+
+.selectedTableRow img{
+	display:block;
+	padding-left:5px;
+}
+.unselectedTableRow
+{
+    padding: 4px 4px 4px;
+    color:#4D4D4D;
+
+
+}
+.unselectedTableRow img{
+	display:block;
+	padding-left:5px;
+}
+.selectedTreeRow
+{
+    background-color:#9D9D9D;
+    color:#4D4D4D;
+}
+
+
+/*圆角页签样式*/
+.groupItemBorder_his{
+	height:30px;
+	line-height:30px;
+    font-size: 16px;
+    text-align: center; 
+	margin-top: -15px; 
+}
+.groupItemBounds_Right_his{
+	width:84px;
+	line-height:30px;
+	border-radius:0px 5px 5px 0px;
+	border: 1px solid rgba(154, 154, 154, 1);
+	border-left-width:0;
+}
+.groupItemBounds_Middle_his{
+	width:84px;
+	line-height:30px;
+	border-radius:0px 0px 0px 0px;
+	border: 1px solid rgba(154, 154, 154, 1);
+	border-right-width:0;
+}
+.groupItemBounds_Left_his{
+	width:84px;
+	line-height:30px;
+	border-radius:5px 0px 0px 5px;
+	border: 1px solid rgba(154, 154, 154, 1);
+	border-right-width:0;
+}
+.selectedFrontGroup_his{
+	background-image: -moz-linear-gradient( 90deg, rgb(164,164,164) 0%, rgb(143,143,143) 100%);
+    background-image: -webkit-linear-gradient( 90deg, rgb(164,164,164) 0%, rgb(143,143,143) 100%);
+    background-image: -ms-linear-gradient( 90deg, rgb(164,164,164) 0%, rgb(143,143,143) 100%);
+    box-shadow: inset 0px 2px 5px 0px rgba(0, 0, 0, 0.55);
+    color:#fff;
+}
+.unselectedFrontGroup_his{
+	z-index: 3;
+	color: rgba(77, 77, 77, 1);
+	background-image: -moz-linear-gradient( 90deg, rgb(242,242,242) 0%, rgb(236,236,236) 50%, rgb(243,243,243) 50%, rgb(255,255,255) 100%);
+    background-image: -webkit-linear-gradient( 90deg, rgb(242,242,242) 0%, rgb(236,236,236) 50%, rgb(243,243,243) 50%, rgb(255,255,255) 100%);
+    background-image: -ms-linear-gradient( 90deg, rgb(242,242,242) 0%, rgb(236,236,236) 50%, rgb(243,243,243) 50%, rgb(255,255,255) 100%);
+    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.1);
+	display: block;
+	float: left;
+	text-decoration: none;
+}
+.removeUL
+{
+    color:#4D4D4D;
+    background-color:White;
+    padding-left:25px;
+    padding-right:25px;
+    margin-top:15px;
+    line-height:23px;
+    font-family:@微软雅黑;
+    font-size:14px;
+    
+    
+ }
+ 
+.first{
+     background-color: #eeeeee;
+     height: 26px;
+     width: 94px;
+     padding-left: 18px;
+    line-height: 26px;
+    color: #4d4d4d;
+    border: 1px solid #9d9d9d;
+    border-bottom: none;
+    border-radius:5px 5px 0px 0px ;
+    }
+.middle{
+    background-color: #eeeeee;
+    height: 26px;
+    width: 94px;
+    padding-left: 18px;
+    line-height: 26px;
+    color: #4d4d4d;
+    border: 1px solid #9d9d9d;
+    border-bottom: none;
+    }
+ .last{
+    background-color: #eeeeee;
+    height: 26px;
+    width: 94px;
+    padding-left: 18px;
+    line-height: 26px;
+    color: #4d4d4d;
+    border: 1px solid #9d9d9d;
+    border-radius:0px 0px 5px 5px ;
+   }
+  .single
+   {
+     background-color: #eeeeee;
+    height: 26px;
+    width: 94px;
+    padding-left: 18px;
+    line-height: 26px;
+    color: #4d4d4d;
+    border: 1px solid #9d9d9d;
+    border-radius:5px 5px 5px 5px;
+    		    
+   }

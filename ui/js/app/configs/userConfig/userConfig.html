@@ -1,0 +1,238 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/app/config.css" />
+    <script type="text/javascript" src="../../../common/commonjsloader.js"></script>
+    <script type="text/javascript" src="../../../core/corejsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../base.loader.js"></script>
+    <script type="text/javascript" src='../SimpleTVConverter.js'></script>
+    <script type="text/javascript" src='Converter.js'></script>
+    
+    <script type="text/javascript" src='userConfig.js'></script>
+
+    
+</head>
+<body onload="init()" style="margin: 2px; font-family: 微软雅黑;
+    font-size: 12pt; overflow: hidden" scroll="no" command="NotifyTitle" onclick="commit(this)"
+    condfields="cmd_ActiveApplication">
+    <div style="display: none" field="cmd_ActiveApplication" conv="Form_ConstValueConverter"
+        command="-">
+        'ActiveApplication'</div>
+    <div id="moduleMananger" style="width: 60px; height: 25px; right: 50px; top: 10px;
+        position: fixed;">
+    </div>
+    <div style="width: 99%; height: 99%; overflow: hidden; position: fixed;">
+        <div style="width: 60%; height: 100%; float: left;">
+            <div style="height: auto; width: auto;  border: solid 1px #E0E0E0;">
+                <div id="UserRecords" field="UserRecords" conv="SimpleTVConverter" style="height: 620px;
+                        width: 100%; margin: 0 auto;">
+                </div>
+                <div field="SelectedPKCode" conv="SelectedPKUserDisabledConv('UserCodeStatusID','forzenid','activeid','PasswordRowID')"
+                    valuemember="UserCode">
+                </div>
+            </div>
+            <div style="width: 100%;  height:auto;  text-align: right;">
+                <input type="button" value="置顶" command='MoveTop' onclick='commit(this);' style="border: 0;
+                    padding: 3px 15px; width: 70px; height: 30px; float: left; text-align: center;
+                    background: #31A580; color: #000000; cursor: pointer; display: block; font-weight: bold;
+                    font-size: medium; margin-left: 5px;" />
+                <input type="button" value="上移" command='MoveUp' onclick='commit(this);' style="border: 0;
+                    padding: 3px 15px; width: 70px; height: 30px; float: left; text-align: center;
+                    background: #31A580; color: #000000; cursor: pointer; display: block; font-weight: bold;
+                    font-size: medium; margin-left: 5px;" />
+                <input type="button" value="下移" command='MoveDown' onclick='commit(this);' style="border: 0;
+                    padding: 3px 15px; width: 70px; height: 30px; float: left; text-align: center;
+                    background: #31A580; color: #000000; cursor: pointer; display: block; font-weight: bold;
+                    font-size: medium; margin-left: 5px;" />
+                <input type="button" value="置底" command='MoveBottom' onclick='commit(this);' style="border: 0;
+                    padding: 3px 15px; width: 70px; height: 30px; float: left; text-align: center;
+                    background: #31A580; color: #000000; cursor: pointer; display: block; font-weight: bold;
+                    font-size: medium; margin-left: 5px;" />
+                <div id="frozenUserID" style="width: 250px; height: 30px; float: right; display: block;">
+                    <input type="button" value="查看冻结用户" command='FrozenUserList' onclick='commit(this);IsDisabledOnClick("frozenUserID","activeUserID");'
+                        style="border: 0; padding: 3px 15px; width: 160px; height: 30px; float: right;
+                        text-align: center; background: #31A580; color: #000000; cursor: pointer; display: block;
+                        font-weight: bold; font-size: medium; margin-left: 5px;" />
+                    <input id="forzenid" type="button" value="冻结" command='DeleteUser' onclick='if(confirm("确认冻结当前选中的用户配置信息吗？"))commit(this);' disabled="disabled"
+                        style="border: 0; padding: 3px 15px; width: 70px; height: 30px; float: right;
+                        text-align: center; background: #31A580; color: #000000; cursor: pointer; display: block;
+                        font-weight: bold; font-size: medium; margin-left: 5px;" />
+                </div>
+                <div id="activeUserID" style="width: 250px; height: 30px; float: right; display: none;">
+                    <input type="button" value="查看激活用户" command='ActiveUserList' onclick='commit(this);IsDisabledOnClick("activeUserID","frozenUserID");'
+                        style="border: 0; padding: 3px 15px; width: 160px; height: 30px; float: right;
+                        text-align: center; background: #31A580; color: #000000; cursor: pointer; display: block;
+                        font-weight: bold; font-size: medium; margin-left: 5px;" />
+                    <input id="activeid" type="button" value="激活" command='ActiveUser' onclick='IsDisabledOnClick("activeUserID","frozenUserID");commit(this);' disabled="disabled"
+                        style="border: 0; padding: 3px 15px; width: 70px; height: 30px; float: right;
+                        text-align: center; background: #31A580; color: #000000; cursor: pointer; display: block; 
+                        font-weight: bold; font-size: medium; margin-left: 5px;" />
+                </div>
+            </div>
+        </div>
+        <div style="width: 38%; height: 100%; float: right;">
+            <div style="margin: 0 auto; padding: 0; width: 400px; height: auto; display: block;
+                line-height: 30px;">
+                <table id="TableConfigUserID">
+                    <tr>
+                        <td colspan="2" style="font-size: 16pt; color: #31A580;">
+                            <span>用户配置</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="white-space: nowrap; text-align: right;">
+                            用户账号：
+                        </td>
+                        <td style="white-space: nowrap; text-align: left;">
+                            <input id="UserCodeStatusID" field="UserCode" onchange="changeFieldValue(this)" maxlength="32"
+                                style="width: 160px; text-align: left; border-left: 0; border-right: 0; border-top: 0;
+                                border-bottom: solid 1px #E0E0E0; font-family: 微软雅黑; font-size: 10pt;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="white-space: nowrap; text-align: right">
+                            用户名：
+                        </td>
+                        <td style="white-space: nowrap; text-align: left;">
+                            <input id="UserName" field="UserName" onchange="changeFieldValue(this)" maxlength="32"
+                                style="width: 160px; text-align: left; border-left: 0; border-right: 0; border-top: 0;
+                                border-bottom: solid 1px #E0E0E0; font-family: 微软雅黑; font-size: 10pt;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="white-space: nowrap; text-align: right;">
+                            备注：
+                        </td>
+                        <td style="white-space: nowrap; text-align: left;">
+                            <input field="Remark" onchange="changeFieldValue(this)" maxlength="256" style="width: 160px;
+                                text-align: left; border-left: 0; border-right: 0; border-top: 0; border-bottom: solid 1px #E0E0E0;
+                                font-family: 微软雅黑; font-size: 10pt;" />
+                        </td>
+                    </tr>
+                    <tr id="PasswordRowID">
+                        <td style="white-space: nowrap; text-align: right">
+                            密码：
+                        </td>
+                        <td style="white-space: nowrap; text-align: left;">
+                            <input field="Password" onchange="changeFieldValue(this)" maxlength="256" style="width: 160px;
+                                text-align: left; border-left: 0; border-right: 0; border-top: 0; border-bottom: solid 1px #E0E0E0;
+                                font-family: 微软雅黑; font-size: 10pt;" />
+                        </td>
+                    </tr>
+                    <tr>
+                    <td colspan="2">
+                         <input type="button" value="新建" command="NewUser" onclick='commit(this);' style="border: 0;
+                                    padding: 3px 15px; width: 70px; height: 30px; text-align: center; background: #31A580;
+                                    color: #000000; cursor: pointer; display: inline-block; font-weight: bold; font-size: 12pt;" />
+                                <input type="button" value="保存" command="SaveUser" onclick='commit(this);' style="border: 0;
+                                    padding: 3px 15px; width: 70px; height: 30px; text-align: center; background: #31A580;
+                                    color: #000000; cursor: pointer; display: inline-block; font-weight: bold; font-size: 12pt;" />
+                    </td>
+                    </tr>
+                    <tr>
+                    <td colspan="2">
+                             <div field="ExamRequestAttachUIDList" style="width: 185px; height: 160px; border: solid 1px #ddd;"
+                     conv="ExamRequestAttachUIDList_SysConv({'rows':2,'cols':3})" />
+                    </td>               
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input value="导入" field='LocalImage' condfields="LocalImage" conv="StaticValueConv('Local')"
+                                    command='AddExamRequestAttach' class="button" style="margin-left: 13px; float: right;display:none;
+                                    width: 60px" type="button" onclick="commit(this)" />
+                            <input value="CA签名" command='CAAutograph' onclick='commit(this);' style="border: 0;
+                                    padding: 3px 15px; width: 70px; height: 30px; text-align: center; background: #31A580;
+                                    color: #000000; cursor: pointer; display: inline-block; font-weight: bold; font-size: 12pt;display:none;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="white-space: nowrap; text-align: right">
+                        CA号：
+                        </td>
+                        <td style="white-space: nowrap; text-align: left;">
+                            <input field="CAId" onchange="changeFieldValue(this)" maxlength="256" style="width: 160px;
+                                text-align: left; border-left: 0; border-right: 0; border-top: 0; border-bottom: solid 1px #E0E0E0;
+                                font-family: 微软雅黑; font-size: 10pt;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div style="width: 100%; height: auto; text-align: center;">
+                               
+                                     <input type="button" value="读取CA" command="ReadCA" onclick='commit(this);' style="border: 0;
+                                    padding: 3px 15px; width: 80px; height: 30px; text-align: center; background: #31A580;
+                                    color: #000000; cursor: pointer; display: inline-block; font-weight: bold; font-size: 12pt;display:none;" />
+                                     <input type="button" value="CA绑定" command="BindingCA" onclick='commit(this);' style="border: 0;
+                                    padding: 3px 15px; width: 90px; height: 30px; text-align: center; background: #31A580;
+                                    color: #000000; cursor: pointer; display: inline-block; font-weight: bold; font-size: 12pt;" />
+                                    <input type="button" value="解除CA" command="RelieveCA" onclick='commit(this);' style="border: 0;
+                                    padding: 3px 15px; width: 90px; height: 30px; text-align: center; background: #31A580;
+                                    color: #000000; cursor: pointer; display: inline-block; font-weight: bold; font-size: 12pt;" />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <table id="TableUpdatePasswordID">
+                    <tr>
+                        <td colspan="2" style="font-size: 16pt; color: #31A580;">
+                            <span>重置密码</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="white-space: nowrap; text-align: center">
+                            用户账号：
+                        </td>
+                        <td style="white-space: nowrap; text-align: left;">
+                            <input field="UserCode" disabled="disabled" onchange="changeFieldValue(this)" maxlength="32"
+                                style="width: 160px; text-align: left; border-left: 0; border-right: 0; border-top: 0;
+                                border-bottom: solid 1px #E0E0E0; font-family: 微软雅黑; font-size: 10pt;" />
+                        </td>
+                    </tr>
+                    <!-- <tr>
+                        <td style="white-space: nowrap; text-align: right">
+                            原密码：
+                        </td>
+                        <td style="white-space: nowrap; text-align: left">
+                            <input field="oldPassword" onchange="changeFieldValue(this)" type="password" style="width: 160px;
+                                text-align: left; border-left: 0; border-right: 0; border-top: 0; border-bottom: solid 1px #E0E0E0;
+                                font-family: 微软雅黑; font-size: 10pt;" />
+                        </td>
+                    </tr>-->
+                    <tr>
+                        <td style="white-space: nowrap; text-align: right">
+                            新密码：
+                        </td>
+                        <td style="white-space: nowrap; text-align: left">
+                            <input field="NewPassword" onchange="changeFieldValue(this)" type="password" style="width: 160px;
+                                text-align: left; border-left: 0; border-right: 0; border-top: 0; border-bottom: solid 1px #E0E0E0;
+                                font-family: 微软雅黑; font-size: 10pt;" />
+                        </td>
+                    </tr>
+                    <!-- <tr>
+                        <td style="white-space: nowrap; text-align: right">
+                            确认密码：
+                        </td>
+                        <td style="white-space: nowrap; text-align: left">
+                            <input field="AffirmPassword" onchange="changeFieldValue(this)" type="password" style="width: 160px;
+                                text-align: left; border-left: 0; border-right: 0; border-top: 0; border-bottom: solid 1px #E0E0E0;
+                                font-family: 微软雅黑; font-size: 10pt;" />
+                        </td>
+                    </tr>-->
+                    <tr>
+                        <td colspan="2">
+                            <div style="width: 100%; height: auto; text-align: center;">
+                                <input type="button" value="保存" command="SavePassword" onclick='commit(this);' style="border: 0;
+                                    padding: 3px 15px; width: 70px; height: 30px; text-align: center; background: #31A580;
+                                    color: #000000; cursor: pointer; display: inline-block; font-weight: bold; font-size: 12pt;" />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div style="clear: both;">
+    </div>
+</body>
+</html>

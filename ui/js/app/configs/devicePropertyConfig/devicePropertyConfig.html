@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/app/config.css" />
+    <script type="text/javascript" src="../../../common/commonjsloader.js"></script>
+    <script type="text/javascript" src="../../../core/corejsloader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../base.loader.js"></script>
+    <script type="text/javascript" src='../SimpleTVConverter.js'></script>
+    <script type="text/javascript" src='Converter.js'></script>
+    <script type="text/javascript" src='devicePropertyConfig.js'></script>
+</head>
+<body onload="init()" style="margin: 2px; font-family: 微软雅黑; font-size: 12pt; overflow: hidden"
+    scroll="no" command="NotifyTitle" onclick="commit(this)" condfields="cmd_ActiveApplication">
+    <div style="display: none" field="cmd_ActiveApplication" conv="Form_ConstValueConverter"
+        command="-">
+        'ActiveApplication'</div>
+    <div id="moduleMananger" style="width: 60px; height: 25px; right: 50px; top: 10px;
+        position: fixed;">
+    </div>
+    <div style="width: 99%; height: 99%; overflow: hidden; position: fixed;">
+        <div style="width: 60%; height: 100%; float: left;">
+            <div style="height: auto; width: auto; margin-left: 5px; border: solid 1px #E0E0E0;">
+                <div id="DevicePropertyResult" field="DevicePropertyResult" conv="SimpleTVConverter"
+                    style="height: 620px; width: 100%; margin: 0 auto;">
+                </div>
+                <div field="SelectedDeviceID" conv="SelectedPKeleDisabledConv('forzenid','activeid')"
+                    valuemember="DeviceID" style="display: none">
+                </div>
+            </div>
+            <div style="width: 100%; height: auto; text-align: right;">
+                <input id="delDeviceid" type="button" value="删除" command='DeleteDeviceProperty' onclick='if(confirm("确认删除当前选中的装置属性配置信息吗？"))commit(this);'
+                    style="border: 0px; padding: 3px 15px; width: 70px; height: 30px; float: right;
+                    text-align: center; background: #31A580; color: #000000; cursor: pointer; display: block;
+                    font-weight: bold; font-size: medium;" />
+            </div>
+        </div>
+        <div style="width: 40%; height: 100%; float: right;">
+            <div style="margin: 0 auto; padding: 0; width: 400px; height: auto; display: block;
+                line-height: 30px;">
+                <table id="TableConfigDeviceID">
+                    <tr>
+                        <td colspan="2" style="font-size: 16pt; color: #31A580; white-space: nowrap; text-align: left;">
+                            <span>装置属性配置</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="white-space: nowrap; text-align: right">
+                            装置类型：
+                        </td>
+                        <td style="white-space: nowrap; text-align: left">
+                            <div style="width: 150px; text-align: left; border: solid 1px #E0E0E0; line-height: 20px;"
+                                valuemember="DeviceTypeCode" displaymember="DeviceTypeName" field="DeviceTypeList"
+                                onchange="changeFieldValue(this)" itemfield="DeviceTypeCode" valuechanged="valueChanged"
+                                conv="ConvListSelect.ListConverter" itemconv="ConvListSelect.ItemConverter" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="white-space: nowrap; text-align: right">
+                            装置信息：
+                        </td>
+                        <td style="white-space: nowrap; text-align: left">
+                            <div style="width: 150px; text-align: left; border: solid 1px #E0E0E0; line-height: 20px;"
+                                valuemember="DeviceID" displaymember="DeviceName" field="DeviceList" onchange="changeFieldValue(this)"
+                                itemfield="DeviceID" valuechanged="valueChanged" conv="ConvListSelectNullable.ListConverter"
+                                itemconv="ConvListSelectNullable.ItemConverter">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="white-space: nowrap; text-align: right">
+                            装置型号：
+                        </td>
+                        <td style="white-space: nowrap; text-align: left">
+                            <input field="DeviceModel" onchange="changeFieldValue(this)" maxlength="32" style="width: 150px;
+                                text-align: left; border-left: 0; border-right: 0; border-top: 0; border-bottom: solid 1px #E0E0E0;
+                                font-family: 微软雅黑; font-size: 10pt;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="white-space: nowrap; text-align: right">
+                            语言标识码：
+                        </td>
+                        <td style="white-space: nowrap; text-align: left">
+                            <input field="LanguageCode" onchange="changeFieldValue(this)" maxlength="64" style="width: 150px;
+                                text-align: left; border-left: 0; border-right: 0; border-top: 0; border-bottom: solid 1px #E0E0E0;
+                                font-family: 微软雅黑; float: left; font-size: 10pt;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="white-space: nowrap; text-align: right">
+                            装置所处房间：
+                        </td>
+                        <td style="white-space: nowrap; text-align: left">
+                            <input field="DeviceRoom" onchange="changeFieldValue(this)" maxlength="32" style="width: 150px;
+                                text-align: left; border-left: 0; border-right: 0; border-top: 0; border-bottom: solid 1px #E0E0E0;
+                                font-family: 微软雅黑; float: left; font-size: 10pt;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="white-space: nowrap; text-align: right">
+                            装置厂商：
+                        </td>
+                        <td>
+                            <textarea rows="5" cols="40" wrap="soft" field="DeviceManufacturer" onchange="changeFieldValue(this)"
+                                style="width: 165px; height: 80px; text-align: left; border-left: 0; border-right: 0;
+                                border-top: 0; border-bottom: solid 1px #E0E0E0; font-family: 微软雅黑; line-height: 20px;
+                                float: left;"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div style="width: 100%; height: auto; text-align: center;">
+                                <input type="button" value="新建" command="NewDeviceProperty" onclick='commit(this);'
+                                    style="border: 0; padding: 3px 15px; width: 70px; height: 30px; text-align: center;
+                                    background: #31A580; color: #000000; cursor: pointer; display: inline-block;
+                                    font-weight: bold; font-size: 12pt;" />
+                                <input type="button" value="保存" command="SaveDeviceProperty" onclick='commit(this);'
+                                    style="border: 0; padding: 3px 15px; width: 70px; height: 30px; text-align: center;
+                                    background: #31A580; color: #000000; cursor: pointer; display: inline-block;
+                                    font-weight: bold; font-size: 12pt;" />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
