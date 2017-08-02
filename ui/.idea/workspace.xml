@@ -25,7 +25,7 @@
         <entry file="file://$PROJECT_DIR$/js/app/configs/RISConfig/RISConfig.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="432">
-              <caret line="172" column="24" lean-forward="false" selection-start-line="172" selection-start-column="24" selection-end-line="172" selection-end-column="24" />
+              <caret line="175" column="24" lean-forward="false" selection-start-line="175" selection-start-column="24" selection-end-line="175" selection-end-column="24" />
               <folding>
                 <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#tr#0;n#table#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -45,6 +45,7 @@
                 <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#td#2;n#tr#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#td#3;n#tr#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#4;n#tr#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#td#1;n#tr#1;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#input#0;n#td#1;n#tr#1;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -56,8 +57,8 @@
                 <element signature="n#style#0;n#tr#1;n#table#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#td#0;n#tr#2;n#table#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <marker date="1501640033748" expanded="false" signature="1404:1422" ph="..." />
-                <marker date="1501640033748" expanded="false" signature="10525:10571" ph="..." />
+                <marker date="1501640262870" expanded="false" signature="1404:1422" ph="..." />
+                <marker date="1501640262870" expanded="false" signature="10638:10684" ph="..." />
               </folding>
             </state>
           </provider>
@@ -354,15 +355,15 @@
       <workItem from="1501123264890" duration="2398000" />
       <workItem from="1501139582608" duration="6000" />
       <workItem from="1501466202465" duration="14849000" />
-      <workItem from="1501640008812" duration="38000" />
+      <workItem from="1501640008812" duration="257000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55536000" />
+    <option name="totallyTimeSpent" value="55755000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19125" sideWeight="0.49543676" order="1" side_tool="false" content_ui="combo" />
@@ -419,6 +420,7 @@
             <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#2;n#tr#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#3;n#tr#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#4;n#tr#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#1;n#tr#1;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#0;n#td#1;n#tr#1;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -430,8 +432,8 @@
             <element signature="n#style#0;n#tr#1;n#table#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#td#0;n#tr#2;n#table#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1501640033748" expanded="false" signature="1404:1422" ph="..." />
-            <marker date="1501640033748" expanded="false" signature="10525:10571" ph="..." />
+            <marker date="1501640262870" expanded="false" signature="1404:1422" ph="..." />
+            <marker date="1501640262870" expanded="false" signature="10638:10684" ph="..." />
           </folding>
         </state>
       </provider>
@@ -700,7 +702,7 @@
     <entry file="file://$PROJECT_DIR$/js/app/configs/RISConfig/RISConfig.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
-          <caret line="172" column="24" lean-forward="false" selection-start-line="172" selection-start-column="24" selection-end-line="172" selection-end-column="24" />
+          <caret line="175" column="24" lean-forward="false" selection-start-line="175" selection-start-column="24" selection-end-line="175" selection-end-column="24" />
           <folding>
             <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#tr#0;n#table#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -720,6 +722,7 @@
             <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#2;n#tr#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#3;n#tr#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#4;n#tr#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#1;n#tr#1;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#0;n#td#1;n#tr#1;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -731,8 +734,8 @@
             <element signature="n#style#0;n#tr#1;n#table#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#td#0;n#tr#2;n#table#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1501640033748" expanded="false" signature="1404:1422" ph="..." />
-            <marker date="1501640033748" expanded="false" signature="10525:10571" ph="..." />
+            <marker date="1501640262870" expanded="false" signature="1404:1422" ph="..." />
+            <marker date="1501640262870" expanded="false" signature="10638:10684" ph="..." />
           </folding>
         </state>
       </provider>
